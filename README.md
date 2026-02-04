@@ -1,16 +1,17 @@
-# 🚚 Delivery Cadet Challenge – AI-Powered Data Exploration Agent
+# 🤖 AI-Powered SQL Agent for E-commerce Data Analysis
 
 ## Overview
-This project implements an **AI-powered data exploration agent** capable of answering natural language questions over a structured relational database.
+This project implements an **AI-powered SQL agent** that allows users to explore and analyze structured relational data using natural language.
 
-The agent dynamically:
-- Interprets user questions
-- Generates SQL queries
-- Executes them safely against a local database
-- Returns conversational answers
-- Produces visualizations when requested
+The system automatically:
+- Understands user question
+- Inspects the database schema at runtime
+- Generates safe, read-only SQL
+- Executes queries securely
+- Returns clear analytical answers
+- Produces charts and visualizations when requested
 
-The system is designed to be **dataset-agnostic**, **safe**, and **easy to extend**.
+The architecture is designed to be **dataset-agnostic**, **safe**, and **easy to extend**.
 
 ---
 
@@ -54,25 +55,26 @@ The system is designed to be **dataset-agnostic**, **safe**, and **easy to exten
 
 ```text
 .
-├── load_db.py                 # Database loader
-├── data/                      # Provided CSV datasets
-├── db/                        # SQLite database
+├── load_db.py                 # CSV → SQLite database loader
+├── data/                      # Dataset files (not committed)
+├── db/                        # SQLite database & cache (not committed)
 ├── src/
 │   ├── agent/
-│   │   ├── graph.py           # LangGraph agent definition
+│   │   ├── graph.py           # Agent orchestration logic
 │   │   ├── schema.py          # Schema inspection utilities
-│   │   ├── sql_tools.py       # Safe SQL execution tool
-│   │   ├── privacy.py         # Privacy & PII guardrails
+│   │   ├── sql_tools.py       # Safe SQL execution
+│   │   ├── cache.py           # Multi-level caching
+│   │   ├── privacy.py         # PII redaction
 │   │   ├── plot_tools.py      # Visualization utilities
 │   │   └── prompts.py         # Dataset-agnostic prompts
 │   ├── server/
-│   │   └── app.py             # FastAPI server + UI integration
+│   │   └── app.py             # FastAPI server
 │   └── ui/
-│       └── index.html         # User interface
+│       └── index.html         # Web UI
 ├── requirements.txt
+├── .env.example
 └── README.md
 ```
-
 ---
 
 ## Set up and how to run
@@ -83,22 +85,31 @@ The system is designed to be **dataset-agnostic**, **safe**, and **easy to exten
 pip install -r requirements.txt
 ```
 
-### Set up
+### Build the Database
 Rebuild the database if you make changes to ```textload_db.py```:
 ```text
 python load_db.py --data data --db db/app.sqlite
 ```
 
-### LangSmith Tracing 
-LangSmith tracing  is enabled via environment variables:
+### Environment Variables
 ```text
-GROQ_API_KEY=YOUR_KEY_HERE
-LANGCHAIN_TRACING_V2=true
-LANGCHAIN_API_KEY=YOUR_KEY_HERE
-LANGCHAIN_PROJECT=<name_of_project>
-GROQ_MODEL=<name_of_model> 
+# LLM
+GROQ_API_KEY=YOUR_API_KEY
+GROQ_MODEL=llama-3.3-70b-versatile
+
+# Database
+DB_PATH=db/app.sqlite
+CACHE_DB=db/cache.sqlite
+CACHE_TTL_SECONDS=3600
+
+# SQL safety
+SQL_MAX_ROWS=50
+SQL_TIMEOUT_SECONDS=2.0
+
+# Windows plotting workaround
+KMP_DUPLICATE_LIB_OK=TRUE
 ```
-When the agent runs locally, all execution steps are automatically logged and visualized in LangSmith.
+
 
 ### Run the Application
 
