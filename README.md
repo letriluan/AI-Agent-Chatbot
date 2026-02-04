@@ -18,7 +18,7 @@ The architecture is designed to be **dataset-agnostic**, **safe**, and **easy to
 
 ## Dataset Summary
 
-This project uses the Olist Brazilian E-commerce Dataset, a real-world dataset containing transactional data from a large online marketplace in Brazil.
+This project uses the **[Olist Brazilian E-commerce Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)** , a real-world dataset containing transactional data from a large online marketplace in Brazil.
 
 The dataset represents the full lifecycle of e-commerce orders, from customer purchase to delivery and review, making it suitable for realistic analytical and business intelligence queries.
 
