@@ -15,6 +15,29 @@ The architecture is designed to be **dataset-agnostic**, **safe**, and **easy to
 
 ---
 
+
+## Dataset Summary
+
+This project uses the Olist Brazilian E-commerce Dataset, a real-world dataset containing transactional data from a large online marketplace in Brazil.
+
+The dataset represents the full lifecycle of e-commerce orders, from customer purchase to delivery and review, making it suitable for realistic analytical and business intelligence queries.
+
+Dataset Contents:
+- The dataset is provided as multiple relational tables, including:
+- Customers – customer identifiers and location information (city, state)
+- Orders – order status and timestamps (purchase, approval, delivery)
+- Order Items – products purchased per order, prices, and freight costs
+- Payments – payment methods, installment counts, and payment values
+- Reviews – customer review scores and feedback
+- Products – product metadata and category information
+- Sellers – seller identifiers and location details
+- Geolocation – geographic coordinates for Brazilian ZIP codes
+- Category Translation – mapping between Portuguese and English product category names
+
+These tables are connected through primary and foreign keys, forming a realistic relational schema for SQL-based data analysis.
+
+---
+
 ## Key Capabilities
 - Automatic database setup from CSV files  
 - Primary key and foreign key inference  
