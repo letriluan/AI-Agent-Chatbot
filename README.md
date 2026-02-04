@@ -38,6 +38,28 @@ These tables are connected through primary and foreign keys, forming a realistic
 
 ---
 
+## Try These Questions
+
+To explore the capabilities of the SQL agent, try asking questions like:
+
+**Basic**
+- How many orders are there in total?
+- How many customers are there in each state?
+
+**Intermediate**
+- What are the top 5 product categories by items sold?
+- What is the average review score for delivered orders?
+
+**Advanced**
+- Which sellers generate the highest total revenue?
+- What is the average delivery time for delivered orders?
+
+**Visualization**
+- Plot the number of orders by order status.
+- Plot monthly revenue over time.
+- Plot average delivery time by order status.
+---
+
 ## Key Capabilities
 - Automatic database setup from CSV files  
 - Primary key and foreign key inference  
