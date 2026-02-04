@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-openai
+langgraph
+pandas
+matplotlib
+tabulate
+python-dotenv
+fastapi
+uvicorn
