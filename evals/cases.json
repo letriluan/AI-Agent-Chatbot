@@ -1,0 +1,420 @@
+[
+  {
+    "id": "q01",
+    "question": "How many orders are there?",
+    "reference_sql": "SELECT COUNT(*) FROM orders",
+    "expected_rows": [
+      [
+        6
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q02",
+    "question": "How many customers are there?",
+    "reference_sql": "SELECT COUNT(*) FROM customers",
+    "expected_rows": [
+      [
+        4
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q03",
+    "question": "What is the sum of all order amounts?",
+    "reference_sql": "SELECT SUM(amount) FROM orders",
+    "expected_rows": [
+      [
+        210.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q04",
+    "question": "What is the average order amount?",
+    "reference_sql": "SELECT AVG(amount) FROM orders",
+    "expected_rows": [
+      [
+        35.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q05",
+    "question": "What is the largest order amount?",
+    "reference_sql": "SELECT MAX(amount) FROM orders",
+    "expected_rows": [
+      [
+        60.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q06",
+    "question": "What is the smallest order amount?",
+    "reference_sql": "SELECT MIN(amount) FROM orders",
+    "expected_rows": [
+      [
+        10.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q07",
+    "question": "How many delivered orders are there?",
+    "reference_sql": "SELECT COUNT(*) FROM orders WHERE status='delivered'",
+    "expected_rows": [
+      [
+        4
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q08",
+    "question": "How many pending orders are there?",
+    "reference_sql": "SELECT COUNT(*) FROM orders WHERE status='pending'",
+    "expected_rows": [
+      [
+        1
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q09",
+    "question": "How many cancelled orders are there?",
+    "reference_sql": "SELECT COUNT(*) FROM orders WHERE status='cancelled'",
+    "expected_rows": [
+      [
+        1
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q10",
+    "question": "What is the delivered order amount total?",
+    "reference_sql": "SELECT SUM(amount) FROM orders WHERE status='delivered'",
+    "expected_rows": [
+      [
+        130.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q11",
+    "question": "List the top two orders by amount, highest first.",
+    "reference_sql": "SELECT id,amount FROM orders ORDER BY amount DESC LIMIT 2",
+    "expected_rows": [
+      [
+        6,
+        60.0
+      ],
+      [
+        5,
+        50.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q12",
+    "question": "List the two smallest orders, lowest first.",
+    "reference_sql": "SELECT id,amount FROM orders ORDER BY amount LIMIT 2",
+    "expected_rows": [
+      [
+        1,
+        10.0
+      ],
+      [
+        2,
+        20.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q13",
+    "question": "Count orders by status, alphabetically.",
+    "reference_sql": "SELECT status,COUNT(*) FROM orders GROUP BY status ORDER BY status",
+    "expected_rows": [
+      [
+        "cancelled",
+        1
+      ],
+      [
+        "delivered",
+        4
+      ],
+      [
+        "pending",
+        1
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q14",
+    "question": "Sum order amounts by customer ID, in ID order.",
+    "reference_sql": "SELECT customer_id,SUM(amount) FROM orders GROUP BY customer_id ORDER BY customer_id",
+    "expected_rows": [
+      [
+        1,
+        30.0
+      ],
+      [
+        2,
+        70.0
+      ],
+      [
+        3,
+        110.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q15",
+    "question": "Show every customer and order count, including zero, in customer ID order.",
+    "reference_sql": "SELECT c.id,COUNT(o.id) FROM customers c LEFT JOIN orders o ON c.id=o.customer_id GROUP BY c.id ORDER BY c.id",
+    "expected_rows": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q16",
+    "question": "Which customers have no orders? Show ID and state.",
+    "reference_sql": "SELECT c.id,c.state FROM customers c LEFT JOIN orders o ON c.id=o.customer_id WHERE o.id IS NULL ORDER BY c.id",
+    "expected_rows": [
+      [
+        4,
+        "NT"
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q17",
+    "question": "What is the order amount total for SA customers?",
+    "reference_sql": "SELECT SUM(o.amount) FROM orders o JOIN customers c ON c.id=o.customer_id WHERE c.state='SA'",
+    "expected_rows": [
+      [
+        30.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q18",
+    "question": "What is the order amount total for WA customers?",
+    "reference_sql": "SELECT SUM(o.amount) FROM orders o JOIN customers c ON c.id=o.customer_id WHERE c.state='WA'",
+    "expected_rows": [
+      [
+        70.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q19",
+    "question": "What is the order amount total for TAS customers?",
+    "reference_sql": "SELECT SUM(o.amount) FROM orders o JOIN customers c ON c.id=o.customer_id WHERE c.state='TAS'",
+    "expected_rows": [
+      [
+        110.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q20",
+    "question": "Show all states and order amount totals including zero, alphabetically.",
+    "reference_sql": "SELECT c.state,COALESCE(SUM(o.amount),0) FROM customers c LEFT JOIN orders o ON c.id=o.customer_id GROUP BY c.state ORDER BY c.state",
+    "expected_rows": [
+      [
+        "NT",
+        0
+      ],
+      [
+        "SA",
+        30.0
+      ],
+      [
+        "TAS",
+        110.0
+      ],
+      [
+        "WA",
+        70.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q21",
+    "question": "Count orders per month in chronological order.",
+    "reference_sql": "SELECT strftime('%Y-%m',ordered_at),COUNT(*) FROM orders GROUP BY 1 ORDER BY 1",
+    "expected_rows": [
+      [
+        "2026-01",
+        2
+      ],
+      [
+        "2026-02",
+        2
+      ],
+      [
+        "2026-03",
+        2
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q22",
+    "question": "Sum order amounts by month, chronological order.",
+    "reference_sql": "SELECT strftime('%Y-%m',ordered_at),SUM(amount) FROM orders GROUP BY 1 ORDER BY 1",
+    "expected_rows": [
+      [
+        "2026-01",
+        30.0
+      ],
+      [
+        "2026-02",
+        70.0
+      ],
+      [
+        "2026-03",
+        110.0
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q23",
+    "question": "How many orders exceed an amount of 30?",
+    "reference_sql": "SELECT COUNT(*) FROM orders WHERE amount>30",
+    "expected_rows": [
+      [
+        3
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q24",
+    "question": "List order IDs with amounts between 20 and 40 inclusive, in ID order.",
+    "reference_sql": "SELECT id FROM orders WHERE amount BETWEEN 20 AND 40 ORDER BY id",
+    "expected_rows": [
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q25",
+    "question": "How many distinct customers placed orders?",
+    "reference_sql": "SELECT COUNT(DISTINCT customer_id) FROM orders",
+    "expected_rows": [
+      [
+        3
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q26",
+    "question": "What is the average amount of delivered orders?",
+    "reference_sql": "SELECT AVG(amount) FROM orders WHERE status='delivered'",
+    "expected_rows": [
+      [
+        32.5
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q27",
+    "question": "What fraction of orders were delivered?",
+    "reference_sql": "SELECT SUM(CASE WHEN status='delivered' THEN 1.0 ELSE 0 END)/COUNT(*) FROM orders",
+    "expected_rows": [
+      [
+        0.6666666666666666
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q28",
+    "question": "How many orders occurred in February 2026?",
+    "reference_sql": "SELECT COUNT(*) FROM orders WHERE ordered_at>='2026-02-01' AND ordered_at<'2026-03-01'",
+    "expected_rows": [
+      [
+        2
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q29",
+    "question": "Show customer IDs with an order amount total greater than 50, ordered by ID.",
+    "reference_sql": "SELECT customer_id FROM orders GROUP BY customer_id HAVING SUM(amount)>50 ORDER BY customer_id",
+    "expected_rows": [
+      [
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "ordered": true
+  },
+  {
+    "id": "q30",
+    "question": "List orders with amounts above the overall average, ordered by ID.",
+    "reference_sql": "SELECT id FROM orders WHERE amount>(SELECT AVG(amount) FROM orders) ORDER BY id",
+    "expected_rows": [
+      [
+        4
+      ],
+      [
+        5
+      ],
+      [
+        6
+      ]
+    ],
+    "ordered": true
+  }
+]

@@ -20,18 +20,14 @@ _NON_ALNUM = re.compile(r"[^a-z0-9\s]+")
 
 def norm_question(q: str) -> str:
     """Normalize user question to improve cache hit rate."""
-    q = (q or "").strip().lower()
-    q = _PUNCT.sub(" ", q)
-    q = _NON_ALNUM.sub(" ", q)
-    q = re.sub(r"\s+", " ", q).strip()
-    return q
+    return " ".join((q or "").strip().casefold().split())
 
 
 def db_fingerprint(db_path: str) -> str:
     """Invalidate cache when DB file changes (mtime + size)."""
     try:
         st = os.stat(db_path)
-        return f"{int(st.st_mtime)}:{st.st_size}"
+        return f"{Path(db_path).resolve()}:{st.st_mtime_ns}:{st.st_size}"
     except FileNotFoundError:
         return "missing-db"
 
@@ -61,7 +57,7 @@ def _ensure_parent_dir(db_path: str) -> None:
 
 
 def _utcnow_iso() -> str:
-    return datetime.datetime.utcnow().isoformat()
+    return datetime.datetime.now(datetime.UTC).isoformat()
 
 
 def _ensure_tables(conn: sqlite3.Connection) -> None:
@@ -129,7 +125,9 @@ def _get_with_age(
         created = datetime.datetime.fromisoformat(created_at)
     except Exception:
         return None
-    age = (datetime.datetime.utcnow() - created).total_seconds()
+    if created.tzinfo is None:
+        created = created.replace(tzinfo=datetime.UTC)
+    age = (datetime.datetime.now(datetime.UTC) - created).total_seconds()
     if age > max_age_seconds:
         return None
     return tuple(payload), float(age)
@@ -263,7 +261,7 @@ def get_cached_sql_result(cache_db_path: str, key: str, max_age_seconds: int) ->
 
 
 def set_cached_sql_result(cache_db_path: str, key: str, sql: str, result: Dict[str, Any], db_fp: str) -> None:
-    if not sql or not isinstance(result, dict):
+    if not sql or not isinstance(result, dict) or not result.get("ok"):
         return
     _ensure_parent_dir(cache_db_path)
     conn = sqlite3.connect(cache_db_path)

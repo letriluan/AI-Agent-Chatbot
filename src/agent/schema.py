@@ -11,6 +11,7 @@ SQLite schema helpers.
 """
 
 import sqlite3
+from .database import connect_readonly
 from typing import Dict, List, Tuple
 
 Relationship = Tuple[str, str, str, str]
@@ -40,11 +41,11 @@ def get_schema(db_path: str) -> Dict[str, List[str]]:
     Includes tables and views (views are still useful for prompt context).
     """
 
-    conn = sqlite3.connect(db_path)
+    conn = connect_readonly(db_path)
     try:
         schema: Dict[str, List[str]] = {}
         for name, _typ in _list_user_objects(conn):
-            cols = conn.execute(f'PRAGMA table_info("{name}")').fetchall()
+            cols = conn.execute(f'PRAGMA table_info("{name.replace(chr(34), chr(34) * 2)}")').fetchall()
             schema[name] = [str(c[1]) for c in cols]
         return schema
     finally:
@@ -57,13 +58,13 @@ def get_relationships(db_path: str) -> List[Relationship]:
 
     Note: FK metadata exists only if FK constraints were created when building the DB.
     """
-    conn = sqlite3.connect(db_path)
+    conn = connect_readonly(db_path)
     try:
         rels: List[Relationship] = []
         for name, typ in _list_user_objects(conn):
             if typ != "table":
                 continue
-            fks = conn.execute(f'PRAGMA foreign_key_list("{name}")').fetchall()
+            fks = conn.execute(f'PRAGMA foreign_key_list("{name.replace(chr(34), chr(34) * 2)}")').fetchall()
             for fk in fks:
                 to_table = str(fk[2])
                 from_col = str(fk[3])

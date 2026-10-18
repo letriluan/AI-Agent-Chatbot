@@ -16,6 +16,8 @@ Features:
 """
 
 import os
+import hashlib
+from pathlib import Path
 import re
 from typing import Any, Dict, List, Optional, TypedDict, Literal
 from functools import lru_cache
@@ -23,11 +25,15 @@ from functools import lru_cache
 from dotenv import load_dotenv
 
 load_dotenv()
+os.environ.setdefault("LANGSMITH_HIDE_INPUTS", "true")
+os.environ.setdefault("LANGSMITH_HIDE_OUTPUTS", "true")
 
 from langchain_core.messages import HumanMessage, SystemMessage
 from langgraph.graph import StateGraph, START, END
 from langchain_groq import ChatGroq
 
+from .observability import observed, measured, invoke_llm
+from .presentation import chart_labels, coded_result_answer, remove_unsupported_currency
 from .schema import get_schema, get_relationships, format_schema
 from .sql_tools import run_sql
 from .privacy import redact_result, redact_text
@@ -70,8 +76,8 @@ class State(TypedDict, total=False):
 
 
 def _make_llm():
-    model = os.environ.get("GROQ_MODEL", "llama-3.1-70b-versatile")
-    return ChatGroq(model=model, temperature=0)
+    model = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
+    return ChatGroq(model=model, temperature=0, timeout=30, max_retries=1)
 
 
 def _strip_markdown_fences(text: str) -> str:
@@ -106,11 +112,13 @@ def _build_plot_image(plot_result: Dict[str, Any], question: str) -> Optional[st
     if len(cols) < 2 or not rows:
         return None
 
+    title, xlabel, ylabel = chart_labels(cols, rows, question)
     xs, ys = [], []
     for r in rows:
         try:
+            y = float(r[1])
             xs.append(str(r[0]))
-            ys.append(float(r[1]))
+            ys.append(y)
         except Exception:
             continue
 
@@ -119,14 +127,14 @@ def _build_plot_image(plot_result: Dict[str, Any], question: str) -> Optional[st
 
     q = question.lower()
     if "bar" in q:
-        return plot_bar_png_base64(xs, ys, title="Comparison", xlabel=cols[0], ylabel=cols[1])
+        return plot_bar_png_base64(xs, ys, title=title, xlabel=xlabel, ylabel=ylabel)
     if "line" in q or "trend" in q or "over time" in q:
-        return plot_line_png_base64(xs, ys, title="Trend", xlabel=cols[0], ylabel=cols[1])
+        return plot_line_png_base64(xs, ys, title=title, xlabel=xlabel, ylabel=ylabel)
 
     if len(xs) > 12:
-        return plot_line_png_base64(xs, ys, title="Trend", xlabel=cols[0], ylabel=cols[1])
+        return plot_line_png_base64(xs, ys, title=title, xlabel=xlabel, ylabel=ylabel)
 
-    return plot_bar_png_base64(xs, ys, title="Comparison", xlabel=cols[0], ylabel=cols[1])
+    return plot_bar_png_base64(xs, ys, title=title, xlabel=xlabel, ylabel=ylabel)
 
 
 @lru_cache(maxsize=8)
@@ -164,6 +172,7 @@ def _is_too_vague(question: str, schema: Dict[str, List[str]]) -> bool:
     return True
 
 
+@measured
 def prepare_schema_node(state: State) -> State:
     db_fp = db_fingerprint(DB_PATH)
     schema_text, relationships, _schema = _cached_schema_text(DB_PATH, db_fp)
@@ -173,6 +182,7 @@ def prepare_schema_node(state: State) -> State:
     return state
 
 
+@measured
 def generate_sql_node(state: State) -> State:
     llm = _make_llm()
     msg = [
@@ -180,11 +190,12 @@ def generate_sql_node(state: State) -> State:
         SystemMessage(content=f"DATABASE SCHEMA:\n{state['schema_text']}"),
         HumanMessage(content=state["question"]),
     ]
-    out = llm.invoke(msg)
+    out = invoke_llm(llm, msg)
     state["sql"] = _strip_markdown_fences(getattr(out, "content", str(out)))
     return state
 
 
+@measured
 def repair_sql_node(state: State) -> State:
     llm = _make_llm()
     prev_sql = state.get("sql", "")
@@ -205,11 +216,12 @@ def repair_sql_node(state: State) -> State:
             )
         ),
     ]
-    out = llm.invoke(msg)
+    out = invoke_llm(llm, msg)
     state["sql"] = _strip_markdown_fences(getattr(out, "content", str(out)))
     return state
 
 
+@measured
 def run_sql_node(state: State) -> State:
     result = run_sql(DB_PATH, state.get("sql", ""), max_rows=SQL_MAX_ROWS, timeout_seconds=SQL_TIMEOUT_SECONDS)
     state["result"] = redact_result(result)
@@ -227,10 +239,11 @@ def decide_retry(state: State) -> Literal["retry", "answer"]:
 
 
 def decide_plot_node(state: State) -> State:
-    state["want_plot"] = _wants_plot(state["question"])
+    state["want_plot"] = bool(state.get("result", {}).get("ok")) and _wants_plot(state["question"])
     return state
 
 
+@measured
 def plot_sql_node(state: State) -> State:
     if not state.get("want_plot"):
         return state
@@ -241,7 +254,7 @@ def plot_sql_node(state: State) -> State:
         SystemMessage(content=f"DATABASE SCHEMA:\n{state['schema_text']}"),
         HumanMessage(content=state["question"]),
     ]
-    out = llm.invoke(msg)
+    out = invoke_llm(llm, msg)
     state["plot_sql"] = _strip_markdown_fences(getattr(out, "content", str(out)))
     state["plot_result"] = redact_result(
         run_sql(DB_PATH, state["plot_sql"], max_rows=200, timeout_seconds=SQL_TIMEOUT_SECONDS)
@@ -250,9 +263,18 @@ def plot_sql_node(state: State) -> State:
     return state
 
 
+@measured
 def answer_node(state: State) -> State:
     llm = _make_llm()
     result = state.get("result", {})
+    if not result.get("ok"):
+        state["answer"] = "I could not execute a valid query after the allowed attempts. Please rephrase your question."
+        return state
+
+    exact_answer = coded_result_answer(state["question"], state.get("sql", ""), result)
+    if exact_answer is not None:
+        state["answer"] = exact_answer
+        return state
 
     msg = [
         SystemMessage(content=ANSWER_SYSTEM),
@@ -264,8 +286,8 @@ def answer_node(state: State) -> State:
             )
         ),
     ]
-    out = llm.invoke(msg)
-    state["answer"] = redact_text(getattr(out, "content", str(out)))
+    out = invoke_llm(llm, msg)
+    state["answer"] = redact_text(remove_unsupported_currency(getattr(out, "content", str(out)), state["question"], result))
     return state
 
 
@@ -293,12 +315,14 @@ def build_graph():
 _GRAPH = None
 
 
+@observed
 def ask(question: str) -> Dict[str, Any]:
     global _GRAPH
     if _GRAPH is None:
         _GRAPH = build_graph()
 
-    model_name = os.environ.get("GROQ_MODEL", "llama-3.1-70b-versatile")
+    model_name = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
+    model_name += "|v2|" + hashlib.sha256(Path(__file__).with_name("prompts.py").read_bytes()).hexdigest()[:16]
     db_fp = db_fingerprint(DB_PATH)
 
     # ✅ ALWAYS define suggestions first (fixes NameError)
@@ -352,21 +376,25 @@ def ask(question: str) -> Dict[str, Any]:
     # 2) Question -> SQL cache
     qsql_k = q2sql_key(question, db_fp, model_name)
     qsql_hit = get_cached_sql(CACHE_DB, qsql_k, max_age_seconds=CACHE_TTL_SECONDS)
-    if qsql_hit:
+    if qsql_hit and not _wants_plot(question):
         sql = qsql_hit["sql"]
 
         # 3) SQL -> Result cache
         sk = sql_key(sql, db_fp)
         r_hit = get_cached_sql_result(CACHE_DB, sk, max_age_seconds=CACHE_TTL_SECONDS)
         if r_hit:
-            result = r_hit
+            result = redact_result(r_hit)
             cache_source = "sql_result"
             cache_age = float(r_hit.get("age_seconds", 0.0) or 0.0)
         else:
             result = redact_result(run_sql(DB_PATH, sql, max_rows=SQL_MAX_ROWS, timeout_seconds=SQL_TIMEOUT_SECONDS))
-            set_cached_sql_result(CACHE_DB, sk, sql=sql, result=result, db_fp=db_fp)
+            if result.get("ok"):
+                set_cached_sql_result(CACHE_DB, sk, sql=sql, result=result, db_fp=db_fp)
             cache_source = "q2sql"
             cache_age = float(qsql_hit.get("age_seconds", 0.0) or 0.0)
+
+        if not result.get("ok"):
+            return _ask_without_query_cache(question, qsql_k)
 
         # Generate answer (1 LLM call)
         llm = _make_llm()
@@ -380,8 +408,11 @@ def ask(question: str) -> Dict[str, Any]:
                 )
             ),
         ]
-        out = llm.invoke(msg)
-        answer = redact_text(getattr(out, "content", str(out)))
+        exact_answer = coded_result_answer(question, sql, result)
+        if exact_answer is None:
+            out = invoke_llm(llm, msg)
+            exact_answer = remove_unsupported_currency(getattr(out, "content", str(out)), question, result)
+        answer = redact_text(exact_answer)
 
         answer = "⚡ *This answer was served from cache.*\n\n" + answer
 
@@ -421,7 +452,7 @@ def ask(question: str) -> Dict[str, Any]:
     # 4) Normal graph execution
     out_state: State = _GRAPH.invoke(
         {"question": question},
-        config={"run_name": "delivery-cadet-ask", "tags": ["delivery-cadet", "langgraph", "sql-agent"]},
+        config={"run_name": "sql-agent-request", "tags": ["sql-agent", "langgraph", "sql-agent"]},
     )
 
     resp = {
@@ -433,6 +464,11 @@ def ask(question: str) -> Dict[str, Any]:
         "cache_age_seconds": 0.0,
         "suggestions": suggestions,
     }
+
+    resp["ok"] = bool(out_state.get("result", {}).get("ok"))
+    resp["attempts"] = out_state.get("attempts", 0)
+    if not resp["ok"]:
+        return resp
 
     # Save caches
     sql_out = resp["sql"]
@@ -463,3 +499,11 @@ def ask(question: str) -> Dict[str, Any]:
         }
 
     return resp
+
+
+def _ask_without_query_cache(question: str, key: str) -> Dict[str, Any]:
+    import sqlite3
+    with sqlite3.connect(CACHE_DB) as conn:
+        conn.execute("DELETE FROM q2sql_cache WHERE cache_key=?", (key,))
+    conn.close()
+    return ask.__wrapped__(question)

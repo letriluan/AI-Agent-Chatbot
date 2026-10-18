@@ -1,0 +1,28 @@
+services:
+  init-db:
+    build: .
+    command: ["python", "load_db.py", "--data", "data", "--db", "db/app.sqlite"]
+    volumes:
+      - agent-data:/app/db
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DB_PATH: /app/db/app.sqlite
+      CACHE_DB: /app/cache/cache.sqlite
+      LANGSMITH_HIDE_INPUTS: "true"
+      LANGSMITH_HIDE_OUTPUTS: "true"
+    volumes:
+      - agent-data:/app/db:ro
+      - agent-cache:/app/cache
+    depends_on:
+      init-db:
+        condition: service_completed_successfully
+    init: true
+volumes:
+  agent-data:
+  agent-cache:

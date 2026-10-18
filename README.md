@@ -8,8 +8,6 @@ Ask a question in the browser. The agent inspects the schema, generates and exec
 
 [Quick Start](#quick-start) · [Example Output](#example-output) · [Architecture](#architecture) · [Evaluation](#evaluation) · [Engineering Notes](docs/ENGINEERING.md)
 
-> **Implementation status:** This README describes the implementation validated locally on 18 October 2026. Its supporting application, evaluation and CI updates have not yet been published to this repository. Results below refer to that local snapshot; the setup commands target the updated implementation.
-
 ## Why I Built It
 
 Natural-language analytics needs more than SQL generation: queries must respect the schema, execution needs boundaries, and answers need evidence. I built this project to connect those concerns in one inspectable application, using the [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) as a working example.
@@ -184,4 +182,4 @@ The CI workflow runs lint, tests, offline references, Compose configuration vali
 
 This is a local prototype. Authentication, per-user data permissions, rate limiting and billing controls are future work. Keep it bound to localhost. Privacy checks rely on column naming and do not replace a complete access policy; database schema and allowed query results can be sent to Groq.
 
-Next steps are broader unseen-question evaluation, narrative factuality review, repeated-run reliability checks and a controlled deployment with access controls and monitoring. Hosted LangSmith delivery, monetary cost and GitHub-hosted CI execution have not been verified for these local changes.
+Next steps are broader unseen-question evaluation, narrative factuality review, repeated-run reliability checks and a controlled deployment with access controls and monitoring. Hosted LangSmith delivery and monetary cost have not been verified. The GitHub Actions workflow runs offline checks without provider credentials.
