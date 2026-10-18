@@ -5,7 +5,7 @@ from typing import Optional
 import logging
 import uuid
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Response, Depends
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
@@ -13,9 +13,11 @@ from pydantic import BaseModel, Field, field_validator
 from src.agent.graph import ask
 from src.agent import graph
 from src.agent.schema import get_schema
+from src.server.demo import get_guard, BodyLimitMiddleware, browser_session
 
 app = FastAPI(title="AI-Powered SQL Agent")
 logging.basicConfig(level=logging.INFO)
+app.add_middleware(BodyLimitMiddleware)
 
 # __file__ = .../src/server/app.py
 
@@ -24,6 +26,18 @@ UI_DIR = SRC_DIR / "ui"
 INDEX_HTML = UI_DIR / "index.html"
 
 app.mount("/ui", StaticFiles(directory=str(UI_DIR)), name="ui")
+
+@app.middleware("http")
+async def session_cookie(request: Request, call_next):
+    # Attach the cookie even when admission/provider/validation returns an error.
+    pending = Response()
+    if request.url.path in {"/", "/ask"} and get_guard() is not None:
+        request.state.demo_identity = browser_session(request, pending)
+    response = await call_next(request)
+    if "set-cookie" in pending.headers:
+        response.headers.append("set-cookie", pending.headers["set-cookie"])
+    return response
+
 
 class AskRequest(BaseModel):
     question: str = Field(min_length=1, max_length=2000)
@@ -60,8 +74,17 @@ def health():
     return {"status": "ok"}
 
 
+def demo_admission(request: Request):
+    guard = get_guard()
+    if guard is None:
+        yield
+    else:
+        with guard.admit(request.state.demo_identity):
+            yield
+
+
 @app.post("/ask", response_model=AskResponse)
-def ask_agent(req: AskRequest):
+def ask_agent(req: AskRequest, admission=Depends(demo_admission)):
     request_id = uuid.uuid4().hex
     try:
         result = ask(req.question)

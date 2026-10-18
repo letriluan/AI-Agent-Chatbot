@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ai-agent-chatbot-demo
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /ready
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
+      - key: DEMO_MODE
+        value: "true"
+      - key: DEMO_CLIENT_PER_MINUTE
+        value: "5"
+      - key: LLM_MAX_TOKENS
+        value: "1024"
+      - key: LANGCHAIN_TRACING_V2
+        value: "false"
+      - key: LANGSMITH_TRACING
+        value: "false"
+      - key: DEMO_SESSION_SECRET
+        generateValue: true
+      - key: DEMO_SECURE_COOKIE
+        value: "true"

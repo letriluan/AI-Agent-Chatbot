@@ -77,7 +77,8 @@ class State(TypedDict, total=False):
 
 def _make_llm():
     model = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
-    return ChatGroq(model=model, temperature=0, timeout=30, max_retries=1)
+    demo = os.getenv("DEMO_MODE", "false").lower() == "true"
+    return ChatGroq(model=model, temperature=0, timeout=20 if demo else 30, max_retries=0 if demo else 1, max_tokens=int(os.getenv("LLM_MAX_TOKENS", "1024")))
 
 
 def _strip_markdown_fences(text: str) -> str:

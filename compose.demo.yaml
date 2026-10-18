@@ -1,0 +1,9 @@
+services:
+  api:
+    environment:
+      DEMO_MODE: "true"
+      DEMO_USAGE_DB: /app/cache/demo-usage.sqlite
+      DEMO_CLIENT_PER_MINUTE: "5"
+      LLM_MAX_TOKENS: "1024"
+      LANGCHAIN_TRACING_V2: "false"
+      LANGSMITH_TRACING: "false"

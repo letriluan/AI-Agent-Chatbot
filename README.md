@@ -81,7 +81,7 @@ Verified locally on **18 October 2026**, with Python 3.12 and Groq-hosted `opena
 
 | Evaluation | Result | Scope |
 | --- | --- | --- |
-| Automated regressions | **114 passed** on Windows and Docker/Linux | Database controls, API, privacy rules, caching, retries, charts and reference cases |
+| Automated regressions | **130 passed** on Windows and Docker/Linux | Database controls, API, privacy rules, caching, retries, charts and reference cases |
 | Development SQL suite | **30/30** strict matches | Questions used during prompt development |
 | New-question first-use suite | **16/16** main SQL matches | 12 SQL-only requests and four chart requests, on a separate fixture with a frozen prompt |
 | First-use chart checks | **4/4 passed** | Plot-query rows, actual renderer inputs, chart type, labels, nonblank PNG and image-cache reuse |
@@ -99,6 +99,10 @@ The first-use suite was created after prompt development and evaluated without c
 An earlier development run returned correct records but unnecessary columns, scoring **27/30**. Clarifying scalar values, ranked lists and filtered lists brought a later full run to **30/30**, with unchanged references. Other checks exposed integer-division errors, unsupported currency labels and location-code expansion. The fixes combine query instructions with deterministic presentation rules.
 
 In the final 30-case development run, median cold latency was **1,232 ms**, versus **2.4 ms** for cached repeats; P95 cold latency was **2,541 ms**. These local measurements are not production guarantees. No repairs were triggered in that run, so live repair-success rate is unmeasured.
+
+## Public Demo Deployment
+
+A prepared [Render deployment guide](docs/DEPLOY_RENDER.md) uses SQLite baked into the Docker image, so no separate PostgreSQL service is required. Public-demo mode allows five questions per minute per signed browser session, with no total quota. It also adds a concurrency limit, a request-body cap and bounded model output. Secrets are supplied at runtime. The configuration has been tested locally; no hosted demo is claimed yet.
 
 ## Local Python Setup
 
@@ -180,6 +184,6 @@ The CI workflow runs lint, tests, offline references, Compose configuration vali
 
 ## Current Scope and Next Steps
 
-This is a local prototype. Authentication, per-user data permissions, rate limiting and billing controls are future work. Keep it bound to localhost. Privacy checks rely on column naming and do not replace a complete access policy; database schema and allowed query results can be sent to Groq.
+This prototype has no authentication, per-user data permissions or durable billing controls. Demo-mode request limits are available for a controlled public demo; their quota state is ephemeral on Render Free. Follow the [deployment guide](docs/DEPLOY_RENDER.md) before publishing. The normal Compose setup remains bound to localhost. Privacy checks rely on column naming and do not replace a complete access policy; database schema and allowed query results can be sent to Groq.
 
 Next steps are broader unseen-question evaluation, narrative factuality review, repeated-run reliability checks and a controlled deployment with access controls and monitoring. Hosted LangSmith delivery and monetary cost have not been verified. The GitHub Actions workflow runs offline checks without provider credentials.
