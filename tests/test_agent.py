@@ -52,6 +52,13 @@ def test_vague_question_does_not_call_llm(agent, monkeypatch):
     assert not calls
 
 
+def test_timeout_message_does_not_blame_question_wording(agent, monkeypatch):
+    fake(agent, monkeypatch, [])
+    state = agent.answer_node({'result': {'ok': False, 'error': 'Query timed out after 2.0s.'}})
+    assert 'execution time limit' in state['answer']
+    assert 'rephrase' not in state['answer'].lower()
+
+
 def test_api_validation_and_sanitized_errors(agent, monkeypatch):
     with TestClient(app) as client:
         assert client.get("/health").status_code == 200

@@ -99,4 +99,10 @@ docker compose -f compose.yaml -f compose.demo.yaml config --quiet
 
 ## JOIN performance correction
 
+## Monthly chart performance correction
+
+The monthly item-price chart also exhausted three 2-second SQL attempts on Render. `deploy/prepare_analytics.py` now adds an Olist-specific month/order index and a covering order/price index during the Docker build, keeping the generic CSV loader independent of this dataset. The exact failing SQL returned 24 months and a total item price of 13,591,643.70 in three local Docker runs at 0.1 CPU / 512 MB, taking 707–793 ms. A live Groq request under the same limits produced the monthly chart on its first SQL attempt; the distinct delivered-order JOIN still returned 96,478. These are local constrained-container measurements, not Render timing guarantees. Windows regressions: 161 passed. The 2-second SQL limit remains unchanged; remaining timeout failures now explain the time limit rather than asking users to rephrase valid questions.
+
+### Earlier JOIN correction
+
 A live Olist distinct-order JOIN exhausted three 2-second SQL attempts on the first Render deployment. Build-time indexes now cover inferred child join keys and low-cardinality text filters paired with a table primary key. On the rebuilt dataset, the exact query returned 96,478 in three local Docker runs capped at 0.1 CPU / 512 MB, taking 406–496 ms per run. The 2-second query timeout is unchanged. Rebuild/redeploy the Docker image to obtain these indexes; restarting an old image does not change its packaged database. Windows regressions: 131 passed.

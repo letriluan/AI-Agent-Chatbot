@@ -270,7 +270,10 @@ def answer_node(state: State) -> State:
     llm = _make_llm()
     result = state.get("result", {})
     if not result.get("ok"):
-        state["answer"] = "I could not execute a valid query after the allowed attempts. Please rephrase your question."
+        if "query timed out" in result.get("error", "").lower():
+            state["answer"] = "This query exceeded the demo's execution time limit. Try a narrower date range or a simpler aggregation. No data was changed."
+        else:
+            state["answer"] = "I could not execute a valid query after the allowed attempts. Please rephrase your question."
         return state
 
     exact_answer = coded_result_answer(state["question"], state.get("sql", ""), result)
