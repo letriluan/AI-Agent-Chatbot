@@ -1,5 +1,9 @@
 # AI Agent Chatbot
 
+## [Try the Live Demo →](https://ai-agent-chatbot-demo.onrender.com/)
+
+Ask a sample question and explore the answers, generated SQL and charts directly in your browser.
+
 ### A SQL analytics assistant that turns database questions into answers and charts.
 
 Ask a question in the browser. The agent inspects the schema, generates and executes read-only SQL, attempts repairs when needed, and summarises the results. Chart requests produce bar or line plots from executed data.
