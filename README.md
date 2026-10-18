@@ -1,4 +1,4 @@
-# AI-Agent-Chatbot
+# AI Agent Chatbot
 
 ### A SQL analytics assistant that turns database questions into answers and charts.
 
@@ -6,7 +6,7 @@ Ask a question in the browser. The agent inspects the schema, generates and exec
 
 **Python 3.12 · FastAPI · LangGraph · Groq · SQLite · Matplotlib · Docker**
 
-[Quick Start](#quick-start) · [Example Output](#example-output) · [Architecture](#architecture) · [Evaluation](#evaluation) · [Engineering Notes](docs/ENGINEERING.md)
+[Live Demo](https://ai-agent-chatbot-demo.onrender.com/) · [Quick Start](#quick-start) · [Example Output](#example-output) · [Architecture](#architecture) · [Evaluation](#evaluation) · [Engineering Notes](docs/ENGINEERING.md)
 
 ## Why I Built It
 
@@ -28,6 +28,7 @@ Other requests can count orders, compare categories, rank records or plot status
 
 | Capability | Implementation |
 | --- | --- |
+| Explore in the browser | Project context alongside the test panel, sample questions, copyable answers/SQL, chart downloads and rate-limit countdowns |
 | Ask questions about relational data | Schema and relationship context guide SQLite query generation |
 | Recover from query failures | LangGraph supplies execution feedback for up to three main-query attempts |
 | Bound database access | Clear refusal of common write requests before model/cache access, plus read-only connections, SQLite authorization, timeouts and result limits |
@@ -102,7 +103,7 @@ In the final 30-case development run, median cold latency was **1,232 ms**, vers
 
 ## Public Demo Deployment
 
-A prepared [Render deployment guide](docs/DEPLOY_RENDER.md) uses SQLite baked into the Docker image, so no separate PostgreSQL service is required. Public-demo mode allows five questions per minute per signed browser session, with no total quota. It also adds a concurrency limit, a request-body cap and bounded model output. Secrets are supplied at runtime. The configuration has been tested locally; no hosted demo is claimed yet.
+The [Render demo](https://ai-agent-chatbot-demo.onrender.com/) uses SQLite baked into the Docker image, so no separate PostgreSQL service is required. Public-demo mode allows five questions per minute per signed browser session, with no total quota. It also adds a concurrency limit, a request-body cap and bounded model output. Secrets are supplied at runtime. See the [deployment guide](docs/DEPLOY_RENDER.md) for setup and hosting limits.
 
 ## Local Python Setup
 

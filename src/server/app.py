@@ -15,7 +15,7 @@ from src.agent import graph
 from src.agent.schema import get_schema
 from src.server.demo import get_guard, BodyLimitMiddleware, browser_session
 
-app = FastAPI(title="AI-Powered SQL Agent")
+app = FastAPI(title="AI Agent Chatbot")
 logging.basicConfig(level=logging.INFO)
 app.add_middleware(BodyLimitMiddleware)
 

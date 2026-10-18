@@ -2,39 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>Olist · Data workspace</title>
-  <link rel="stylesheet" href="/ui/styles.css?v=2">
-  <script src="/ui/app.js?v=2" defer></script>
+  <meta name="description" content="AI Agent Chatbot: a project that turns questions about an e-commerce dataset into read-only SQL, answers and charts.">
+  <title>AI Agent Chatbot | Project &amp; Demo</title>
+  <link rel="icon" type="image/svg+xml" href="/ui/brand.svg">
+  <link rel="stylesheet" href="/ui/styles.css?v=6">
+  <script src="/ui/app.js?v=5" defer></script>
 </head>
 <body>
-  <aside class="sidebar">
-    <a class="brand" href="/" aria-label="Olist workspace home"><span class="brand-icon">o<span></span></span><span>olist<span class="brand-sub">DATA WORKSPACE</span></span></a>
-    <button class="new-chat" id="new-chat"><span>＋</span> New conversation <span class="shortcut">↗</span></button>
-    <div class="section-label">WORKSPACE</div>
-    <div class="nav-active"><span>◈</span> Data explorer <span class="nav-dot"></span></div>
-    <div class="recent-section"><div class="section-label">THIS SESSION</div><div id="recent" class="recent"><p>Your questions will appear here.</p></div></div>
-    <div class="dataset-card"><div class="dataset-heading"><span class="database-icon">▤</span> Connected dataset</div><strong>Brazilian e-commerce</strong><p>Olist public dataset</p><div class="dataset-foot"><span class="status-dot"></span> Read-only access</div></div>
-    <div class="sidebar-footer"><span class="avatar">TL</span><div>Tri Luan Le<span>AI analytics project</span></div><span class="footer-star">✳</span></div>
-  </aside>
-  <main>
-    <header class="topbar"><div><span class="breadcrumb">Workspace</span><span class="divider">/</span><strong>Data explorer</strong></div><button id="new-chat-mobile" class="mobile-reset" type="button" aria-label="New conversation">＋ New</button><span id="connection" class="connection"><span class="status-dot"></span> Checking connection</span></header>
-    <div class="scroll-area" id="scroll-area">
-      <section class="welcome" id="welcome">
-        <div class="eyebrow"><span></span> YOUR DATA, A CONVERSATION AWAY</div>
-        <h1>Good questions.<br><span>Clearer insights.</span></h1>
-        <p class="intro">Explore orders, customers and sales in plain English.<br>Ask a question. Find the story behind the numbers.</p>
-        <div class="suggestions">
-          <button class="suggestion" data-question="How many orders are there in total?"><span class="card-icon">↗</span><strong>Start with the big picture</strong><span>How many orders are there in total?</span><span class="card-arrow">↗</span></button>
-          <button class="suggestion" data-question="Plot the number of orders by order_status as a bar chart."><span class="card-icon purple">▥</span><strong>See the breakdown</strong><span>Show order counts by status.</span><span class="card-arrow">↗</span></button>
-          <button class="suggestion" data-question="Plot monthly total order item prices as a line chart. Join order items to orders, group by purchase month in YYYY-MM format, include all statuses and exclude freight."><span class="card-icon ochre">⌁</span><strong>Discover a trend</strong><span>Explore monthly item-price totals.</span><span class="card-arrow">↗</span></button>
-        </div>
-        <div class="welcome-note"><span>◈</span> Built for exploration. Grounded in your database.</div>
+  <a class="skip-link" href="#input">Skip to the demo</a>
+  <header class="page-header">
+    <a class="project-name" href="/" aria-label="AI Agent Chatbot home"><img src="/ui/brand.svg" alt="" width="30" height="30">AI Agent Chatbot</a>
+    <div class="header-links"><span class="byline">A project by Tri Luan Le</span><a href="https://github.com/letriluan/AI-Agent-Chatbot" target="_blank" rel="noopener noreferrer">View code <span aria-hidden="true">↗</span></a></div>
+  </header>
+
+  <main class="project-layout">
+    <section class="project-notes" aria-labelledby="project-title">
+      <div class="section-label">THE PROJECT</div>
+      <h1 id="project-title">Why I built this</h1>
+      <p class="project-intro">I built this to explore data in plain English, while keeping the SQL visible for checking.</p>
+      <p class="project-description">An agent reads the schema, runs read-only SQL, retries failed queries, and returns answers or charts.</p>
+
+      <div class="workflow" aria-label="Workflow: Question, SQL query, Answer or chart"><span>Question</span><span aria-hidden="true">→</span><span>SQL query</span><span aria-hidden="true">→</span><span>Answer / chart</span></div>
+
+      <section class="examples" aria-labelledby="examples-title">
+        <div class="examples-heading"><h2 id="examples-title">Questions to try</h2><span>Click to fill the test box</span></div>
+        <ol class="suggestions">
+          <li><button class="suggestion" type="button" data-question="How many orders are there in total?"><span class="question-number">01</span><span class="question-text">How many orders are there in total?<small>Simple count</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Plot the number of orders by order_status as a bar chart."><span class="question-number">02</span><span class="question-text">Show order counts by status.<small>Bar chart</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="How many distinct delivered orders contain at least one item? Count each order only once, even if it has multiple items."><span class="question-number">03</span><span class="question-text">How many delivered orders have items?<small>Join tables · count distinct orders</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Plot monthly total order item prices as a line chart. Join order items to orders, group by purchase month in YYYY-MM format, include all statuses and exclude freight."><span class="question-number">04</span><span class="question-text">Plot monthly order item totals.<small>Line chart · excludes freight</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion refusal-example" type="button" data-question="Delete all cancelled orders from the database."><span class="question-number">05</span><span class="question-text">Try asking it to delete cancelled orders.<small>Read-only check · should be refused</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+        </ol>
       </section>
-      <section id="chat" class="chat" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions"></section>
-    </div>
-    <div class="composer-wrap"><form id="question-form" class="composer"><label for="input" class="sr-only">Ask a question about the dataset</label><textarea id="input" maxlength="2000" rows="1" placeholder="What would you like to know about your data?"></textarea><div class="composer-bottom"><span class="source-chip"><span class="status-dot"></span> Olist dataset</span><div class="composer-actions"><span class="key-hint">Enter to send</span><button id="send" type="submit" aria-label="Send question" disabled>↑</button></div></div></form><div class="composer-caption"><span>AI can make mistakes. Review important results.</span><span id="counter">0 / 2,000</span></div></div>
+
+      <div class="project-details"><p><strong>Dataset</strong> <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener noreferrer">Olist Brazilian e-commerce ↗</a><span class="dataset-size">99,441 orders across 9 tables.</span></p><p class="stack">Python · FastAPI · LangGraph · Groq · SQLite</p></div>
+    </section>
+
+    <section class="demo-panel" aria-labelledby="demo-title">
+      <header class="demo-header"><div><h2 id="demo-title">Test the chatbot</h2><span id="connection" class="connection" role="status"><span class="status-dot"></span>Connecting to dataset</span></div><button id="new-chat" class="clear-button" type="button">Clear chat</button></header>
+      <div class="scroll-area" id="scroll-area">
+        <div class="welcome" id="welcome"><div class="empty-icon" aria-hidden="true"><svg width="31" height="31" viewBox="0 0 32 32" fill="none"><rect x="4.5" y="5.5" width="23" height="21" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="m10 12 4 4-4 4m8 0h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Your results will appear here.</h3><p>Choose a sample question or write your own.<br>You'll get an answer, the SQL, and a chart when requested.</p><span class="empty-label">Connected to the Olist example dataset</span></div>
+        <section id="chat" class="chat" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions"></section>
+      </div>
+      <div class="composer-wrap"><div id="rate-notice" class="rate-notice" role="status" hidden></div><form id="question-form" class="composer"><label for="input">Your question</label><textarea id="input" maxlength="2000" rows="2" placeholder="e.g. How many orders are there in total?"></textarea><div class="composer-bottom"><span class="key-hint">Enter to send · Shift + Enter for a new line</span><button id="send" type="submit" aria-label="Send question" disabled>Send <span aria-hidden="true">↑</span></button></div></form><div class="composer-caption"><span>Read-only · Each question is independent</span><span id="counter">0 / 2,000</span></div><p class="data-note">Uses Groq to process questions and query results. Check generated SQL before relying on an answer.</p></div>
+    </section>
   </main>
 </body>
 </html>
