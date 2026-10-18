@@ -24,6 +24,10 @@ SQLite metadata supplies the table, column and relationship context. The main La
 
 SQL prompts distinguish between scalar questions such as a maximum amount, ranked lists that need an identifier and ranking metric, and filtered lists that only need the requested identifiers. This reduces unnecessary output columns. Fractions use floating-point division to avoid SQLite integer truncation. These are prompt instructions, not a formal runtime guarantee of semantic correctness.
 
+### Write-intent refusal
+
+Common English and Vietnamese requests to change database records or structure are refused deterministically before graph construction, cache lookup, model calls or database access. The response has `ok=false`, empty SQL, no image and zero model calls. Requests are not silently translated into SELECT queries. This conservative phrase recogniser is not a complete natural-language policy engine; the database executor independently enforces read-only access. Regression cases include valid analytics and chart-editing requests to check false positives.
+
 ### Database controls
 
 The agent opens an existing database with `mode=ro` and `query_only`. An authorizer rejects write operations, internal SQLite table reads and access to recognised personal-data columns, including attempts to alias those columns. A progress handler interrupts expensive queries; an outer `LIMIT` bounds returned rows even if the generated SQL contains its own limit.

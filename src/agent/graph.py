@@ -33,6 +33,7 @@ from langgraph.graph import StateGraph, START, END
 from langchain_groq import ChatGroq
 
 from .observability import observed, measured, invoke_llm
+from .intent import requests_data_change, REFUSAL
 from .presentation import chart_labels, coded_result_answer, remove_unsupported_currency
 from .schema import get_schema, get_relationships, format_schema
 from .sql_tools import run_sql
@@ -318,6 +319,9 @@ _GRAPH = None
 
 @observed
 def ask(question: str) -> Dict[str, Any]:
+    if requests_data_change(question):
+        return {"ok": False, "sql": "", "answer": REFUSAL, "image_b64": None,
+                "cache_hit": False, "cache_source": "none", "attempts": 0}
     global _GRAPH
     if _GRAPH is None:
         _GRAPH = build_graph()

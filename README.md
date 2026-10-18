@@ -30,7 +30,7 @@ Other requests can count orders, compare categories, rank records or plot status
 | --- | --- |
 | Ask questions about relational data | Schema and relationship context guide SQLite query generation |
 | Recover from query failures | LangGraph supplies execution feedback for up to three main-query attempts |
-| Bound database access | Read-only connections, SQLite authorization, timeouts and result limits |
+| Bound database access | Clear refusal of common write requests before model/cache access, plus read-only connections, SQLite authorization, timeouts and result limits |
 | Visualise results | Bar/line charts with descriptive labels, calendar-aware month axes and numeric formatting |
 | Reuse successful work | Answer, question-to-SQL and SQL-result caches with expiry and database fingerprints |
 | Inspect backend behaviour | Request IDs, cache source, attempt counts, stage timings and provider token metadata |
@@ -81,7 +81,7 @@ Verified locally on **18 October 2026**, with Python 3.12 and Groq-hosted `opena
 
 | Evaluation | Result | Scope |
 | --- | --- | --- |
-| Automated regressions | **131 passed** on Windows; previous 130-case suite passed on Docker/Linux | Database controls, API, privacy rules, caching, retries, charts and reference cases |
+| Automated regressions | **159 passed** on Windows and Docker/Linux | Database controls, API, privacy rules, caching, retries, charts and reference cases |
 | Development SQL suite | **30/30** strict matches | Questions used during prompt development |
 | New-question first-use suite | **16/16** main SQL matches | 12 SQL-only requests and four chart requests, on a separate fixture with a frozen prompt |
 | First-use chart checks | **4/4 passed** | Plot-query rows, actual renderer inputs, chart type, labels, nonblank PNG and image-cache reuse |
@@ -181,6 +181,10 @@ The CI workflow runs lint, tests, offline references, Compose configuration vali
 | `evals/` | Development and first-use fixtures, cases and runners |
 | `docs/` | Engineering notes, validation protocol and archived evidence |
 | `Dockerfile`, `compose.yaml`, `.github/workflows/ci.yml` | Packaging and automated checks |
+
+### Read-only requests
+
+Requests such as “Delete all cancelled orders” or “Update order statuses” receive a deterministic explanation that the assistant cannot modify records and that no changes were made. Common English and Vietnamese write requests are recognised before answer caches, model calls and database execution. This intent check is conservative and does not recognise every possible paraphrase; SQLite read-only enforcement remains the protection against generated write SQL.
 
 ## Current Scope and Next Steps
 
