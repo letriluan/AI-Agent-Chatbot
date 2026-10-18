@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-18",
+  "backend_commit": "43634f479eb81698a8aee8abe7f6488219419ae4",
+  "endpoint": "https://ai-agent-chatbot-demo.onrender.com/ask",
+  "scope": "Added sample prompts 06–10 sent sequentially to the existing Render backend before publishing the expanded UI. Generated SQL results compared with independent source-data reference queries; payment chart PNG decoded. Single-run smoke checks, not a reliability benchmark.",
+  "cases": [
+    {
+      "sample": 6,
+      "pass": true,
+      "attempts": 1,
+      "cache": "none",
+      "latency_ms": 2380.037,
+      "rows": [
+        [
+          "SP",
+          41746
+        ],
+        [
+          "RJ",
+          12852
+        ],
+        [
+          "MG",
+          11635
+        ],
+        [
+          "RS",
+          5466
+        ],
+        [
+          "PR",
+          5045
+        ]
+      ],
+      "question": "Return the top 5 customer states by number of customer records. Return state and customer_count, sorted by count descending then state ascending.",
+      "sql": "SELECT\n  customer_state AS state,\n  COUNT(*) AS customer_count\nFROM\n  olist_customers_dataset\nGROUP BY\n  customer_state\nORDER BY\n  customer_count DESC,\n  customer_state ASC\nLIMIT 5;",
+      "answer": "State | Customer Count  \n--- | ---  \nSP | 41746  \nRJ | 12852  \nMG | 11635  \nRS | 5466  \nPR | 5045",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1569,
+        "output_tokens": 236,
+        "total_tokens": 1805,
+        "stages_ms": {
+          "prepare_schema_node": 0.134,
+          "generate_sql_node": 1400.051,
+          "run_sql_node": 13.123,
+          "plot_sql_node": 0.004,
+          "answer_node": 762.758
+        },
+        "latency_ms": 2380.037
+      }
+    },
+    {
+      "sample": 7,
+      "pass": true,
+      "attempts": 1,
+      "cache": "none",
+      "latency_ms": 1878.661,
+      "rows": [
+        [
+          97.02034372140264
+        ]
+      ],
+      "question": "What percentage of all orders have order_status = 'delivered'? Return the percentage as a number from 0 to 100.",
+      "sql": "SELECT 100.0 * SUM(CASE WHEN order_status = 'delivered' THEN 1 ELSE 0 END) / COUNT(*) AS percentage\nFROM olist_orders_dataset;",
+      "answer": "97.02034372140264",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1525,
+        "output_tokens": 291,
+        "total_tokens": 1816,
+        "stages_ms": {
+          "prepare_schema_node": 0.129,
+          "generate_sql_node": 1410.448,
+          "run_sql_node": 98.43,
+          "plot_sql_node": 0.003,
+          "answer_node": 345.087
+        },
+        "latency_ms": 1878.661
+      }
+    },
+    {
+      "sample": 8,
+      "pass": true,
+      "attempts": 1,
+      "cache": "none",
+      "latency_ms": 4131.379,
+      "rows": [
+        [
+          "boleto",
+          19784
+        ],
+        [
+          "credit_card",
+          76795
+        ],
+        [
+          "debit_card",
+          1529
+        ],
+        [
+          "not_defined",
+          3
+        ],
+        [
+          "voucher",
+          5775
+        ]
+      ],
+      "question": "Plot the number of payment records by payment_type as a bar chart.",
+      "sql": "SELECT payment_type, COUNT(*) AS payment_count\nFROM olist_order_payments_dataset\nGROUP BY payment_type;",
+      "answer": "**Payment records by type**\n\n| payment_type | payment_count |\n|--------------|---------------|\n| boleto       | 19,784 |\n| credit_card  | 76,795 |\n| debit_card   | 1,529 |\n| not_defined  | 3 |\n| voucher      | 5,775 |\n\nThese values can be plotted as a bar chart with `payment_type` on the x‑axis and `payment_count` on the y‑axis.",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 2305,
+        "output_tokens": 510,
+        "total_tokens": 2815,
+        "stages_ms": {
+          "prepare_schema_node": 0.119,
+          "generate_sql_node": 618.697,
+          "run_sql_node": 222.822,
+          "plot_sql_node": 2614.189,
+          "answer_node": 653.893
+        },
+        "latency_ms": 4131.379
+      }
+    },
+    {
+      "sample": 9,
+      "pass": true,
+      "attempts": 1,
+      "cache": "none",
+      "latency_ms": 2574.704,
+      "rows": [
+        [
+          "cama_mesa_banho",
+          11115
+        ],
+        [
+          "beleza_saude",
+          9670
+        ],
+        [
+          "esporte_lazer",
+          8641
+        ],
+        [
+          "moveis_decoracao",
+          8334
+        ],
+        [
+          "informatica_acessorios",
+          7827
+        ]
+      ],
+      "question": "Return the top 5 product categories by number of order items sold. Join order items to products, exclude missing product categories, return category and item_count, and sort by item_count descending then category ascending.",
+      "sql": "SELECT\n    p.product_category_name AS category,\n    COUNT(*) AS item_count\nFROM\n    olist_order_items_dataset oi\nJOIN\n    olist_products_dataset p\n    ON oi.product_id = p.product_id\nWHERE\n    p.product_category_name IS NOT NULL\nGROUP BY\n    p.product_category_name\nORDER BY\n    item_count DESC,\n    category ASC\nLIMIT 5;",
+      "answer": "Top 5 product categories by order items sold:\n\n| category              | item_count |\n|-----------------------|------------|\n| cama_mesa_banho       | 11115      |\n| beleza_saude          | 9670       |\n| esporte_lazer         | 8641       |\n| moveis_decoracao      | 8334       |\n| informatica_acessorios| 7827       |",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1650,
+        "output_tokens": 486,
+        "total_tokens": 2136,
+        "stages_ms": {
+          "prepare_schema_node": 0.136,
+          "generate_sql_node": 887.749,
+          "run_sql_node": 926.092,
+          "plot_sql_node": 0.004,
+          "answer_node": 741.498
+        },
+        "latency_ms": 2574.704
+      }
+    },
+    {
+      "sample": 10,
+      "pass": true,
+      "attempts": 1,
+      "cache": "none",
+      "latency_ms": 1205.646,
+      "rows": [
+        [
+          120.65373901464713
+        ]
+      ],
+      "question": "What is the average item price in olist_order_items_dataset, excluding freight? Return only the average price.",
+      "sql": "SELECT AVG(price) FROM olist_order_items_dataset;",
+      "answer": "120.65373901464713",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1493,
+        "output_tokens": 201,
+        "total_tokens": 1694,
+        "stages_ms": {
+          "prepare_schema_node": 0.179,
+          "generate_sql_node": 825.118,
+          "run_sql_node": 20.636,
+          "plot_sql_node": 0.004,
+          "answer_node": 340.175
+        },
+        "latency_ms": 1205.646
+      }
+    }
+  ]
+}

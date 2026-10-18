@@ -151,7 +151,20 @@ async function submitQuestion(event) {
 $('question-form').addEventListener('submit', submitQuestion);
 input.addEventListener('input', updateInput);
 input.addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); submitQuestion(); } });
-document.querySelectorAll('.suggestion').forEach(button => button.addEventListener('click', () => { if (!busy) { input.value = button.dataset.question; updateInput(); input.focus(); } }));
+function setMobileView(view) {
+  document.body.dataset.view = view;
+  $('show-project').setAttribute('aria-pressed', String(view === 'project'));
+  $('show-demo').setAttribute('aria-pressed', String(view === 'demo'));
+}
+$('show-project').addEventListener('click', () => setMobileView('project'));
+$('show-demo').addEventListener('click', () => setMobileView('demo'));
+document.querySelector('.skip-link').addEventListener('click', () => setMobileView('demo'));
+document.querySelectorAll('.suggestion').forEach(button => button.addEventListener('click', () => {
+  if (busy) return;
+  input.value = button.dataset.question;
+  if (matchMedia('(max-width: 760px)').matches) setMobileView('demo');
+  updateInput(); input.focus();
+}));
 function resetConversation() {
   if (busy) return;
   chat.replaceChildren();

@@ -7,18 +7,20 @@
   <meta name="description" content="AI Agent Chatbot: a project that turns questions about an e-commerce dataset into read-only SQL, answers and charts.">
   <title>AI Agent Chatbot | Project &amp; Demo</title>
   <link rel="icon" type="image/svg+xml" href="/ui/brand.svg">
-  <link rel="stylesheet" href="/ui/styles.css?v=6">
-  <script src="/ui/app.js?v=5" defer></script>
+  <link rel="stylesheet" href="/ui/styles.css?v=7">
+  <script src="/ui/app.js?v=6" defer></script>
 </head>
-<body>
+<body data-view="project">
   <a class="skip-link" href="#input">Skip to the demo</a>
   <header class="page-header">
     <a class="project-name" href="/" aria-label="AI Agent Chatbot home"><img src="/ui/brand.svg" alt="" width="30" height="30">AI Agent Chatbot</a>
     <div class="header-links"><span class="byline">A project by Tri Luan Le</span><a href="https://github.com/letriluan/AI-Agent-Chatbot" target="_blank" rel="noopener noreferrer">View code <span aria-hidden="true">↗</span></a></div>
   </header>
 
+  <nav class="mobile-tabs" aria-label="Demo sections"><button id="show-project" type="button" aria-controls="project-notes" aria-pressed="true">Project &amp; questions</button><button id="show-demo" type="button" aria-controls="demo-panel" aria-pressed="false">Try chatbot</button></nav>
+
   <main class="project-layout">
-    <section class="project-notes" aria-labelledby="project-title">
+    <section id="project-notes" class="project-notes" aria-labelledby="project-title">
       <div class="section-label">THE PROJECT</div>
       <h1 id="project-title">Why I built this</h1>
       <p class="project-intro">Relational databases contain useful information, but accessing it often requires SQL knowledge. I built this chatbot to let users ask questions in natural language and receive answers or charts directly from the database.</p>
@@ -29,18 +31,23 @@
       <section class="examples" aria-labelledby="examples-title">
         <div class="examples-heading"><h2 id="examples-title">Questions to try</h2><span>Click to fill the test box</span></div>
         <ol class="suggestions">
-          <li><button class="suggestion" type="button" data-question="How many orders are there in total?"><span class="question-number">01</span><span class="question-text">How many orders are there in total?<small>Simple count</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
-          <li><button class="suggestion" type="button" data-question="Plot the number of orders by order_status as a bar chart."><span class="question-number">02</span><span class="question-text">Show order counts by status.<small>Bar chart</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
-          <li><button class="suggestion" type="button" data-question="How many distinct delivered orders contain at least one item? Count each order only once, even if it has multiple items."><span class="question-number">03</span><span class="question-text">How many delivered orders have items?<small>Join tables · count distinct orders</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
-          <li><button class="suggestion" type="button" data-question="Plot monthly total order item prices as a line chart. Join order items to orders, group by purchase month in YYYY-MM format, include all statuses and exclude freight."><span class="question-number">04</span><span class="question-text">Plot monthly order item totals.<small>Line chart · excludes freight</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
-          <li><button class="suggestion refusal-example" type="button" data-question="Delete all cancelled orders from the database."><span class="question-number">05</span><span class="question-text">Try asking it to delete cancelled orders.<small>Read-only check · should be refused</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="How many orders are there in total?"><span class="question-number">01</span><span class="question-text">How many orders in total?<small>Count</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Plot the number of orders by order_status as a bar chart."><span class="question-number">02</span><span class="question-text">Orders by status<small>Bar chart</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="How many distinct delivered orders contain at least one item? Count each order only once, even if it has multiple items."><span class="question-number">03</span><span class="question-text">Delivered orders with items<small>Distinct join</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Plot monthly total order item prices as a line chart. Join order items to orders, group by purchase month in YYYY-MM format, include all statuses and exclude freight."><span class="question-number">04</span><span class="question-text">Monthly item totals<small>Line chart · excludes freight</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion refusal-example" type="button" data-question="Delete all cancelled orders from the database."><span class="question-number">05</span><span class="question-text">Try deleting cancelled orders<small>Read-only check · refused</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Return the top 5 customer states by number of customer records. Return state and customer_count, sorted by count descending then state ascending."><span class="question-number">06</span><span class="question-text">Top 5 customer states<small>Ranking</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="What percentage of all orders have order_status = &#x27;delivered&#x27;? Return the percentage as a number from 0 to 100."><span class="question-number">07</span><span class="question-text">Delivered order percentage<small>Percentage</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Plot the number of payment records by payment_type as a bar chart."><span class="question-number">08</span><span class="question-text">Payments by type<small>Bar chart</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="Return the top 5 product categories by number of order items sold. Join order items to products, exclude missing product categories, return category and item_count, and sort by item_count descending then category ascending."><span class="question-number">09</span><span class="question-text">Top 5 product categories<small>Product join</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
+          <li><button class="suggestion" type="button" data-question="What is the average item price in olist_order_items_dataset, excluding freight? Return only the average price."><span class="question-number">10</span><span class="question-text">Average item price<small>Average · excludes freight</small></span><span class="question-arrow" aria-hidden="true">↗</span></button></li>
         </ol>
       </section>
 
-      <div class="project-details"><p><strong>Dataset</strong> <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener noreferrer">Olist Brazilian e-commerce ↗</a><span class="dataset-size">99,441 orders across 9 tables.</span></p><p class="stack">Python · FastAPI · LangGraph · Groq · SQLite</p></div>
+      <div class="project-details"><p><strong>Dataset</strong> <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noopener noreferrer">Olist Brazilian e-commerce ↗</a><span class="dataset-size">99,441 orders · 9 tables</span></p><p class="stack">Python · FastAPI · LangGraph · Groq · SQLite</p></div>
     </section>
 
-    <section class="demo-panel" aria-labelledby="demo-title">
+    <section id="demo-panel" class="demo-panel" aria-labelledby="demo-title">
       <header class="demo-header"><div><h2 id="demo-title">Test the chatbot</h2><span id="connection" class="connection" role="status"><span class="status-dot"></span>Connecting to dataset</span></div><button id="new-chat" class="clear-button" type="button">Clear chat</button></header>
       <div class="scroll-area" id="scroll-area">
         <div class="welcome" id="welcome"><div class="empty-icon" aria-hidden="true"><svg width="31" height="31" viewBox="0 0 32 32" fill="none"><rect x="4.5" y="5.5" width="23" height="21" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="m10 12 4 4-4 4m8 0h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Your results will appear here.</h3><p>Choose a sample question or write your own.<br>You'll get an answer, the SQL, and a chart when requested.</p><span class="empty-label">Connected to the Olist example dataset</span></div>

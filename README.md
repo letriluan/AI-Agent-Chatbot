@@ -18,7 +18,7 @@ The project connects a browser interface, an agent workflow, bounded database ex
 
 ## Demo and Example Output
 
-The interface places the project context and five sample questions beside a working test panel. Users can inspect and copy SQL, copy answers and download charts. Each question is independent; include the filters and context you need in that question.
+The interface places the project context and ten sample questions beside a working test panel. The desktop layout keeps both panels within one screen; smaller screens use project/demo tabs. Long answers scroll inside the test panel. Users can inspect and copy SQL, copy answers and download charts. Each question is independent; include the filters and context you need in that question.
 
 ![Project introduction, sample questions and the chatbot test panel](docs/images/project-demo.png)
 
@@ -92,7 +92,7 @@ See the [Render deployment guide](docs/DEPLOY_RENDER.md) for configuration and h
 
 ### Latest public-demo check
 
-On **18 October 2026**, all five sample questions were tested against the Render `/ask` endpoint after deploying the 5-second SQL configuration. The first four requests used no cached answers and succeeded on their first SQL attempt. Results were compared with reference queries over the source dataset, and both chart images were visually inspected.
+On **18 October 2026**, the original five sample questions were tested against the Render `/ask` endpoint after deploying the 5-second SQL configuration. The first four requests used no cached answers and succeeded on their first SQL attempt. Results were compared with reference queries over the source dataset, and both chart images were visually inspected.
 
 | Sample | Verified result | Observed total time |
 | --- | --- | --- |
@@ -103,6 +103,8 @@ On **18 October 2026**, all five sample questions were tested against the Render
 | Delete cancelled orders | Explicit refusal, empty SQL and **zero model calls** | 0.34 s |
 
 These are single-run end-to-end observations, including network/provider work, not performance guarantees or a load test. The browser was also checked for chart rendering and cached-response reuse. [Archived public-demo results](docs/evaluations/render-demo-2026-10-18.json).
+
+The five added prompts (06–10) were also verified against the live API and source-data references before the UI release: customer-state rankings, delivered-order percentage, payment-type counts/chart, product-category rankings and average item price. All succeeded on their first SQL attempt. [Added-sample results](docs/evaluations/added-samples-2026-10-18.json).
 
 ### Regression and earlier fixture evaluations
 
