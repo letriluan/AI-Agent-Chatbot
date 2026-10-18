@@ -1,0 +1,1013 @@
+{
+  "mode": "live",
+  "fingerprints": {
+    "prompts.py": "a264ae47da52f728caa78d5e0c741b07875db973b793141b9a960a7348c1b7b9",
+    "holdout_cases.json": "a24c6d64d74d3ab96d9e665b94f69136cee4d9f869ea165c28444132b0f2c7c5",
+    "holdout_fixture.py": "ab134b675becdfb7fed2932032e78470e4fd8fb1e7ab5e7fa62e82de9a45bc31"
+  },
+  "model": "openai/gpt-oss-20b",
+  "records": [
+    {
+      "id": "h01",
+      "kind": "sql",
+      "question": "For each state, return state and total delivered order amount, including states with no delivered orders as zero. Sort by state.",
+      "reference_sql": "SELECT c.state,COALESCE(SUM(CASE WHEN o.status='delivered' THEN o.amount ELSE 0 END),0) FROM customers c LEFT JOIN orders o ON o.customer_id=c.id GROUP BY c.state ORDER BY c.state",
+      "expected_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100
+        ],
+        [
+          "TAS",
+          240
+        ],
+        [
+          "WA",
+          120
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT c.state, COALESCE(SUM(o.amount), 0) AS total_delivered_amount\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'delivered'\nGROUP BY c.state\nORDER BY c.state\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100.0
+        ],
+        [
+          "TAS",
+          240.0
+        ],
+        [
+          "WA",
+          120.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "State | Total Delivered Amount  \n--- | ---  \nNT | 0  \nSA | 100.0  \nTAS | 240.0  \nWA | 120.0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1191,
+        "output_tokens": 805,
+        "total_tokens": 1996,
+        "stages_ms": {
+          "prepare_schema_node": 0.309,
+          "generate_sql_node": 1574.845,
+          "run_sql_node": 0.925,
+          "plot_sql_node": 0.001,
+          "answer_node": 644.759
+        },
+        "latency_ms": 2273.851
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h02",
+      "kind": "sql",
+      "question": "Which orders tie for the largest amount? Return only order IDs, ascending.",
+      "reference_sql": "SELECT id FROM orders WHERE amount=(SELECT MAX(amount) FROM orders) ORDER BY id",
+      "expected_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT id\nFROM orders\nWHERE amount = (SELECT MAX(amount) FROM orders)\nORDER BY id;",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "5, 6",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1102,
+        "output_tokens": 226,
+        "total_tokens": 1328,
+        "stages_ms": {
+          "prepare_schema_node": 0.377,
+          "generate_sql_node": 601.056,
+          "run_sql_node": 0.705,
+          "plot_sql_node": 0.001,
+          "answer_node": 528.41
+        },
+        "latency_ms": 1204.436
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h03",
+      "kind": "sql",
+      "question": "What percentage of orders are delivered? Return one number from 0 to 100 without rounding.",
+      "reference_sql": "SELECT 100.0*SUM(CASE WHEN status='delivered' THEN 1 ELSE 0 END)/COUNT(*) FROM orders",
+      "expected_rows": [
+        [
+          62.5
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT (COUNT(CASE WHEN status = 'delivered' THEN 1 END) * 100.0 / COUNT(*)) AS percentage FROM orders;",
+      "actual_rows": [
+        [
+          62.5
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "62.5",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1119,
+        "output_tokens": 269,
+        "total_tokens": 1388,
+        "stages_ms": {
+          "prepare_schema_node": 0.309,
+          "generate_sql_node": 1052.144,
+          "run_sql_node": 0.734,
+          "plot_sql_node": 0.001,
+          "answer_node": 638.435
+        },
+        "latency_ms": 1760.189
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h04",
+      "kind": "sql",
+      "question": "For each customer, return customer ID and the number of delivered orders, including zero counts. Sort by customer ID.",
+      "reference_sql": "SELECT c.id,COUNT(o.id) FROM customers c LEFT JOIN orders o ON o.customer_id=c.id AND o.status='delivered' GROUP BY c.id ORDER BY c.id",
+      "expected_rows": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT customers.id AS customer_id, COUNT(orders.id) AS delivered_orders\nFROM customers\nLEFT JOIN orders ON orders.customer_id = customers.id AND orders.status = 'delivered'\nGROUP BY customers.id\nORDER BY customers.id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Customer ID | Delivered Orders  \n--- | ---  \n1 | 1  \n2 | 1  \n3 | 2  \n4 | 0  \n5 | 1",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1178,
+        "output_tokens": 509,
+        "total_tokens": 1687,
+        "stages_ms": {
+          "prepare_schema_node": 0.417,
+          "generate_sql_node": 1107.781,
+          "run_sql_node": 0.9,
+          "plot_sql_node": 0.001,
+          "answer_node": 609.481
+        },
+        "latency_ms": 1791.816
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h05",
+      "kind": "sql",
+      "question": "Return only IDs of customers who have at least two delivered orders, ascending.",
+      "reference_sql": "SELECT customer_id FROM orders WHERE status='delivered' GROUP BY customer_id HAVING COUNT(*)>=2 ORDER BY customer_id",
+      "expected_rows": [
+        [
+          3
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT customers.id\nFROM customers\nJOIN orders ON orders.customer_id = customers.id\nWHERE orders.status = 'delivered'\nGROUP BY customers.id\nHAVING COUNT(*) >= 2\nORDER BY customers.id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          3
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "3",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1125,
+        "output_tokens": 268,
+        "total_tokens": 1393,
+        "stages_ms": {
+          "prepare_schema_node": 0.337,
+          "generate_sql_node": 770.877,
+          "run_sql_node": 0.949,
+          "plot_sql_node": 0.002,
+          "answer_node": 577.731
+        },
+        "latency_ms": 1426.669
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h06",
+      "kind": "sql",
+      "question": "Calculate total item value as quantity times unit price for delivered orders only. Return one total.",
+      "reference_sql": "SELECT SUM(i.quantity*i.unit_price) FROM order_items i JOIN orders o ON o.id=i.order_id WHERE o.status='delivered'",
+      "expected_rows": [
+        [
+          460
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT SUM(order_items.quantity * order_items.unit_price) AS total_item_value\nFROM order_items\nJOIN orders ON order_items.order_id = orders.id\nWHERE orders.status = 'delivered';",
+      "actual_rows": [
+        [
+          460.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "460.0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1127,
+        "output_tokens": 230,
+        "total_tokens": 1357,
+        "stages_ms": {
+          "prepare_schema_node": 0.345,
+          "generate_sql_node": 758.914,
+          "run_sql_node": 0.814,
+          "plot_sql_node": 0.001,
+          "answer_node": 676.805
+        },
+        "latency_ms": 1505.93
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h07",
+      "kind": "sql",
+      "question": "Return order ID and total quantity for delivered orders with at least three units. Sort by order ID.",
+      "reference_sql": "SELECT o.id,SUM(i.quantity) FROM orders o JOIN order_items i ON i.order_id=o.id WHERE o.status='delivered' GROUP BY o.id HAVING SUM(i.quantity)>=3 ORDER BY o.id",
+      "expected_rows": [
+        [
+          1,
+          3
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT orders.id AS order_id, SUM(order_items.quantity) AS total_quantity\nFROM orders\nJOIN order_items ON order_items.order_id = orders.id\nWHERE orders.status = 'delivered'\nGROUP BY orders.id\nHAVING SUM(order_items.quantity) >= 3\nORDER BY orders.id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          1,
+          3
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Order ID | Total Quantity  \n--- | ---  \n1 | 3  \n5 | 4",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1166,
+        "output_tokens": 473,
+        "total_tokens": 1639,
+        "stages_ms": {
+          "prepare_schema_node": 0.339,
+          "generate_sql_node": 949.856,
+          "run_sql_node": 0.854,
+          "plot_sql_node": 0.001,
+          "answer_node": 324.754
+        },
+        "latency_ms": 1378.152
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h08",
+      "kind": "sql",
+      "question": "How many distinct delivered orders have item rows? Count each order once even if it has several item rows.",
+      "reference_sql": "SELECT COUNT(DISTINCT o.id) FROM orders o JOIN order_items i ON i.order_id=o.id WHERE o.status='delivered'",
+      "expected_rows": [
+        [
+          5
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT COUNT(DISTINCT orders.id)\nFROM orders\nJOIN order_items ON order_items.order_id = orders.id\nWHERE orders.status = 'delivered';",
+      "actual_rows": [
+        [
+          5
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "There are 5 distinct delivered orders that have item rows.",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1127,
+        "output_tokens": 303,
+        "total_tokens": 1430,
+        "stages_ms": {
+          "prepare_schema_node": 0.3,
+          "generate_sql_node": 796.723,
+          "run_sql_node": 0.804,
+          "plot_sql_node": 0.002,
+          "answer_node": 284.492
+        },
+        "latency_ms": 1170.524
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h09",
+      "kind": "sql",
+      "question": "Return only order IDs purchased during April 2026, including April 30 but excluding May 1, sorted ascending.",
+      "reference_sql": "SELECT id FROM orders WHERE ordered_at>='2026-04-01' AND ordered_at<'2026-05-01' ORDER BY id",
+      "expected_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT id\nFROM orders\nWHERE ordered_at >= '2026-04-01'\n  AND ordered_at <= '2026-04-30'\nORDER BY id ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1142,
+        "output_tokens": 395,
+        "total_tokens": 1537,
+        "stages_ms": {
+          "prepare_schema_node": 0.328,
+          "generate_sql_node": 889.842,
+          "run_sql_node": 1.032,
+          "plot_sql_node": 0.002,
+          "answer_node": 347.596
+        },
+        "latency_ms": 1290.592
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h10",
+      "kind": "sql",
+      "question": "What is the average amount of pending orders, including zero amounts?",
+      "reference_sql": "SELECT AVG(amount) FROM orders WHERE status='pending'",
+      "expected_rows": [
+        [
+          30
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT AVG(amount) FROM orders WHERE status = 'pending';",
+      "actual_rows": [
+        [
+          30.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "The average amount of pending orders is 30.0.",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1090,
+        "output_tokens": 286,
+        "total_tokens": 1376,
+        "stages_ms": {
+          "prepare_schema_node": 0.316,
+          "generate_sql_node": 494.321,
+          "run_sql_node": 0.807,
+          "plot_sql_node": 0.002,
+          "answer_node": 291.416
+        },
+        "latency_ms": 847.425
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h11",
+      "kind": "sql",
+      "question": "Return only IDs of delivered orders whose amount exceeds the average delivered order amount, sorted ascending.",
+      "reference_sql": "SELECT id FROM orders WHERE status='delivered' AND amount>(SELECT AVG(amount) FROM orders WHERE status='delivered') ORDER BY id",
+      "expected_rows": [
+        [
+          1
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT orders.id\nFROM orders\nWHERE orders.status = 'delivered'\n  AND orders.amount > (\n    SELECT AVG(amount)\n    FROM orders\n    WHERE status = 'delivered'\n  )\nORDER BY orders.id ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          1
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "1\n5\n6",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1140,
+        "output_tokens": 299,
+        "total_tokens": 1439,
+        "stages_ms": {
+          "prepare_schema_node": 0.332,
+          "generate_sql_node": 853.98,
+          "run_sql_node": 0.842,
+          "plot_sql_node": 0.001,
+          "answer_node": 296.452
+        },
+        "latency_ms": 1215.994
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h12",
+      "kind": "sql",
+      "question": "Return only IDs of customers with orders but no delivered orders, sorted ascending.",
+      "reference_sql": "SELECT c.id FROM customers c WHERE EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.id) AND NOT EXISTS(SELECT 1 FROM orders o WHERE o.customer_id=c.id AND o.status='delivered') ORDER BY c.id",
+      "expected_rows": [],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT customers.id\nFROM customers\nJOIN orders ON orders.customer_id = customers.id\nGROUP BY customers.id\nHAVING COUNT(*) > 0\n   AND SUM(CASE WHEN orders.status = 'delivered' THEN 1 ELSE 0 END) = 0\nORDER BY customers.id ASC\nLIMIT 50;",
+      "actual_rows": [],
+      "sql_correct": true,
+      "answer": "I couldn\u2019t find any customers who meet that criteria.  \nYou might try expanding the search to include a broader date range or to look at a different status (e.g., \u201cpending\u201d or \u201cshipped\u201d).",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1141,
+        "output_tokens": 494,
+        "total_tokens": 1635,
+        "stages_ms": {
+          "prepare_schema_node": 0.333,
+          "generate_sql_node": 854.302,
+          "run_sql_node": 0.886,
+          "plot_sql_node": 0.001,
+          "answer_node": 796.557
+        },
+        "latency_ms": 1731.817
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h13",
+      "kind": "bar",
+      "question": "Draw a bar chart of delivered order amount by state, including zero states. Return state and total delivered amount; sort states alphabetically.",
+      "reference_sql": "SELECT c.state,COALESCE(SUM(CASE WHEN o.status='delivered' THEN o.amount ELSE 0 END),0) FROM customers c LEFT JOIN orders o ON o.customer_id=c.id GROUP BY c.state ORDER BY c.state",
+      "expected_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100
+        ],
+        [
+          "TAS",
+          240
+        ],
+        [
+          "WA",
+          120
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    customers.state,\n    COALESCE(SUM(orders.amount), 0) AS total_delivered_amount\nFROM\n    customers\nLEFT JOIN\n    orders\n    ON orders.customer_id = customers.id\n    AND orders.status = 'delivered'\nGROUP BY\n    customers.state\nORDER BY\n    customers.state ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100.0
+        ],
+        [
+          "TAS",
+          240.0
+        ],
+        [
+          "WA",
+          120.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Delivered order amount by state (alphabetical order)**  \n\n| state | total_delivered_amount |\n|-------|------------------------|\n| NT    | 0 |\n| SA    | 100.0 |\n| TAS   | 240.0 |\n| WA    | 120.0 |",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1623,
+        "output_tokens": 1349,
+        "total_tokens": 2972,
+        "stages_ms": {
+          "prepare_schema_node": 0.302,
+          "generate_sql_node": 1188.468,
+          "run_sql_node": 1.189,
+          "plot_sql_node": 22235.126,
+          "answer_node": 709.73
+        },
+        "latency_ms": 24186.009
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100.0
+        ],
+        [
+          "TAS",
+          240.0
+        ],
+        [
+          "WA",
+          120.0
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "NT",
+          0.0
+        ],
+        [
+          "SA",
+          100.0
+        ],
+        [
+          "TAS",
+          240.0
+        ],
+        [
+          "WA",
+          120.0
+        ]
+      ],
+      "labels": {
+        "title": "Total delivered amount by state",
+        "xlabel": "State",
+        "ylabel": "Total delivered amount"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    },
+    {
+      "id": "h14",
+      "kind": "line",
+      "question": "Draw a line chart of monthly average order amount for all statuses. Use YYYY-MM and average amount, in chronological order. Include only months with orders; do not fill missing months.",
+      "reference_sql": "SELECT strftime('%Y-%m',ordered_at),AVG(amount) FROM orders GROUP BY 1 ORDER BY 1",
+      "expected_rows": [
+        [
+          "2026-01",
+          60
+        ],
+        [
+          "2026-02",
+          40
+        ],
+        [
+          "2026-04",
+          100
+        ],
+        [
+          "2026-05",
+          40
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT strftime('%Y-%m', orders.ordered_at) AS month,\n       AVG(orders.amount) AS avg_amount\nFROM orders\nGROUP BY strftime('%Y-%m', orders.ordered_at)\nORDER BY month ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "2026-01",
+          60.0
+        ],
+        [
+          "2026-02",
+          40.0
+        ],
+        [
+          "2026-04",
+          100.0
+        ],
+        [
+          "2026-05",
+          40.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Monthly average order amount (chronological order)**  \n\n| month   | avg_amount |\n|---------|------------|\n| 2026-01 | 60.0 |\n| 2026-02 | 40.0 |\n| 2026-04 | 100.0 |\n| 2026-05 | 40.0 |\n\nThese values can be plotted as a line chart with the month on the x\u2011axis and the average amount on the y\u2011axis. Missing months are omitted as requested.",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1640,
+        "output_tokens": 1104,
+        "total_tokens": 2744,
+        "stages_ms": {
+          "prepare_schema_node": 0.308,
+          "generate_sql_node": 1180.097,
+          "run_sql_node": 0.934,
+          "plot_sql_node": 648.31,
+          "answer_node": 526.78
+        },
+        "latency_ms": 2445.137
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "2026-01",
+          60.0
+        ],
+        [
+          "2026-02",
+          40.0
+        ],
+        [
+          "2026-04",
+          100.0
+        ],
+        [
+          "2026-05",
+          40.0
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "2026-01",
+          60.0
+        ],
+        [
+          "2026-02",
+          40.0
+        ],
+        [
+          "2026-04",
+          100.0
+        ],
+        [
+          "2026-05",
+          40.0
+        ]
+      ],
+      "labels": {
+        "title": "Avg order amount by order month",
+        "xlabel": "Order month",
+        "ylabel": "Avg order amount"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    },
+    {
+      "id": "h15",
+      "kind": "bar",
+      "question": "Draw a bar chart of total units purchased by order status. Join orders and order_items; sum quantity rather than counting item rows. Return status and total units, sorted by status.",
+      "reference_sql": "SELECT o.status,SUM(i.quantity) FROM orders o JOIN order_items i ON i.order_id=o.id GROUP BY o.status ORDER BY o.status",
+      "expected_rows": [
+        [
+          "cancelled",
+          1
+        ],
+        [
+          "delivered",
+          13
+        ],
+        [
+          "pending",
+          2
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    orders.status,\n    SUM(order_items.quantity) AS total_units\nFROM\n    orders\nJOIN\n    order_items\n    ON order_items.order_id = orders.id\nGROUP BY\n    orders.status\nORDER BY\n    orders.status\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "cancelled",
+          1
+        ],
+        [
+          "delivered",
+          13
+        ],
+        [
+          "pending",
+          2
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Bar chart data (status \u2192 total units)**  \n\n| status     | total_units |\n|------------|-------------|\n| cancelled  | 1           |\n| delivered  | 13          |\n| pending    | 2           |\n\nThese values are sorted by status and can be plotted as a bar chart with each status on the x\u2011axis and the corresponding total_units on the y\u2011axis.",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1619,
+        "output_tokens": 768,
+        "total_tokens": 2387,
+        "stages_ms": {
+          "prepare_schema_node": 0.321,
+          "generate_sql_node": 698.113,
+          "run_sql_node": 0.866,
+          "plot_sql_node": 851.957,
+          "answer_node": 537.441
+        },
+        "latency_ms": 2147.347
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "cancelled",
+          1
+        ],
+        [
+          "delivered",
+          13
+        ],
+        [
+          "pending",
+          2
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "cancelled",
+          1.0
+        ],
+        [
+          "delivered",
+          13.0
+        ],
+        [
+          "pending",
+          2.0
+        ]
+      ],
+      "labels": {
+        "title": "Total units by order status",
+        "xlabel": "Order status",
+        "ylabel": "Total units"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    },
+    {
+      "id": "h16",
+      "kind": "line",
+      "question": "Draw a line chart of cumulative monthly order amount over all statuses. Use YYYY-MM and a running total of monthly sums, chronological order, only months with orders.",
+      "reference_sql": "SELECT month,SUM(total) OVER(ORDER BY month) FROM (SELECT strftime('%Y-%m',ordered_at) month,SUM(amount) total FROM orders GROUP BY 1) ORDER BY month",
+      "expected_rows": [
+        [
+          "2026-01",
+          120
+        ],
+        [
+          "2026-02",
+          200
+        ],
+        [
+          "2026-04",
+          500
+        ],
+        [
+          "2026-05",
+          540
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "WITH monthly AS (\n  SELECT strftime('%Y-%m', ordered_at) AS month,\n         SUM(amount) AS monthly_total\n  FROM orders\n  GROUP BY month\n)\nSELECT month,\n       SUM(monthly_total) OVER (ORDER BY month) AS cumulative_total\nFROM monthly\nORDER BY month\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "2026-01",
+          120.0
+        ],
+        [
+          "2026-02",
+          200.0
+        ],
+        [
+          "2026-04",
+          500.0
+        ],
+        [
+          "2026-05",
+          540.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Cumulative monthly totals (chronological, only months with orders):\n\n- 2026\u201101: 120.0  \n- 2026\u201102: 200.0  \n- 2026\u201104: 500.0  \n- 2026\u201105: 540.0",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1644,
+        "output_tokens": 1230,
+        "total_tokens": 2874,
+        "stages_ms": {
+          "prepare_schema_node": 0.379,
+          "generate_sql_node": 960.532,
+          "run_sql_node": 0.88,
+          "plot_sql_node": 1128.513,
+          "answer_node": 1107.574
+        },
+        "latency_ms": 3259.037
+      },
+      "attempts": 1,
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "2026-01",
+          120.0
+        ],
+        [
+          "2026-02",
+          200.0
+        ],
+        [
+          "2026-04",
+          500.0
+        ],
+        [
+          "2026-05",
+          540.0
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "2026-01",
+          120.0
+        ],
+        [
+          "2026-02",
+          200.0
+        ],
+        [
+          "2026-04",
+          500.0
+        ],
+        [
+          "2026-05",
+          540.0
+        ]
+      ],
+      "labels": {
+        "title": "Cumulative amount by order month",
+        "xlabel": "Order month",
+        "ylabel": "Cumulative amount"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    }
+  ],
+  "narrative_accuracy_measured": false,
+  "summary": {
+    "reference_passed": 16,
+    "total": 16,
+    "sql_correct": 16,
+    "charts_correct": 4,
+    "charts_total": 4,
+    "errors": 0,
+    "cache_hits": 16
+  }
+}
