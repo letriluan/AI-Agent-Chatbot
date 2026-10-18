@@ -29,7 +29,7 @@ def _authorize(action, arg1, arg2, database, trigger):
     return sqlite3.SQLITE_OK
 
 
-def run_sql(db_path: str, sql: str, max_rows: int = 50, timeout_seconds: float = 2.0) -> dict:
+def run_sql(db_path: str, sql: str, max_rows: int = 50, timeout_seconds: float = 5.0) -> dict:
     error = {"ok": False, "columns": [], "rows": []}
     if not is_safe_sql(sql):
         return {**error, "error": "Unsafe or non-read-only SQL blocked."}

@@ -59,7 +59,7 @@ CACHE_DB = os.environ.get("CACHE_DB", "db/cache.sqlite")
 CACHE_TTL_SECONDS = int(os.environ.get("CACHE_TTL_SECONDS", "3600"))
 
 SQL_MAX_ROWS = int(os.environ.get("SQL_MAX_ROWS", "50"))
-SQL_TIMEOUT_SECONDS = float(os.environ.get("SQL_TIMEOUT_SECONDS", "2.0"))
+SQL_TIMEOUT_SECONDS = float(os.environ.get("SQL_TIMEOUT_SECONDS", "5.0"))
 
 
 class State(TypedDict, total=False):
