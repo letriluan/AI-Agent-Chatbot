@@ -10,7 +10,9 @@ A full-stack SQL analytics application that turns natural-language questions int
 
 ## Why I Built It
 
-Exploring relational data usually requires understanding the schema and writing SQL for every question. I built this application to make that exploration accessible through plain English, while keeping the generated query visible so users can check how an answer was produced.
+Relational databases contain useful information, but accessing it often requires SQL knowledge. I built this chatbot to let users ask questions in natural language and receive answers or charts directly from the database.
+
+The goal is to make everyday data exploration easier for users who are unfamiliar with SQL, while allowing technical users to inspect the generated queries and verify the results.
 
 The project connects a browser interface, an agent workflow, bounded database execution and chart rendering in one deployed application. The demo uses the [Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce): **9 related tables and 99,441 orders**.
 
