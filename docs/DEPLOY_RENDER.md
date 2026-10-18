@@ -96,3 +96,7 @@ docker compose -f compose.yaml -f compose.demo.yaml config --quiet
 - [Runtime environment variables](https://render.com/docs/configure-environment-variables)
 - [Web service port binding](https://render.com/docs/web-services#port-binding)
 - [Groq rate limits](https://console.groq.com/docs/rate-limits)
+
+## JOIN performance correction
+
+A live Olist distinct-order JOIN exhausted three 2-second SQL attempts on the first Render deployment. Build-time indexes now cover inferred child join keys and low-cardinality text filters paired with a table primary key. On the rebuilt dataset, the exact query returned 96,478 in three local Docker runs capped at 0.1 CPU / 512 MB, taking 406–496 ms per run. The 2-second query timeout is unchanged. Rebuild/redeploy the Docker image to obtain these indexes; restarting an old image does not change its packaged database. Windows regressions: 131 passed.

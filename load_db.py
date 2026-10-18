@@ -226,6 +226,32 @@ def insert_all(conn: sqlite3.Connection, tables: Dict[str, pd.DataFrame]) -> Non
     conn.commit()
 
 
+def create_query_indexes(conn, tables, pks, fks):
+    """Index child join keys and common low-cardinality text filters at build time."""
+    candidates = set()
+    for table, column, _, _ in fks:
+        if column != pks.get(table):
+            candidates.add((table, (column,)))
+    for table, frame in tables.items():
+        primary = pks.get(table)
+        if not primary or len(frame) < 100:
+            continue
+        for column in frame.columns:
+            is_text = pd.api.types.is_object_dtype(frame[column].dtype) or pd.api.types.is_string_dtype(frame[column].dtype)
+            if column == primary or not is_text:
+                continue
+            if 2 <= frame[column].nunique(dropna=True) <= 32:
+                candidates.add((table, (column, primary)))
+    for table, columns in sorted(candidates):
+        # Input identifiers were normalised by the loader; quote defensively too.
+        def quote(value):
+            return '"' + value.replace('"', '""') + '"'
+        name = 'idx_' + table + '_' + '_'.join(columns)
+        conn.execute(f'CREATE INDEX IF NOT EXISTS {quote(name)} ON {quote(table)} (' + ','.join(quote(c) for c in columns) + ')')
+    conn.execute('ANALYZE')
+    conn.commit()
+
+
 def validate_foreign_keys(conn: sqlite3.Connection) -> None:
     """Turn FK enforcement back on and report any FK violations."""
     conn.execute("PRAGMA foreign_keys=ON;")
@@ -287,6 +313,7 @@ def main(data_dir: Path, db_path: Path) -> None:
     try:
         create_tables(conn, tables, pks, fks)
         insert_all(conn, tables)
+        create_query_indexes(conn, tables, pks, fks)
 
         # Row counts
         for t in tables:

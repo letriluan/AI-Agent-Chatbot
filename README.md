@@ -71,7 +71,7 @@ flowchart TD
     F -->|Attempts exhausted| J[Controlled failure response]
 ```
 
-**Why this stack:** LangGraph makes retries explicit, FastAPI separates the backend from the browser, and SQLite keeps ingestion and evaluations easy to reproduce. Charts use Matplotlib rather than model-drawn graphics. A separate plotting query is executed and checked against reference data during chart evaluation.
+**Why this stack:** LangGraph makes retries explicit, FastAPI separates the backend from the browser, and SQLite keeps ingestion and evaluations easy to reproduce. Build-time indexes cover inferred join keys and low-cardinality text filters to reduce scans on small hosting instances. Charts use Matplotlib rather than model-drawn graphics. A separate plotting query is executed and checked against reference data during chart evaluation.
 
 Prompt changes are included in answer/query cache identity. Coded filters such as `WA` can be summarised directly from results; common unsupported currency markers are filtered from generated answers. Details and implementation limits are documented in [Engineering Notes](docs/ENGINEERING.md).
 
@@ -81,7 +81,7 @@ Verified locally on **18 October 2026**, with Python 3.12 and Groq-hosted `opena
 
 | Evaluation | Result | Scope |
 | --- | --- | --- |
-| Automated regressions | **130 passed** on Windows and Docker/Linux | Database controls, API, privacy rules, caching, retries, charts and reference cases |
+| Automated regressions | **131 passed** on Windows; previous 130-case suite passed on Docker/Linux | Database controls, API, privacy rules, caching, retries, charts and reference cases |
 | Development SQL suite | **30/30** strict matches | Questions used during prompt development |
 | New-question first-use suite | **16/16** main SQL matches | 12 SQL-only requests and four chart requests, on a separate fixture with a frozen prompt |
 | First-use chart checks | **4/4 passed** | Plot-query rows, actual renderer inputs, chart type, labels, nonblank PNG and image-cache reuse |
