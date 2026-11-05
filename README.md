@@ -2,6 +2,20 @@
 
 ## [Try the Live Demo →](https://ai-agent-chatbot-demo.onrender.com/)
 
+*First load may take ~30 s (free tier wakes from sleep).*
+
+## Results at a glance
+
+| Area | Measured result |
+| --- | --- |
+| Tests and deployment | **314 tests passed**; Render deploys after CI checks pass |
+| Five-run reliability | **80/80 SQL matches**, 16/16 cases correct in every run; **20/20 chart checks** |
+| Second schema | **24/24 SQL matches; 4/4 chart checks** on synthetic transit data |
+| Numeric support | **71/75 holdout; 16/17 transit** scored answers supported |
+| Availability | Free monitoring every **30 min**; confirmed cold start **32.85 s** |
+
+Results measured on 5 November 2026. Synthetic evaluation results are not a general accuracy guarantee. [Protocols, costs and limitations](docs/PROJECT1_EVALUATION.md).
+
 [![CI](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/ci.yml/badge.svg)](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/ci.yml) [![Manual availability diagnostic](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/availability.yml/badge.svg)](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/availability.yml)
 
 A full-stack SQL analytics application that turns natural-language questions into **inspectable SQL, answers and charts**.
@@ -88,64 +102,22 @@ flowchart LR
 
 Render reads the GitHub check results before deploying; the CI workflow itself does not publish an image or call the Render deployment API. See [Render's CI integration rules](https://render.com/docs/deploys#integrating-with-ci). This setting has not been tested here by deliberately failing a deployment-branch commit.
 
-The identifier and connection-recovery fixes reached Render in commit `5df7de9` on 5 November. Main CI passed at 05:23:08 UTC; Render's subsequent Auto-Deploy started at 05:23:11 UTC and became live at 05:24:39 UTC. An earlier Blueprint-triggered build was canceled and Blueprint Auto Sync disabled after it exposed a separate configuration-deployment path. Health, readiness, homepage, write refusal (zero model calls) and invalid-input checks passed on the new deployment.
-
 See the [Render deployment guide](docs/DEPLOY_RENDER.md) for configuration and hosting limits.
 
-**Availability:** UptimeRobot Free checks `/health` every **30 minutes**, with a **60-second timeout** and the expected JSON keyword. Automatic incident detection and recovery are verified. One controlled idle trial confirmed against Render lifecycle logs measured **32.85 seconds to healthy**, including an initial 503; warm health/readiness took **234 / 199 ms**. Free-service wake failures remain in the incident history; this is not a continuous uptime SLA. GitHub retains an on-demand health/readiness diagnostic. [Completion audit and monitoring evidence](docs/evaluations/project1-completion-2026-11-05/REPORT.md).
+**Availability:** UptimeRobot Free checks `/health` every **30 minutes**; automatic incident detection and recovery are verified. Render Free can sleep and return wake-related errors. [Monitoring settings, cold-start measurement and limitations](docs/PROJECT1_EVALUATION.md#availability-and-wake-up-observations).
 
 ## Evaluation and Results
 
-**Fixed-version five-run result, 5 November 2026:** **80/80 observations and 20/20 chart checks passed; all 16 cases passed every run (100%)**. Four naturally interrupted requests recovered within the shared two-retry limit. The incomplete earlier 22/23 attempt stopped on Free-tier quota and remains separate. [Complete fixed-version study](docs/evaluations/reliability-fixed-live-2026-11-05/REPORT.md) · [Preserved quota-restricted attempt](docs/evaluations/fixed-rerun-partial-2026-11-05/REPORT.md).
-
-### Public-demo checks
-
-After deploying the fixes on 5 November, two fresh hosted questions passed independent SQL-result checks (99,441 total orders and a chart of order statuses). They made five observed model calls; both cache repeats passed with zero model calls, including identical chart-image reuse. Health, readiness, homepage, write refusal and invalid-input checks also passed. Render's existing user-confirmed Free Groq credential was retained. [Fixed-version deployment smoke and chart review](docs/evaluations/render-fixed-deployment-2026-11-05/REPORT.md).
-
-On **5 November 2026**, all **ten current demo checks passed** through the public Render API: nine SQL results matched independent Olist references and the write request was refused with zero model calls. The nine data questions were uncached and made 21 observed model calls; all three chart PNGs were visually inspected. Three cache repeats preserved SQL/images with zero model calls, and two invalid inputs returned HTTP 422. This is one known-question deployment check, not the five-run synthetic reliability study or transit evaluation. [Earlier full-suite report, raw results and chart review](docs/evaluations/render-live-2026-11-05/REPORT.md).
-
-On **18 October 2026**, the original five sample questions were tested against the Render `/ask` endpoint after deploying the 5-second SQL configuration. The first four requests used no cached answers and succeeded on their first SQL attempt. Results were compared with reference queries over the source dataset, and both chart images were visually inspected.
-
-| Sample | Verified result | Observed total time |
+| Check | Latest evidence | Scope |
 | --- | --- | --- |
-| Total orders | **99,441** | 3.05 s |
-| Orders by status | Correct counts across eight statuses and a bar chart | 5.15 s |
-| Distinct delivered orders with items | **96,478**, counting each order once | 3.26 s |
-| Monthly item-price totals | **24 months**, reference totals and a line chart | 7.83 s |
-| Delete cancelled orders | Explicit refusal, empty SQL and **zero model calls** | 0.34 s |
+| **Automated regressions** | **314 tests passed**; GitHub CI passed | Identifier grounding, connection recovery and existing application controls |
+| Five-run holdout | **80/80 SQL matches; 20/20 chart checks** | The same 16 synthetic questions repeated five times; all 16 passed every run |
+| Second-schema evaluation | **24/24 SQL matches; 4/4 chart checks** | User-approved synthetic transit schema; not real Adelaide Metro data |
+| Numeric support | **71/75 holdout; 16/17 transit** scored answers supported | Literal number checks; context flags and unscored answers documented separately |
 
-These are single-run end-to-end observations, including network/provider work, not performance guarantees or a load test. The browser was also checked for chart rendering and cached-response reuse. [Archived public-demo results](docs/evaluations/render-demo-2026-10-18.json).
+SQL checks compare result values, columns, duplicates and required ordering. These small, now-exposed suites do not establish accuracy on arbitrary schemas or complete narrative factuality. The earlier **161-test** result is a historical baseline, not the current test count.
 
-The five added prompts (06–10) were also verified against the live API and source-data references before the UI release: customer-state rankings, delivered-order percentage, payment-type counts/chart, product-category rankings and average item price. All succeeded on their first SQL attempt. [Added-sample results](docs/evaluations/added-samples-2026-10-18.json).
-
-### Regression and earlier fixture evaluations
-
-| Check | Evidence | Scope |
-| --- | --- | --- |
-| Earlier automated regressions | **161 passed** locally on Windows; Linux GitHub CI passed | Historical baseline before the November evaluation additions |
-| Earlier development SQL suite | **30/30** strict matches | Questions used during prompt development |
-| Earlier new-question first-use suite | **16/16** main SQL matches | Separate synthetic fixture; 12 SQL-only and four chart requests |
-| First-use chart checks | **4/4 passed** | Plot-query rows, renderer inputs, chart type, labels, PNG output and cached-image reuse |
-
-Strict SQL matching compares returned values, column count, duplicates and required ordering, rather than SQL wording. The first-use questions were evaluated with frozen prompts before using them as regression cases; they are no longer unseen. These small suites do not establish correctness on arbitrary schemas or factuality of every generated sentence.
-
-[First-use protocol and report](docs/HOLDOUT_EVALUATION.md) · [Development results and validation history](docs/VALIDATION.md)
-
-### November evaluation additions
-
-- The **full fixed-version transit rerun passed 24/24 SQL and 4/4 chart checks**, including the corrected `S4` → `R2` lookup on its first SQL attempt. All 24 cached repeats used zero model calls. Numeric support was **16/17 scored answers (94.1%)**, one question-context flag reviewed manually and seven unscored. Known list-price subtotal **USD 0.005380875** covers 23/24 questions; one recovered request has incomplete usage. This is synthetic regression data, and the original 23/24 first-use failure remains preserved. [Complete transit rerun](docs/evaluations/transit-fixed-live-2026-11-05/REPORT.md).
-
-- The **fixed-version five-run study passed 80/80 observations**, with **16/16 cases correct in every run and 20/20 chart checks**. All 80 cached repeats used zero model calls. Numeric support was **71/75 scored answers (94.7%)**, four question-date context flags reviewed manually, and five unscored answers. Known list-price estimate **USD 0.019544175** covers **76/80** questions; recovered requests with incomplete usage remain unknown, so no full mean or measured bill is claimed. [Full fixed-version report](docs/evaluations/reliability-fixed-live-2026-11-05/REPORT.md).
-
-- **314 automated tests passed** locally on Windows/Python 3.12, including identifier grounding, bounded connection recovery and free-tier stop/resume controls. Lint, dependency compatibility and Compose configuration checks also passed. The merged commit also passed GitHub CI, including the Linux Docker build, and deployed to Render. [Latest fix validation](docs/evaluations/lookup-connection-followup-2026-11-05/REPORT.md) · [Initial offline verification](docs/evaluations/project1-offline-verification-2026-11-05.json).
-- The **original pre-fix baseline** of five fresh-cache regression runs collected **80 observations**: **77 returned SQL results matched**, while three requests failed with `APIConnectionError`. **13/16 questions passed in every run (81.25%)**; chart cases succeeded in **18/20** observations, with two connection failures. Every returned SQL result matched; failed requests remain in the denominator. These are 16 exposed questions repeated five times, not 80 unseen questions. [Repeated-run report and raw evidence](docs/evaluations/reliability-live-2026-11-05/REPORT.md).
-- A first live run on **24 synthetic transit questions** achieved **23/24 strict SQL matches and 4/4 chart checks**, with all four PNGs visually inspected. One stop-code lookup incorrectly filtered the stop-name column; the failure is preserved. This uses an invented five-table star schema, not Adelaide Metro data or a general cross-domain benchmark. [First-live report and failure analysis](docs/evaluations/transit-first-live-2026-11-05/REPORT.md).
-- A conservative numeric-support check compares answer numbers with executed SQL cells. Applied retrospectively to the archived October holdout, **14 answers have supported numbers, one is flagged and one has no numeric claims**. The flagged answer repeats dates supplied in the question but not returned by SQL. This is a review flag, not proof of a false statement; numeric support does not establish semantic factuality. [Retrospective report](docs/evaluations/numeric-support-archived-holdout-2026-11-05.json).
-- The controlled idle trial confirmed actual shutdown/restart in Render logs and measured **32.85 s to healthy**, preserving an initial 503. UptimeRobot automatic detection and recovery are now verified at the user-selected 30-minute interval. [Completion audit](docs/evaluations/project1-completion-2026-11-05/REPORT.md) · [Confirmed cold-start study](docs/evaluations/render-fixed-deployment-2026-11-05/REPORT.md).
-- Initial dated token-based cost estimates cover **24/24 transit questions and 77/80 holdout observations**. Missing usage on the three failed requests is not treated as zero, so no complete holdout mean is claimed. Estimates use standard list prices and do not represent measured charges. [Estimate record and coverage](docs/evaluations/cost-estimates-2026-11-05.json).
-- A separate local follow-up corrected the stop-code lookup: **4/4 affected regressions and 8/8 new identifier/name cases passed**, with three chart PNGs visually reviewed. A controlled pre-network failure and one naturally observed transport failure both recovered after one application retry. Original benchmark failures remain preserved; this is a targeted follow-up, not a new five-run reliability study. These fixes deployed to Render in commit `5df7de9` on 5 November. [Follow-up evidence](docs/evaluations/lookup-connection-followup-2026-11-05/REPORT.md).
-
-[Protocol, commands and remaining work](docs/PROJECT1_EVALUATION.md)
+[Evaluation protocols, November results and historical baselines](docs/PROJECT1_EVALUATION.md#evaluation-results-and-history) · [Completion audit](docs/evaluations/project1-completion-2026-11-05/REPORT.md)
 
 ### What Changed After Failures
 
