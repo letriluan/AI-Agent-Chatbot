@@ -2,8 +2,8 @@ name: Demo availability
 on:
   workflow_dispatch:
   schedule:
-    # Sampling leaves room for Free-plan sleep. It is not a keep-awake service.
-    - cron: '17,47 * * * *'
+    # UTC minutes 12 and 42; keep 30-minute sampling so Free-plan sleep remains possible.
+    - cron: '12,42 * * * *'
 permissions:
   contents: read
 concurrency:
