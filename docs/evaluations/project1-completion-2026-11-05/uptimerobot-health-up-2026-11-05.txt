@@ -20,7 +20,7 @@ Browser tab: 1271253136, Title: "SQL Agent demo - health | Monitors | UptimeRobo
 			19 link Description: Monitoring, Value: dashboard.uptimerobot.com/monitors
 			20 text SQL Agent demo - health
 			21 link ai-agent-chatbot-demo.onrender.com/health
-			22 text Keyword  monitor for 
+			22 text Keyword  monitor for
 			23 link Description: https://ai-agent-chatbot-demo.onrender.com/health, Value: ai-agent-chatbot-demo.onrender.com/health
 			24 text , checking absence  of  "status":"ok"
 			25 pop up button (collapsed) Test Notification, ID: popover-trigger-_r_16_, Secondary Actions: Expand
@@ -97,7 +97,7 @@ Browser tab: 1271253136, Title: "SQL Agent demo - health | Monitors | UptimeRobo
 			96 pop up button (collapsed) 7 days, ID: menu-button-_r_1c_, Secondary Actions: Expand
 			97 text 0.28 hours
 		98 heading Response time for All regions, Value: 2
-			99 text Response time  for 
+			99 text Response time  for
 			100 pop up button (collapsed) All regions, ID: base-ui-_r_1j_, Secondary Actions: Expand
 				101 text All regions
 				102 image
