@@ -1,5 +1,11 @@
 # AI Agent Chatbot
 
+A full-stack SQL analytics application that turns natural-language questions into **inspectable SQL, answers and charts**.
+
+**Python · FastAPI · LangGraph · LangChain · Groq · SQLite · Matplotlib · JavaScript · Docker · GitHub Actions · Render**
+
+[![CI](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/ci.yml/badge.svg)](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/ci.yml) [![Manual availability diagnostic](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/availability.yml/badge.svg)](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/availability.yml)
+
 ## [Try the Live Demo →](https://ai-agent-chatbot-demo.onrender.com/)
 
 *First load may take ~30 s (free tier wakes from sleep).*
@@ -11,16 +17,10 @@
 | Tests and deployment | **314 tests passed**; Render deploys after CI checks pass |
 | Five-run reliability | **80/80 SQL matches**, 16/16 cases correct in every run; **20/20 chart checks** |
 | Second schema | **24/24 SQL matches; 4/4 chart checks** on synthetic transit data |
-| Numeric support | **71/75 holdout; 16/17 transit** scored answers supported |
+| Answer numbers backed by SQL results | **71/75 holdout; 16/17 transit** scored answers supported |
 | Availability | Free monitoring every **30 min**; confirmed cold start **32.85 s** |
 
 Results measured on 5 November 2026. Synthetic evaluation results are not a general accuracy guarantee. [Protocols, costs and limitations](docs/PROJECT1_EVALUATION.md).
-
-[![CI](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/ci.yml/badge.svg)](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/ci.yml) [![Manual availability diagnostic](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/availability.yml/badge.svg)](https://github.com/letriluan/AI-Agent-Chatbot/actions/workflows/availability.yml)
-
-A full-stack SQL analytics application that turns natural-language questions into **inspectable SQL, answers and charts**.
-
-**Python · FastAPI · LangGraph · LangChain · Groq · SQLite · Matplotlib · JavaScript · Docker · GitHub Actions · Render**
 
 [Project](#why-i-built-it) · [Design](#architecture-and-design) · [CI/CD](#cicd-and-deployment) · [Results](#evaluation-and-results) · [Run Locally](#quick-start) · [Engineering Notes](docs/ENGINEERING.md)
 
@@ -113,7 +113,7 @@ See the [Render deployment guide](docs/DEPLOY_RENDER.md) for configuration and h
 | **Automated regressions** | **314 tests passed**; GitHub CI passed | Identifier grounding, connection recovery and existing application controls |
 | Five-run holdout | **80/80 SQL matches; 20/20 chart checks** | The same 16 synthetic questions repeated five times; all 16 passed every run |
 | Second-schema evaluation | **24/24 SQL matches; 4/4 chart checks** | User-approved synthetic transit schema; not real Adelaide Metro data |
-| Numeric support | **71/75 holdout; 16/17 transit** scored answers supported | Literal number checks; context flags and unscored answers documented separately |
+| Answer numbers backed by SQL results | **71/75 holdout; 16/17 transit** scored answers supported | Literal number checks; context flags and unscored answers documented separately |
 
 SQL checks compare result values, columns, duplicates and required ordering. These small, now-exposed suites do not establish accuracy on arbitrary schemas or complete narrative factuality. The earlier **161-test** result is a historical baseline, not the current test count.
 
