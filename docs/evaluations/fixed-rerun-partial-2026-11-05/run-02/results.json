@@ -1,0 +1,576 @@
+{
+  "mode": "live",
+  "suite": "holdout",
+  "fingerprints": {
+    "cache.py": "3639d21feb54a5ea08a0f58f3ebd6dd6dea4f5df68fddcde0c4e84d599ab94ae",
+    "database.py": "15149515e0ec716c5e4a3ad8154d1ce480e3156338ce5cb8d2919e03ef7aa9e1",
+    "graph.py": "ce1a45094bd863e4d139d2de91e7de2004afff8dc54add76a562dc43ea05a709",
+    "identifiers.py": "f93d5d0bf3d2315aec077c8c2233a44b53e0266b405bffa48e57419468f5c42b",
+    "intent.py": "0499802daeff01e9939d8f709e4cfee360bc0e541489c3d6be1a6592f8e96e5a",
+    "observability.py": "029f189dd25c14bb77f8c0f8ff9d5c3a079ad7fca3ee51a68181e36cac3fe654",
+    "plot_tools.py": "f78c3cf038b315f46f53ce3d44b4139d2f6f31bae1a6bdcdfd0bd026237fb37a",
+    "presentation.py": "01081ed992e5ee7976aedacc58b4ed13e17ecf3b8039c435585d50efa160d83f",
+    "privacy.py": "e553caec1eed6f63bed63a561453496dc9ef4e3d4c5e3d7100a58a76d601a7de",
+    "prompts.py": "a5dd3fc58a6dea4e4e22e3b43347861c447412d3ddde7f7066740134367758ab",
+    "schema.py": "7ea194a611576aa07e014252cd8c6a21472949643f0e36091501596e4edc3ec4",
+    "sql_tools.py": "269b4fc31ec869ee6d7b24b4527e8cde6605f5094f3a388acf67f35ca32b938a",
+    "holdout.py": "bb2447889b8ce94e262b272c73a2f8aab7132e85d366de9fbf5fc2ecc5d6365b",
+    "run.py": "b6c2cb215f71415c3161743dab20892edd1513afd2affc170228c4fcf4201a9c",
+    "grounding.py": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+    "cost.py": "b7afd36ab8dc48b38101cf9d1cffbd92e09ff9be6bca0f7b002e4e7cd1d7a33e",
+    "holdout_cases.json": "a24c6d64d74d3ab96d9e665b94f69136cee4d9f869ea165c28444132b0f2c7c5",
+    "holdout_fixture.py": "ab134b675becdfb7fed2932032e78470e4fd8fb1e7ab5e7fa62e82de9a45bc31"
+  },
+  "model": "openai/gpt-oss-20b",
+  "started_at": "2026-11-05T05:13:08.011323+00:00",
+  "records": [
+    {
+      "id": "h01",
+      "kind": "sql",
+      "question": "For each state, return state and total delivered order amount, including states with no delivered orders as zero. Sort by state.",
+      "reference_sql": "SELECT c.state,COALESCE(SUM(CASE WHEN o.status='delivered' THEN o.amount ELSE 0 END),0) FROM customers c LEFT JOIN orders o ON o.customer_id=c.id GROUP BY c.state ORDER BY c.state",
+      "expected_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100
+        ],
+        [
+          "TAS",
+          240
+        ],
+        [
+          "WA",
+          120
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT c.state,\n       COALESCE(SUM(CASE WHEN o.status = 'delivered' THEN o.amount END), 0) AS total_delivered_amount\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id\nGROUP BY c.state\nORDER BY c.state\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "NT",
+          0
+        ],
+        [
+          "SA",
+          100.0
+        ],
+        [
+          "TAS",
+          240.0
+        ],
+        [
+          "WA",
+          120.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "State | Total Delivered Amount  \n--- | ---  \nNT | 0  \nSA | 100.0  \nTAS | 240.0  \nWA | 120.0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1266,
+        "output_tokens": 864,
+        "total_tokens": 2130,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.383,
+          "generate_sql_node": 2182.432,
+          "run_sql_node": 0.921,
+          "plot_sql_node": 0.001,
+          "answer_node": 2180.195
+        },
+        "latency_ms": 4412.333
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "0",
+          "100.0",
+          "240.0",
+          "120.0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.00035415",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h02",
+      "kind": "sql",
+      "question": "Which orders tie for the largest amount? Return only order IDs, ascending.",
+      "reference_sql": "SELECT id FROM orders WHERE amount=(SELECT MAX(amount) FROM orders) ORDER BY id",
+      "expected_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT id\nFROM orders\nWHERE amount = (SELECT MAX(amount) FROM orders)\nORDER BY id;",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "5, 6",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1171,
+        "output_tokens": 171,
+        "total_tokens": 1342,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.354,
+          "generate_sql_node": 789.065,
+          "run_sql_node": 0.844,
+          "plot_sql_node": 0.002,
+          "answer_node": 316.211
+        },
+        "latency_ms": 1159.603
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "5",
+          "6"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000139125",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h03",
+      "kind": "sql",
+      "question": "What percentage of orders are delivered? Return one number from 0 to 100 without rounding.",
+      "reference_sql": "SELECT 100.0*SUM(CASE WHEN status='delivered' THEN 1 ELSE 0 END)/COUNT(*) FROM orders",
+      "expected_rows": [
+        [
+          62.5
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT (SUM(CASE WHEN status = 'delivered' THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS percentage FROM orders;",
+      "actual_rows": [
+        [
+          62.5
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "62.5",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1191,
+        "output_tokens": 395,
+        "total_tokens": 1586,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.359,
+          "generate_sql_node": 951.817,
+          "run_sql_node": 1.113,
+          "plot_sql_node": 0.002,
+          "answer_node": 535.568
+        },
+        "latency_ms": 1549.477
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "62.5"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000207825",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h04",
+      "kind": "sql",
+      "question": "For each customer, return customer ID and the number of delivered orders, including zero counts. Sort by customer ID.",
+      "reference_sql": "SELECT c.id,COUNT(o.id) FROM customers c LEFT JOIN orders o ON o.customer_id=c.id AND o.status='delivered' GROUP BY c.id ORDER BY c.id",
+      "expected_rows": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    customers.id,\n    COUNT(orders.id) AS delivered_orders\nFROM\n    customers\nLEFT JOIN\n    orders\n    ON orders.customer_id = customers.id\n    AND orders.status = 'delivered'\nGROUP BY\n    customers.id\nORDER BY\n    customers.id;",
+      "actual_rows": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "| id | delivered_orders |\n|----|------------------|\n| 1  | 1 |\n| 2  | 1 |\n| 3  | 2 |\n| 4  | 0 |\n| 5  | 1 |",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1254,
+        "output_tokens": 338,
+        "total_tokens": 1592,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.513,
+          "generate_sql_node": 879.302,
+          "run_sql_node": 0.877,
+          "plot_sql_node": 0.001,
+          "answer_node": 616.204
+        },
+        "latency_ms": 1569.66
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "1",
+          "1",
+          "2",
+          "1",
+          "3",
+          "2",
+          "4",
+          "0",
+          "5",
+          "1"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.00019545",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h05",
+      "kind": "sql",
+      "question": "Return only IDs of customers who have at least two delivered orders, ascending.",
+      "reference_sql": "SELECT customer_id FROM orders WHERE status='delivered' GROUP BY customer_id HAVING COUNT(*)>=2 ORDER BY customer_id",
+      "expected_rows": [
+        [
+          3
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT orders.customer_id\nFROM orders\nWHERE orders.status = 'delivered'\nGROUP BY orders.customer_id\nHAVING COUNT(*) >= 2\nORDER BY orders.customer_id ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          3
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "3",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1189,
+        "output_tokens": 258,
+        "total_tokens": 1447,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.336,
+          "generate_sql_node": 761.832,
+          "run_sql_node": 0.811,
+          "plot_sql_node": 0.001,
+          "answer_node": 251.713
+        },
+        "latency_ms": 1086.455
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "3"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000166575",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h06",
+      "kind": "sql",
+      "question": "Calculate total item value as quantity times unit price for delivered orders only. Return one total.",
+      "reference_sql": "SELECT SUM(i.quantity*i.unit_price) FROM order_items i JOIN orders o ON o.id=i.order_id WHERE o.status='delivered'",
+      "expected_rows": [
+        [
+          460
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT SUM(order_items.quantity * order_items.unit_price) AS total_item_value\nFROM order_items\nJOIN orders ON order_items.order_id = orders.id\nWHERE orders.status = 'delivered';",
+      "actual_rows": [
+        [
+          460.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "460.0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1196,
+        "output_tokens": 202,
+        "total_tokens": 1398,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.517,
+          "generate_sql_node": 523.192,
+          "run_sql_node": 0.814,
+          "plot_sql_node": 0.002,
+          "answer_node": 310.696
+        },
+        "latency_ms": 897.811
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "460.0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0001503",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "h07",
+      "kind": "sql",
+      "question": "Return order ID and total quantity for delivered orders with at least three units. Sort by order ID.",
+      "reference_sql": "SELECT o.id,SUM(i.quantity) FROM orders o JOIN order_items i ON i.order_id=o.id WHERE o.status='delivered' GROUP BY o.id HAVING SUM(i.quantity)>=3 ORDER BY o.id",
+      "expected_rows": [
+        [
+          1,
+          3
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "passed": false,
+      "error_type": "RateLimitError",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 797,
+        "output_tokens": 255,
+        "total_tokens": 1052,
+        "token_usage_complete": false,
+        "llm_failed_calls": 1,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 0.346,
+          "generate_sql_node": 828.786,
+          "run_sql_node": 0.861,
+          "plot_sql_node": 0.001,
+          "answer_node": 182.589
+        },
+        "latency_ms": 1057.792
+      },
+      "estimated_cost": {
+        "available": false,
+        "reason": "Complete provider token usage was not recorded"
+      },
+      "provider_http_status": 429
+    }
+  ],
+  "expected_cases": 16,
+  "selected_case_ids": null,
+  "complete": false,
+  "narrative_accuracy_measured": false,
+  "numeric_support_measured": true,
+  "agent_quality_measured": true,
+  "configuration": {
+    "model": "openai/gpt-oss-20b",
+    "max_output_tokens": 1024,
+    "demo_mode": true,
+    "sql_max_rows": 50,
+    "sql_timeout_seconds": 5.0,
+    "temperature": 0,
+    "connection_retry_limit": 2,
+    "sdk_max_retries": 0
+  },
+  "summary": {
+    "reference_passed": 7,
+    "total": 7,
+    "sql_correct": 6,
+    "charts_correct": 0,
+    "charts_total": 0,
+    "errors": 1,
+    "cache_hits": 6,
+    "numeric_supported": 6,
+    "numeric_unsupported": 0,
+    "numeric_unscored": 1
+  },
+  "stopped_reason": "provider_rate_limit",
+  "stopped_at": "2026-11-05T05:16:19.825530+00:00"
+}

@@ -90,6 +90,8 @@ See the [Render deployment guide](docs/DEPLOY_RENDER.md) for configuration and h
 
 ## Evaluation and Results
 
+**Fixed-version rerun, 5 November 2026:** the first repeat passed 16/16 SQL and 4/4 chart checks. The second passed six cases before a Groq free-tier HTTP 429 stopped collection: **22/23 saved observations passed**, including the quota failure. No paid fallback was used; the remaining repeats and full transit rerun are pending free allowance. This is not a completed five-run result. [Preserved partial study](docs/evaluations/fixed-rerun-partial-2026-11-05/REPORT.md).
+
 ### Latest public-demo check
 
 On **5 November 2026**, all **ten current demo checks passed** through the public Render API: nine SQL results matched independent Olist references and the write request was refused with zero model calls. The nine data questions were uncached and made 21 observed model calls; all three chart PNGs were visually inspected. Three cache repeats preserved SQL/images with zero model calls, and two invalid inputs returned HTTP 422. This is one known-question deployment check, not the five-run synthetic reliability study or transit evaluation. [Latest report, raw results and chart review](docs/evaluations/render-live-2026-11-05/REPORT.md).

@@ -7,8 +7,8 @@ Status as of **5 November 2026**. The offline fixture checks and the separately 
 | Roadmap item | Completed locally | Still needed |
 | --- | --- | --- |
 | 1. Deploy after CI | Maintainer confirmed Render setting; Blueprint and README updated | An intentionally failing deployment-branch experiment was not performed |
-| 2. Five repeated runs | All five completed: 77 matching returns / 80 observations, three connection failures; 13/16 questions pass every run | Investigate connection reliability; any changed configuration needs a separate measured study |
-| 3. Second schema | First live run preserved at 23/24 SQL matches; local fix then passes the affected case and eight new identifier/name cases | Test broader identifier formats and real Project 2 data; the targeted follow-up is not a replacement full-schema benchmark |
+| 2. Five repeated runs | Original baseline: 77/80, 13/16 cases pass all five. Fixed-version rerun: run 1 passes 16/16; run 2 passes six then stops at HTTP 429 | Resume the incomplete fixed-version study after free allowance is available; no all-five fixed-version claim |
+| 3. Second schema | First live run preserved at 23/24 SQL matches; local fix then passes the affected case and eight new identifier/name cases | Full fixed-version 24-case transit rerun has not started because of the free-tier restriction; real Project 2 data remains future work |
 | 4. Answer numbers | New live reports include numeric-support counts; all seven automatic context/result-shape flags across both studies were reviewed | Full semantic factuality remains unmeasured; no-number answers do not count as successful grounding checks |
 | 5. Availability | Process/database probe, one archived live observation and scheduled workflow | Publish workflow and collect history; confirm actual platform sleep for a cold-start claim |
 | 6. Estimated question cost | Dated estimates cover 24/24 transit questions and 77/80 holdout observations | Failed-request usage is unavailable; no full holdout mean or measured bill is claimed |
@@ -16,6 +16,8 @@ Status as of **5 November 2026**. The offline fixture checks and the separately 
 The subsequent local fix is validated separately: **4/4 affected regressions and 8/8 newly authored identifier/name cases passed**, including three chart checks with visual inspection. The `S4` lookup now returns `R2` on its first generated-SQL attempt. A controlled pre-network error and one naturally observed connection/timeout failure were each recovered with one application retry. **314 offline tests passed**. The original reports are unchanged; this targeted follow-up is not a replacement five-run reliability study and the source changes are not yet deployed to Render. [Follow-up report and frozen evidence](evaluations/lookup-connection-followup-2026-11-05/REPORT.md).
 
 ## Local environment
+
+The requested full fixed-version rerun stopped on the free-tier restriction: **22/23 saved observations passed**, with one HTTP 429 retained. The completed first run includes a naturally recovered connection failure and four visually inspected charts. The second run and subsequent runs remain incomplete; the full transit rerun has not started. [Immutable partial evidence and resume instructions](evaluations/fixed-rerun-partial-2026-11-05/REPORT.md). The Groq console displayed Free as the current plan; no billing change was made.
 
 Use Python 3.12 and the existing pinned requirements. A local `.venv` and ignored `.env` copied from `.env.example` have been prepared for this checkout. Set `GROQ_API_KEY` in that local file using your editor. Keep the key out of chat, source control and report files. Use a free-only account/project or provider-side restrictions as described in [deployment guidance](DEPLOY_RENDER.md).
 
