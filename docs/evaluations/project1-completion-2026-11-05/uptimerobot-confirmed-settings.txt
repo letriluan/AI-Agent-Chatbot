@@ -1,0 +1,9 @@
+			27 text Keyword to look for
+				30 text field (settable) Keyword to look for, Value: "status":"ok", ID: field-_r_p_
+				31 pop up button (collapsed, settable) Value: Start incident when keyword does not exist, ID: field-_r_p_, Secondary Actions: Expand
+						34 (selected) Start incident when keyword does not exist
+			35 checkbox (settable, integer) Case-sensitive check, Value: 1, ID: keywordCaseSensitive
+				58 text Your monitor will be checked every 30 minutes . We recommend to use at least 1-minute checks
+					62 slider 1800
+						114 text The request timeout is  1 minute . The shorter the timeout the earlier we mark website as down.
+							117 slider 60

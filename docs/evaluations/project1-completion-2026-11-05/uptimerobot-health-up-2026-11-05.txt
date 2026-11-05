@@ -1,0 +1,178 @@
+Browser tab: 1271253136, Title: "SQL Agent demo - health | Monitors | UptimeRobot", URL: "https://dashboard.uptimerobot.com/monitors/804558877".
+1 AXWebArea SQL Agent demo - health | Monitors | UptimeRobot, URL: dashboard.uptimerobot.com/monitors/804558877
+	2 container
+		3 link Description: UptimeRobot logo, Value: dashboard.uptimerobot.com/
+		4 link Description: Monitoring, Value: dashboard.uptimerobot.com/monitors
+		5 link Description: 3rd party monitors Beta, Value: dashboard.uptimerobot.com/3rd-party-services
+		6 link Description: Incidents, Value: dashboard.uptimerobot.com/incidents
+		7 link Description: Status pages, Value: dashboard.uptimerobot.com/status
+		8 link Description: Maintenance, Value: dashboard.uptimerobot.com/maintenance
+		9 link Description: Team members, Value: dashboard.uptimerobot.com/team
+		10 link Description: Integrations & API, Value: dashboard.uptimerobot.com/integrations
+		11 container menu-button-_r_f_
+			12 container Le Tri Luan
+			13 text Le Tri Luan
+			14 button Team actions
+		15 button
+			16 image
+		17 link Description: Upgrade now, Value: app.uptimerobot.com/billing/pricing
+		18 container
+			19 link Description: Monitoring, Value: dashboard.uptimerobot.com/monitors
+			20 text SQL Agent demo - health
+			21 link ai-agent-chatbot-demo.onrender.com/health
+			22 text Keyword  monitor for
+			23 link Description: https://ai-agent-chatbot-demo.onrender.com/health, Value: ai-agent-chatbot-demo.onrender.com/health
+			24 text , checking absence  of  "status":"ok"
+			25 pop up button (collapsed) Test Notification, ID: popover-trigger-_r_16_, Secondary Actions: Expand
+			26 button Pause
+			27 link Description: Edit, Value: dashboard.uptimerobot.com/monitors/804558877/edit
+			28 pop up button (collapsed) ID: menu-button-_r_r_, Secondary Actions: Expand
+		29 definition list
+			30 container Current status
+				31 text Current status
+			32 text Up
+			33 text Currently up for 0h 1m 56s
+		34 definition list
+			35 container Last check
+				36 text Last check
+			37 container
+				38 text 2m, 4s  ago
+			39 container
+				40 text Checked  every 30m
+			41 button Get 60 sec. checks
+		42 text Last 24 hours
+		43 text 18.840%
+		44 image
+			45 image
+			46 image
+			47 image
+			48 image
+			49 image
+			50 image
+			51 image
+			52 image
+			53 image
+			54 image
+			55 image
+			56 image
+			57 image
+			58 image
+			59 image
+			60 image
+			61 image
+			62 image
+			63 image
+			64 image
+			65 image
+			66 image
+			67 image
+			68 image
+		69 container
+			70 text 2 incidents ,  2h, 22m, 14s  down
+		71 definition list
+			72 container Last 7 days
+				73 text Last 7 days
+			74 text 18.840%
+			75 container
+				76 text 2 incidents ,  2h, 22m, 14s  down
+		77 definition list
+			78 container Last 30 days
+				79 text Last 30 days
+			80 text 18.840%
+			81 container
+				82 text 2 incidents ,  2h, 22m, 14s  down
+		83 definition list
+			84 container Last 365 days
+				85 text Last 365 days
+			86 text --.---%
+			87 link Description: Unlock with paid plans, Value: app.uptimerobot.com/billing/pricing
+		88 definition list
+			89 pop up button (collapsed) Pick a date range, ID: popover-trigger-_r_18_, Secondary Actions: Expand
+			90 text --.---%
+			91 container
+				92 text — incidents , — down
+		93 definition list
+			94 container MTBF
+				95 text MTBF
+			96 pop up button (collapsed) 7 days, ID: menu-button-_r_1c_, Secondary Actions: Expand
+			97 text 0.28 hours
+		98 heading Response time for All regions, Value: 2
+			99 text Response time  for
+			100 pop up button (collapsed) All regions, ID: base-ui-_r_1j_, Secondary Actions: Expand
+				101 text All regions
+				102 image
+		103 button Setup alerts
+		104 pop up button (collapsed) Last 24 hours, ID: menu-button-_r_t_, Secondary Actions: Expand
+		105 image
+			176 text Nov 4, 20:58
+			177 text Nov 5, 08:58
+			178 text Nov 5, 20:58
+			109 text 0ms
+			110 text 200ms
+			111 text 400ms
+			112 text 754ms
+		113 definition list
+			114 container
+				115 image
+				116 text 357  ms
+			117 text Average
+		118 definition list
+			119 container
+				120 image
+				121 text 230  ms
+			122 text Minimum
+		123 definition list
+			124 container
+				125 image
+				126 text 704  ms
+			127 text Maximum
+		128 heading Latest incidents., Value: 2
+			129 text Latest incidents .
+		130 button Export logs
+		131 text Status Root Cause Started Duration
+		132 container
+			133 image
+			134 text Resolved
+			135 link Description: 503 Service Unavailable, Value: dashboard.uptimerobot.com/incidents/376644232005708366
+			136 text Nov 5, 2026, 18:39:42 GMT+10:30 2h 17m 9s
+		137 container
+			138 image
+			139 text Resolved
+			140 link Description: 503 Service Unavailable, Value: dashboard.uptimerobot.com/incidents/376635194058224841
+			141 text Nov 5, 2026, 18:03:47 GMT+10:30 0h 5m 5s
+		142 text That's all, folks!
+		143 container
+			144 heading Domain & SSL., Value: 2
+				145 text Domain & SSL .
+			146 text Domain  valid until
+			147 image
+			148 text Unlock SSL certificate  valid until
+			149 image
+			150 text Unlock
+			151 button Unlock Domain and SSL
+			152 heading Next maintenance., Value: 2
+				153 text Next maintenance .
+				154 link dashboard.uptimerobot.com/monitors/804558877/edit?tab=maintenance
+			155 text No maintenance planned.
+			156 link Description: Set up maintenance, Value: dashboard.uptimerobot.com/monitors/804558877/edit?tab=maintenance
+			157 heading Regions., Value: 2
+				158 text Regions .
+			159 image Continents map
+			160 text Europe
+			161 heading To be notified. Edit alert contacts, Value: 2
+				162 text To be notified .
+				163 link Description: Edit alert contacts, Value: dashboard.uptimerobot.com/monitors/804558877/edit?tab=notifications
+			164 container Le Tri Luan
+			165 heading Appears on., Value: 2
+				166 text Appears on .
+			167 text Attached to no status page.
+			168 link Description: Manage status pages, Value: dashboard.uptimerobot.com/status
+		169 container Description: Notifications-top, ID: chakra-toast-manager-top
+		170 container Description: Notifications-top-left, ID: chakra-toast-manager-top-left
+		171 container Description: Notifications-top-right, ID: chakra-toast-manager-top-right
+		172 container Description: Notifications-bottom-left, ID: chakra-toast-manager-bottom-left
+		173 container Description: Notifications-bottom, ID: chakra-toast-manager-bottom
+		174 container Description: Notifications-bottom-right, ID: chakra-toast-manager-bottom-right
+		175 button (collapsed) Description: Open Intercom Messenger, Secondary Actions: Expand
+
+The focused UI element is 1 AXWebArea SQL Agent demo - health | Monitors | UptimeRobot, URL: dashboard.uptimerobot.com/monitors/804558877
