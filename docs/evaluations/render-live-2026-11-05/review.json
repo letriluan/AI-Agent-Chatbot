@@ -1,0 +1,49 @@
+{
+  "reviewed_at": "2026-11-05T01:06:55.908013+00:00",
+  "results_sha256": "79628d323fb480726c904a7e3b026def1ac8f16a641640cd7b52d77d333bba71",
+  "executed_runner_sha256": "a295bffdb39f7f756503dce3be242b1f600c2830f7c4f4bdc77973820bb85629",
+  "numeric_checker_sha256": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+  "numeric_flags": [
+    {
+      "id": "delivered_join",
+      "classification": "question_or_result_shape_context",
+      "review": "The phrase at least one item restates the join condition; 96,478 matches the reference. No unsupported result value was found in manual review."
+    },
+    {
+      "id": "customer_states",
+      "classification": "question_or_result_shape_context",
+      "review": "Top 5 describes the requested ranking and its five returned rows; all five state/count pairs match the reference."
+    },
+    {
+      "id": "product_categories",
+      "classification": "question_or_result_shape_context",
+      "review": "Top 5 describes the requested ranking and its five returned rows; all five category/count pairs match the reference."
+    }
+  ],
+  "answer_review": "Nine specific returned answers were manually compared with executed local Olist rows. No incorrect result value or unsupported currency was identified; this is a single known-sample check, not general factuality accuracy.",
+  "chart_reviews": [
+    {
+      "id": "statuses",
+      "visually_reviewed": true,
+      "notes": "Eight labelled status categories, delivered dominates, axes readable and no invented currency. Exact plot query rows are not exposed by the public API.",
+      "png_sha256": "01d48430557ffa2fbe2342e37959e781c11d875e0b097959570f622fcffc101f"
+    },
+    {
+      "id": "monthly_items",
+      "visually_reviewed": true,
+      "notes": "Readable calendar axis and total-item-price labels; the visible 24-point monthly trend is consistent with the reference series. No currency was invented. Exact plot query rows are not exposed.",
+      "png_sha256": "4d3a6058dce2b53f762736618e9b9fea2c9f22f2e88c3a5290ba791b9f0f5579"
+    },
+    {
+      "id": "payment_types",
+      "visually_reviewed": true,
+      "notes": "Five readable payment categories with credit_card dominant, followed by boleto and voucher; count axis has no invented currency. Exact plot query rows are not exposed.",
+      "png_sha256": "3f458ad1030e15e85947cbd387c0fd4ab48a328b65b7d282ae6fe2d93148ea1a"
+    }
+  ],
+  "fresh_model_reliability_measured": false,
+  "synthetic_suites_measured": false,
+  "deployed_revision_verified": false,
+  "deployed_model_identity_verified": false,
+  "actual_billing_measured": false
+}

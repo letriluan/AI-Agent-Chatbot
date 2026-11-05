@@ -1,0 +1,29 @@
+{
+  "reviewed_at": "2026-11-05T05:16:15.906926+00:00",
+  "images": [
+    {
+      "path": "reports\\fixed-reliability-live-2026-11-05\\run-01\\h13.png",
+      "sha256": "5fa6de167b0d6d59b54e5e6362d4a48b9592109f580865177bf9383a725ce1e7",
+      "visually_reviewed": true,
+      "notes": "Legible title, axes and values. Month labels are equally spaced observed categories, not elapsed-time spacing."
+    },
+    {
+      "path": "reports\\fixed-reliability-live-2026-11-05\\run-01\\h14.png",
+      "sha256": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
+      "visually_reviewed": true,
+      "notes": "Legible title, axes and values. Month labels are equally spaced observed categories, not elapsed-time spacing."
+    },
+    {
+      "path": "reports\\fixed-reliability-live-2026-11-05\\run-01\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visually_reviewed": true,
+      "notes": "Legible title, axes and values. Month labels are equally spaced observed categories, not elapsed-time spacing."
+    },
+    {
+      "path": "reports\\fixed-reliability-live-2026-11-05\\run-01\\h16.png",
+      "sha256": "71946087c771f3fd01784fca5cb0e1f96f31aa1761573614e080558c9c3f7f5a",
+      "visually_reviewed": true,
+      "notes": "Legible title, axes and values. Month labels are equally spaced observed categories, not elapsed-time spacing."
+    }
+  ]
+}

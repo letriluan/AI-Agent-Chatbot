@@ -1,0 +1,2090 @@
+{
+  "mode": "live",
+  "suite": "transit",
+  "fingerprints": {
+    "cache.py": "3639d21feb54a5ea08a0f58f3ebd6dd6dea4f5df68fddcde0c4e84d599ab94ae",
+    "database.py": "15149515e0ec716c5e4a3ad8154d1ce480e3156338ce5cb8d2919e03ef7aa9e1",
+    "graph.py": "039adc40b1b6fded714f1c2c308d610579fc6a85c6f3f4e1c6c4c6088e9d1135",
+    "intent.py": "0499802daeff01e9939d8f709e4cfee360bc0e541489c3d6be1a6592f8e96e5a",
+    "observability.py": "c2a39c93a99ddc8af08cf3545b9daf37c2cf8e469d922eee13a922179e32c9a2",
+    "plot_tools.py": "f78c3cf038b315f46f53ce3d44b4139d2f6f31bae1a6bdcdfd0bd026237fb37a",
+    "presentation.py": "01081ed992e5ee7976aedacc58b4ed13e17ecf3b8039c435585d50efa160d83f",
+    "privacy.py": "e553caec1eed6f63bed63a561453496dc9ef4e3d4c5e3d7100a58a76d601a7de",
+    "prompts.py": "a264ae47da52f728caa78d5e0c741b07875db973b793141b9a960a7348c1b7b9",
+    "schema.py": "7ea194a611576aa07e014252cd8c6a21472949643f0e36091501596e4edc3ec4",
+    "sql_tools.py": "269b4fc31ec869ee6d7b24b4527e8cde6605f5094f3a388acf67f35ca32b938a",
+    "holdout.py": "560ce85dd4b7513b11551da2c1b0a6fc94cb26b8d27c9d4891ec9ce989656d18",
+    "run.py": "b6c2cb215f71415c3161743dab20892edd1513afd2affc170228c4fcf4201a9c",
+    "grounding.py": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+    "cost.py": "b7afd36ab8dc48b38101cf9d1cffbd92e09ff9be6bca0f7b002e4e7cd1d7a33e",
+    "transit_cases.json": "5b16baa75e272828ce0018dc3d8af7eff5d575b50a6f60fa06ac3c9541edba8f",
+    "transit_fixture.py": "d00c55e9161b6cb1a17630cac7da2d1bf1aa5a4940251d5c569c6de045f5a298"
+  },
+  "model": "openai/gpt-oss-20b",
+  "started_at": "2026-11-05T01:50:29.834957+00:00",
+  "records": [
+    {
+      "id": "t01",
+      "kind": "sql",
+      "question": "How many distinct scheduled trips are in fact_stop_events? Count each trip once across all stop events.",
+      "reference_sql": "SELECT COUNT(DISTINCT trip_id) FROM fact_stop_events",
+      "expected_rows": [
+        [
+          6
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT COUNT(DISTINCT trip_id) FROM fact_stop_events;",
+      "actual_rows": [
+        [
+          6
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "There are 6 distinct scheduled trips recorded in `fact_stop_events`.",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1203,
+        "output_tokens": 120,
+        "total_tokens": 1323,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.304,
+          "generate_sql_node": 1108.338,
+          "run_sql_node": 0.856,
+          "plot_sql_node": 0.002,
+          "answer_node": 631.813
+        },
+        "latency_ms": 1808.445
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "6"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000126225",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t02",
+      "kind": "sql",
+      "question": "How many scheduled stop events are in fact_stop_events? Return one count.",
+      "reference_sql": "SELECT COUNT(*) FROM fact_stop_events",
+      "expected_rows": [
+        [
+          14
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT COUNT(*) FROM fact_stop_events;",
+      "actual_rows": [
+        [
+          14
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "14",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1183,
+        "output_tokens": 88,
+        "total_tokens": 1271,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.338,
+          "generate_sql_node": 308.835,
+          "run_sql_node": 0.825,
+          "plot_sql_node": 0.001,
+          "answer_node": 289.733
+        },
+        "latency_ms": 661.437
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "14"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000115125",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t03",
+      "kind": "sql",
+      "question": "For every route, return route_key and distinct scheduled trip count, including routes with zero trips. Sort by route_key.",
+      "reference_sql": "SELECT r.route_key,COUNT(DISTINCT e.trip_id) FROM dim_route r LEFT JOIN fact_stop_events e ON e.route_key=r.route_key GROUP BY r.route_key ORDER BY r.route_key",
+      "expected_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          1
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT dr.route_key, COUNT(DISTINCT fse.trip_id) AS scheduled_trip_count\nFROM dim_route dr\nLEFT JOIN fact_stop_events fse ON dr.route_key = fse.route_key\nGROUP BY dr.route_key\nORDER BY dr.route_key\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          1
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "route_key | scheduled_trip_count  \n--- | ---  \nR1 | 3  \nR2 | 2  \nR3 | 1  \nR4 | 0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1281,
+        "output_tokens": 468,
+        "total_tokens": 1749,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.416,
+          "generate_sql_node": 666.581,
+          "run_sql_node": 1.246,
+          "plot_sql_node": 0.002,
+          "answer_node": 320.045
+        },
+        "latency_ms": 1054.203
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "3",
+          "2",
+          "1",
+          "0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000236475",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t04",
+      "kind": "sql",
+      "question": "Return only stop_key values of stops with no scheduled stop events, ordered by stop_key.",
+      "reference_sql": "SELECT s.stop_key FROM dim_stop s WHERE NOT EXISTS(SELECT 1 FROM fact_stop_events e WHERE e.stop_key=s.stop_key) ORDER BY s.stop_key",
+      "expected_rows": [
+        [
+          "S6"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT ds.stop_key\nFROM dim_stop ds\nLEFT JOIN fact_stop_events fse ON ds.stop_key = fse.stop_key\nWHERE fse.event_key IS NULL\nORDER BY ds.stop_key\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "S6"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "S6",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1228,
+        "output_tokens": 298,
+        "total_tokens": 1526,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.532,
+          "generate_sql_node": 664.835,
+          "run_sql_node": 1.002,
+          "plot_sql_node": 0.002,
+          "answer_node": 535.843
+        },
+        "latency_ms": 1273.115
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0001815",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t05",
+      "kind": "sql",
+      "question": "For each route_type in dim_route, return route_type and the number of routes, including unused routes. Sort by route_type.",
+      "reference_sql": "SELECT route_type,COUNT(*) FROM dim_route GROUP BY route_type ORDER BY route_type",
+      "expected_rows": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    route_type,\n    COUNT(*) AS num_routes\nFROM\n    dim_route\nGROUP BY\n    route_type\nORDER BY\n    route_type;",
+      "actual_rows": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Route type 0: 1 route  \nRoute type 2: 1 route  \nRoute type 3: 2 routes",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1249,
+        "output_tokens": 270,
+        "total_tokens": 1519,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.433,
+          "generate_sql_node": 902.545,
+          "run_sql_node": 0.829,
+          "plot_sql_node": 0.001,
+          "answer_node": 324.928
+        },
+        "latency_ms": 1315.924
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "0",
+          "1",
+          "2",
+          "1",
+          "3",
+          "2"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000174675",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t06",
+      "kind": "sql",
+      "question": "For every stop, return stop_key and the distinct number of scheduled trips serving it, including zero counts. Sort by stop_key.",
+      "reference_sql": "SELECT s.stop_key,COUNT(DISTINCT e.trip_id) FROM dim_stop s LEFT JOIN fact_stop_events e ON e.stop_key=s.stop_key GROUP BY s.stop_key ORDER BY s.stop_key",
+      "expected_rows": [
+        [
+          "S1",
+          6
+        ],
+        [
+          "S2",
+          3
+        ],
+        [
+          "S3",
+          2
+        ],
+        [
+          "S4",
+          2
+        ],
+        [
+          "S5",
+          1
+        ],
+        [
+          "S6",
+          0
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT s.stop_key, COUNT(DISTINCT e.trip_id) AS trip_count\nFROM dim_stop s\nLEFT JOIN fact_stop_events e ON s.stop_key = e.stop_key\nGROUP BY s.stop_key\nORDER BY s.stop_key\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "S1",
+          6
+        ],
+        [
+          "S2",
+          3
+        ],
+        [
+          "S3",
+          2
+        ],
+        [
+          "S4",
+          2
+        ],
+        [
+          "S5",
+          1
+        ],
+        [
+          "S6",
+          0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Stop Key | Trip Count  \n--- | ---  \nS1 | 6  \nS2 | 3  \nS3 | 2  \nS4 | 2  \nS5 | 1  \nS6 | 0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1294,
+        "output_tokens": 567,
+        "total_tokens": 1861,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.344,
+          "generate_sql_node": 776.191,
+          "run_sql_node": 0.951,
+          "plot_sql_node": 0.001,
+          "answer_node": 396.659
+        },
+        "latency_ms": 1274.046
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "6",
+          "3",
+          "2",
+          "2",
+          "1",
+          "0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.00026715",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t07",
+      "kind": "sql",
+      "question": "Return only distinct trip_id values scheduled on service_date 2026-11-02. Sort by trip_id.",
+      "reference_sql": "SELECT DISTINCT e.trip_id FROM fact_stop_events e JOIN dim_date d ON d.date_key=e.date_key WHERE d.service_date='2026-11-02' ORDER BY e.trip_id",
+      "expected_rows": [
+        [
+          "T1"
+        ],
+        [
+          "T2"
+        ],
+        [
+          "T4"
+        ],
+        [
+          "T6"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT DISTINCT fse.trip_id\nFROM fact_stop_events fse\nJOIN dim_date d ON fse.date_key = d.date_key\nWHERE d.service_date = '2026-11-02'\nORDER BY fse.trip_id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "T1"
+        ],
+        [
+          "T2"
+        ],
+        [
+          "T4"
+        ],
+        [
+          "T6"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "T1  \nT2  \nT4  \nT6",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1257,
+        "output_tokens": 298,
+        "total_tokens": 1555,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.321,
+          "generate_sql_node": 501.41,
+          "run_sql_node": 0.889,
+          "plot_sql_node": 0.001,
+          "answer_node": 661.521
+        },
+        "latency_ms": 1238.435
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000183675",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t08",
+      "kind": "sql",
+      "question": "Return only distinct trip_id values scheduled on Saturday according to dim_date.weekday. Sort by trip_id.",
+      "reference_sql": "SELECT DISTINCT e.trip_id FROM fact_stop_events e JOIN dim_date d ON d.date_key=e.date_key WHERE d.weekday='Saturday' ORDER BY e.trip_id",
+      "expected_rows": [
+        [
+          "T5"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT DISTINCT fse.trip_id\nFROM fact_stop_events fse\nJOIN dim_date d ON fse.date_key = d.date_key\nWHERE d.weekday = 'Saturday'\nORDER BY fse.trip_id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "T5"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "T5",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1236,
+        "output_tokens": 246,
+        "total_tokens": 1482,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.35,
+          "generate_sql_node": 511.499,
+          "run_sql_node": 1.056,
+          "plot_sql_node": 0.002,
+          "answer_node": 630.011
+        },
+        "latency_ms": 1198.007
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0001665",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t09",
+      "kind": "sql",
+      "question": "Which trips have arrivals at or after 24:00 in their service day? arrival_seconds is seconds from service-day midnight and may exceed 86400. Return only distinct trip_id values, ascending.",
+      "reference_sql": "SELECT DISTINCT trip_id FROM fact_stop_events WHERE arrival_seconds>=86400 ORDER BY trip_id",
+      "expected_rows": [
+        [
+          "T6"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT DISTINCT trip_id\nFROM fact_stop_events\nWHERE arrival_seconds >= 86400\nORDER BY trip_id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "T6"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "The only trip that has an arrival at or after 24:00 in its service day is:\n\n- T6",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1254,
+        "output_tokens": 201,
+        "total_tokens": 1455,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.304,
+          "generate_sql_node": 366.484,
+          "run_sql_node": 0.99,
+          "plot_sql_node": 0.002,
+          "answer_node": 295.442
+        },
+        "latency_ms": 724.591
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "24:00"
+        ],
+        "unsupported": [
+          "24:00"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.00015435",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t10",
+      "kind": "sql",
+      "question": "For each trip, return trip_id and scheduled duration in minutes, computed as its latest departure_seconds minus earliest arrival_seconds, divided by 60.0. Sort by trip_id.",
+      "reference_sql": "SELECT trip_id,(MAX(departure_seconds)-MIN(arrival_seconds))/60.0 FROM fact_stop_events GROUP BY trip_id ORDER BY trip_id",
+      "expected_rows": [
+        [
+          "T1",
+          25
+        ],
+        [
+          "T2",
+          30
+        ],
+        [
+          "T3",
+          10
+        ],
+        [
+          "T4",
+          20
+        ],
+        [
+          "T5",
+          20
+        ],
+        [
+          "T6",
+          20
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    trip_id,\n    (MAX(departure_seconds) - MIN(arrival_seconds)) / 60.0 AS duration_minutes\nFROM\n    fact_stop_events\nGROUP BY\n    trip_id\nORDER BY\n    trip_id;",
+      "actual_rows": [
+        [
+          "T1",
+          25.0
+        ],
+        [
+          "T2",
+          30.0
+        ],
+        [
+          "T3",
+          10.0
+        ],
+        [
+          "T4",
+          20.0
+        ],
+        [
+          "T5",
+          20.0
+        ],
+        [
+          "T6",
+          20.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "trip_id | duration_minutes  \nT1 | 25.0  \nT2 | 30.0  \nT3 | 10.0  \nT4 | 20.0  \nT5 | 20.0  \nT6 | 20.0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1323,
+        "output_tokens": 379,
+        "total_tokens": 1702,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.31,
+          "generate_sql_node": 816.523,
+          "run_sql_node": 0.872,
+          "plot_sql_node": 0.001,
+          "answer_node": 785.195
+        },
+        "latency_ms": 1698.159
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "25.0",
+          "30.0",
+          "10.0",
+          "20.0",
+          "20.0",
+          "20.0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000212925",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t11",
+      "kind": "sql",
+      "question": "Return the one longest scheduled trip: trip_id and duration in minutes, using (latest departure_seconds minus earliest arrival_seconds)/60.0. Break ties by trip_id ascending.",
+      "reference_sql": "SELECT trip_id,(MAX(departure_seconds)-MIN(arrival_seconds))/60.0 AS duration FROM fact_stop_events GROUP BY trip_id ORDER BY duration DESC,trip_id LIMIT 1",
+      "expected_rows": [
+        [
+          "T2",
+          30
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    trip_id,\n    (MAX(departure_seconds) - MIN(arrival_seconds)) / 60.0 AS duration\nFROM\n    fact_stop_events\nGROUP BY\n    trip_id\nORDER BY\n    duration DESC,\n    trip_id ASC\nLIMIT 1;",
+      "actual_rows": [
+        [
+          "T2",
+          30.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Trip ID: T2  \nDuration: 30.0 minutes",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1283,
+        "output_tokens": 312,
+        "total_tokens": 1595,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.464,
+          "generate_sql_node": 943.613,
+          "run_sql_node": 0.89,
+          "plot_sql_node": 0.001,
+          "answer_node": 629.724
+        },
+        "latency_ms": 1673.445
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "30.0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000189825",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t12",
+      "kind": "sql",
+      "question": "What is the average scheduled trip duration in minutes across distinct trips? First compute (latest departure_seconds minus earliest arrival_seconds)/60.0 per trip, then average those trip durations without rounding. Return one number.",
+      "reference_sql": "SELECT AVG(duration) FROM (SELECT (MAX(departure_seconds)-MIN(arrival_seconds))/60.0 AS duration FROM fact_stop_events GROUP BY trip_id)",
+      "expected_rows": [
+        [
+          20.833333333333332
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT AVG(duration) FROM (\n    SELECT trip_id,\n           (max(departure_seconds) - min(arrival_seconds)) / 60.0 AS duration\n    FROM fact_stop_events\n    GROUP BY trip_id\n) AS t;",
+      "actual_rows": [
+        [
+          20.833333333333332
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "20.833333333333332",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1285,
+        "output_tokens": 557,
+        "total_tokens": 1842,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.321,
+          "generate_sql_node": 752.645,
+          "run_sql_node": 1.106,
+          "plot_sql_node": 0.001,
+          "answer_node": 274.64
+        },
+        "latency_ms": 1090.837
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "20.833333333333332"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000263475",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t13",
+      "kind": "sql",
+      "question": "For each trip, return trip_id and total scheduled dwell seconds, summing departure_seconds minus arrival_seconds across its stops. Include zero values and sort by trip_id.",
+      "reference_sql": "SELECT trip_id,SUM(departure_seconds-arrival_seconds) FROM fact_stop_events GROUP BY trip_id ORDER BY trip_id",
+      "expected_rows": [
+        [
+          "T1",
+          60
+        ],
+        [
+          "T2",
+          120
+        ],
+        [
+          "T3",
+          60
+        ],
+        [
+          "T4",
+          0
+        ],
+        [
+          "T5",
+          0
+        ],
+        [
+          "T6",
+          0
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    trip_id,\n    SUM(COALESCE(departure_seconds,0) - COALESCE(arrival_seconds,0)) AS total_dwell_seconds\nFROM\n    fact_stop_events\nGROUP BY\n    trip_id\nORDER BY\n    trip_id\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "T1",
+          60
+        ],
+        [
+          "T2",
+          120
+        ],
+        [
+          "T3",
+          60
+        ],
+        [
+          "T4",
+          0
+        ],
+        [
+          "T5",
+          0
+        ],
+        [
+          "T6",
+          0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "Trip ID | Total Dwell Seconds  \n--------|---------------------  \nT1 | 60  \nT2 | 120  \nT3 | 60  \nT4 | 0  \nT5 | 0  \nT6 | 0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1317,
+        "output_tokens": 583,
+        "total_tokens": 1900,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.325,
+          "generate_sql_node": 1120.28,
+          "run_sql_node": 0.856,
+          "plot_sql_node": 0.001,
+          "answer_node": 654.823
+        },
+        "latency_ms": 1849.287
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "60",
+          "120",
+          "60",
+          "0",
+          "0",
+          "0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000273675",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t14",
+      "kind": "sql",
+      "question": "For every route return route_key and the number of distinct stops it serves, including routes with no stop events as zero. Sort by route_key.",
+      "reference_sql": "SELECT r.route_key,COUNT(DISTINCT e.stop_key) FROM dim_route r LEFT JOIN fact_stop_events e ON e.route_key=r.route_key GROUP BY r.route_key ORDER BY r.route_key",
+      "expected_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          2
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT r.route_key, COUNT(DISTINCT f.stop_key) AS distinct_stop_count\nFROM dim_route r\nLEFT JOIN fact_stop_events f ON r.route_key = f.route_key\nGROUP BY r.route_key\nORDER BY r.route_key\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          2
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "R1: 3  \nR2: 2  \nR3: 2  \nR4: 0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1288,
+        "output_tokens": 531,
+        "total_tokens": 1819,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.326,
+          "generate_sql_node": 976.308,
+          "run_sql_node": 0.879,
+          "plot_sql_node": 0.002,
+          "answer_node": 958.354
+        },
+        "latency_ms": 2016.213
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "3",
+          "2",
+          "2",
+          "0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0002559",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t15",
+      "kind": "sql",
+      "question": "Return only distinct route_key values serving stop S4, sorted ascending.",
+      "reference_sql": "SELECT DISTINCT route_key FROM fact_stop_events WHERE stop_key='S4' ORDER BY route_key",
+      "expected_rows": [
+        [
+          "R2"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT DISTINCT fse.route_key\nFROM fact_stop_events AS fse\nJOIN dim_stop AS ds ON fse.stop_key = ds.stop_key\nWHERE ds.stop_name = 'S4'\nORDER BY fse.route_key\nLIMIT 50;",
+      "actual_rows": [],
+      "sql_correct": false,
+      "answer": "I couldn\u2019t find any route_key values for stop\u202fS4. You might try searching for a different stop name, a broader date range, or a different stop code.",
+      "metrics": {
+        "llm_calls": 4,
+        "input_tokens": 2777,
+        "output_tokens": 993,
+        "total_tokens": 3770,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.318,
+          "generate_sql_node": 658.014,
+          "run_sql_node": 2.935,
+          "repair_sql_node": 1826.956,
+          "plot_sql_node": 0.001,
+          "answer_node": 593.48
+        },
+        "latency_ms": 3154.131
+      },
+      "attempts": 3,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000506175",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": false
+    },
+    {
+      "id": "t16",
+      "kind": "sql",
+      "question": "Return only route_key values for routes whose route_type is not 3, ordered by route_key.",
+      "reference_sql": "SELECT route_key FROM dim_route WHERE route_type<>3 ORDER BY route_key",
+      "expected_rows": [
+        [
+          "R2"
+        ],
+        [
+          "R3"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT route_key\nFROM dim_route\nWHERE route_type <> 3\nORDER BY route_key;",
+      "actual_rows": [
+        [
+          "R2"
+        ],
+        [
+          "R3"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "R2  \nR3",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1211,
+        "output_tokens": 148,
+        "total_tokens": 1359,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.394,
+          "generate_sql_node": 596.829,
+          "run_sql_node": 0.813,
+          "plot_sql_node": 0.001,
+          "answer_node": 545.553
+        },
+        "latency_ms": 1227.312
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000135225",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t17",
+      "kind": "sql",
+      "question": "How many distinct trips have service_date on or after 2026-11-02 and strictly before 2026-11-07? Return one count.",
+      "reference_sql": "SELECT COUNT(DISTINCT e.trip_id) FROM fact_stop_events e JOIN dim_date d ON d.date_key=e.date_key WHERE d.service_date>='2026-11-02' AND d.service_date<'2026-11-07'",
+      "expected_rows": [
+        [
+          5
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT COUNT(DISTINCT f.trip_id) AS trip_count\nFROM fact_stop_events f\nJOIN dim_date d ON f.date_key = d.date_key\nWHERE d.service_date >= '2026-11-02'\n  AND d.service_date < '2026-11-07';",
+      "actual_rows": [
+        [
+          5
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "5",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1268,
+        "output_tokens": 239,
+        "total_tokens": 1507,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.307,
+          "generate_sql_node": 408.017,
+          "run_sql_node": 1.112,
+          "plot_sql_node": 0.002,
+          "answer_node": 507.764
+        },
+        "latency_ms": 1010.518
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "5"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0001668",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t18",
+      "kind": "sql",
+      "question": "Return only distinct trip_id values scheduled on Sunday according to dim_date.weekday, sorted ascending. An empty answer is valid.",
+      "reference_sql": "SELECT DISTINCT e.trip_id FROM fact_stop_events e JOIN dim_date d ON d.date_key=e.date_key WHERE d.weekday='Sunday' ORDER BY e.trip_id",
+      "expected_rows": [],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT DISTINCT f.trip_id\nFROM fact_stop_events f\nJOIN dim_date d ON f.date_key = d.date_key\nWHERE d.weekday = 'Sunday'\nORDER BY f.trip_id\nLIMIT 50;",
+      "actual_rows": [],
+      "sql_correct": true,
+      "answer": "I couldn\u2019t find any trip_id scheduled on Sunday.  \nYou might try expanding the date range or looking for trips on a different weekday.",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1236,
+        "output_tokens": 376,
+        "total_tokens": 1612,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.308,
+          "generate_sql_node": 853.069,
+          "run_sql_node": 0.938,
+          "plot_sql_node": 0.001,
+          "answer_node": 373.712
+        },
+        "latency_ms": 1318.846
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0002055",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t19",
+      "kind": "sql",
+      "question": "Return only stop_key values served by exactly two distinct scheduled trips, sorted by stop_key.",
+      "reference_sql": "SELECT stop_key FROM fact_stop_events GROUP BY stop_key HAVING COUNT(DISTINCT trip_id)=2 ORDER BY stop_key",
+      "expected_rows": [
+        [
+          "S3"
+        ],
+        [
+          "S4"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT stop_key\nFROM fact_stop_events\nGROUP BY stop_key\nHAVING COUNT(DISTINCT trip_id) = 2\nORDER BY stop_key\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "S3"
+        ],
+        [
+          "S4"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "S3  \nS4",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1223,
+        "output_tokens": 195,
+        "total_tokens": 1418,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.434,
+          "generate_sql_node": 686.38,
+          "run_sql_node": 0.899,
+          "plot_sql_node": 0.001,
+          "answer_node": 592.475
+        },
+        "latency_ms": 1344.966
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000150225",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t20",
+      "kind": "sql",
+      "question": "What percentage of scheduled stop events occur in dim_time.peak_period='peak'? Return one number from 0 to 100 without rounding. Count stop events rather than trips.",
+      "reference_sql": "SELECT 100.0*SUM(CASE WHEN t.peak_period='peak' THEN 1 ELSE 0 END)/COUNT(*) FROM fact_stop_events e JOIN dim_time t ON t.time_key=e.time_key",
+      "expected_rows": [
+        [
+          50
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT (COUNT(CASE WHEN dt.peak_period = 'peak' THEN 1 END) * 100.0 / COUNT(*)) AS percentage\nFROM fact_stop_events f\nJOIN dim_time dt ON f.time_key = dt.time_key;",
+      "actual_rows": [
+        [
+          50.0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "50.0",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1266,
+        "output_tokens": 375,
+        "total_tokens": 1641,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.452,
+          "generate_sql_node": 937.537,
+          "run_sql_node": 0.843,
+          "plot_sql_node": 0.001,
+          "answer_node": 470.83
+        },
+        "latency_ms": 1501.516
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "50.0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.00020745",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    },
+    {
+      "id": "t21",
+      "kind": "bar",
+      "question": "Draw a bar chart of distinct scheduled trip count by route_key, including unused routes as zero. Return route_key and distinct trip count, sorted by route_key.",
+      "reference_sql": "SELECT r.route_key,COUNT(DISTINCT e.trip_id) FROM dim_route r LEFT JOIN fact_stop_events e ON e.route_key=r.route_key GROUP BY r.route_key ORDER BY r.route_key",
+      "expected_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          1
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    r.route_key,\n    COUNT(DISTINCT f.trip_id) AS trip_count\nFROM\n    dim_route r\nLEFT JOIN\n    fact_stop_events f\n    ON r.route_key = f.route_key\nGROUP BY\n    r.route_key\nORDER BY\n    r.route_key\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          1
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Distinct scheduled trip count by route_key**\n\n| route_key | trip_count |\n|-----------|------------|\n| R1        | 3 |\n| R2        | 2 |\n| R3        | 1 |\n| R4        | 0 |",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1819,
+        "output_tokens": 941,
+        "total_tokens": 2760,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.324,
+          "generate_sql_node": 1072.478,
+          "run_sql_node": 0.942,
+          "plot_sql_node": 1127.141,
+          "answer_node": 2103.622
+        },
+        "latency_ms": 4387.096
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "3",
+          "2",
+          "1",
+          "0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000418725",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "R1",
+          3
+        ],
+        [
+          "R2",
+          2
+        ],
+        [
+          "R3",
+          1
+        ],
+        [
+          "R4",
+          0
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "R1",
+          3.0
+        ],
+        [
+          "R2",
+          2.0
+        ],
+        [
+          "R3",
+          1.0
+        ],
+        [
+          "R4",
+          0.0
+        ]
+      ],
+      "labels": {
+        "title": "Distinct trip count by route key",
+        "xlabel": "Route key",
+        "ylabel": "Distinct trip count"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    },
+    {
+      "id": "t22",
+      "kind": "line",
+      "question": "Draw a line chart of distinct scheduled trip count by service_date in YYYY-MM-DD format, chronological order. Include only dates with stop events; do not fill missing days. Return service_date and distinct trip count.",
+      "reference_sql": "SELECT d.service_date,COUNT(DISTINCT e.trip_id) FROM fact_stop_events e JOIN dim_date d ON d.date_key=e.date_key GROUP BY d.service_date ORDER BY d.service_date",
+      "expected_rows": [
+        [
+          "2026-11-02",
+          4
+        ],
+        [
+          "2026-11-03",
+          1
+        ],
+        [
+          "2026-11-07",
+          1
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT\n    dim_date.service_date,\n    COUNT(DISTINCT fact_stop_events.trip_id) AS trip_count\nFROM\n    fact_stop_events\nJOIN\n    dim_date\n    ON fact_stop_events.date_key = dim_date.date_key\nGROUP BY\n    dim_date.service_date\nORDER BY\n    dim_date.service_date ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "2026-11-02",
+          4
+        ],
+        [
+          "2026-11-03",
+          1
+        ],
+        [
+          "2026-11-07",
+          1
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Distinct scheduled trip counts by service date**\n\n| service_date | trip_count |\n|--------------|------------|\n| 2026\u201111\u201102   | 4 |\n| 2026\u201111\u201103   | 1 |\n| 2026\u201111\u201107   | 1 |",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1860,
+        "output_tokens": 782,
+        "total_tokens": 2642,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.429,
+          "generate_sql_node": 565.545,
+          "run_sql_node": 0.917,
+          "plot_sql_node": 896.976,
+          "answer_node": 494.575
+        },
+        "latency_ms": 2067.177
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "2026-11-02",
+          "4",
+          "2026-11-03",
+          "1",
+          "2026-11-07",
+          "1"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.0003741",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "2026-11-02",
+          4
+        ],
+        [
+          "2026-11-03",
+          1
+        ],
+        [
+          "2026-11-07",
+          1
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "2026-11-02",
+          4.0
+        ],
+        [
+          "2026-11-03",
+          1.0
+        ],
+        [
+          "2026-11-07",
+          1.0
+        ]
+      ],
+      "labels": {
+        "title": "Distinct trip count by service date",
+        "xlabel": "Service date",
+        "ylabel": "Distinct trip count"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    },
+    {
+      "id": "t23",
+      "kind": "bar",
+      "question": "Draw a bar chart of scheduled stop event count by dim_stop.zone. Include all zones, count stop events rather than distinct trips, and return zone and event count sorted alphabetically by zone.",
+      "reference_sql": "SELECT s.zone,COUNT(e.event_key) FROM dim_stop s LEFT JOIN fact_stop_events e ON e.stop_key=s.stop_key GROUP BY s.zone ORDER BY s.zone",
+      "expected_rows": [
+        [
+          "CBD",
+          6
+        ],
+        [
+          "Coastal",
+          2
+        ],
+        [
+          "Outer",
+          1
+        ],
+        [
+          "Suburban",
+          5
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT s.zone, COUNT(e.event_key) AS event_count\nFROM dim_stop s\nLEFT JOIN fact_stop_events e ON s.stop_key = e.stop_key\nGROUP BY s.zone\nORDER BY s.zone ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "CBD",
+          6
+        ],
+        [
+          "Coastal",
+          2
+        ],
+        [
+          "Outer",
+          1
+        ],
+        [
+          "Suburban",
+          5
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Scheduled stop event counts by zone (sorted alphabetically)**  \n\n| zone      | event_count |\n|-----------|-------------|\n| CBD       | 6           |\n| Coastal   | 2           |\n| Outer     | 1           |\n| Suburban  | 5           |\n\nThese values can be plotted as a bar chart with zones on the x\u2011axis and event counts on the y\u2011axis.",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1816,
+        "output_tokens": 1016,
+        "total_tokens": 2832,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.322,
+          "generate_sql_node": 2232.449,
+          "run_sql_node": 0.911,
+          "plot_sql_node": 870.767,
+          "answer_node": 883.392
+        },
+        "latency_ms": 4084.508
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "6",
+          "2",
+          "1",
+          "5"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000441",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          "CBD",
+          6
+        ],
+        [
+          "Coastal",
+          2
+        ],
+        [
+          "Outer",
+          1
+        ],
+        [
+          "Suburban",
+          5
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "CBD",
+          6.0
+        ],
+        [
+          "Coastal",
+          2.0
+        ],
+        [
+          "Outer",
+          1.0
+        ],
+        [
+          "Suburban",
+          5.0
+        ]
+      ],
+      "labels": {
+        "title": "Event count by zone",
+        "xlabel": "Zone",
+        "ylabel": "Event count"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    },
+    {
+      "id": "t24",
+      "kind": "line",
+      "question": "Draw a line chart of cumulative stop event counts by service_hour over all dates, ordered numerically by service_hour. Include only hours with events and preserve service_hour values greater than 23. Return service_hour and the running total of hourly stop event counts.",
+      "reference_sql": "SELECT hour,SUM(n) OVER(ORDER BY hour) FROM (SELECT t.service_hour AS hour,COUNT(*) AS n FROM fact_stop_events e JOIN dim_time t ON t.time_key=e.time_key GROUP BY t.service_hour) ORDER BY hour",
+      "expected_rows": [
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          25,
+          14
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "WITH hourly_counts AS (\n  SELECT dt.service_hour, COUNT(*) AS event_count\n  FROM fact_stop_events f\n  JOIN dim_time dt ON f.time_key = dt.time_key\n  GROUP BY dt.service_hour\n)\nSELECT service_hour,\n       SUM(event_count) OVER (ORDER BY service_hour) AS running_total\nFROM hourly_counts\nWHERE event_count > 0\nORDER BY service_hour\nLIMIT 50;",
+      "actual_rows": [
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          25,
+          14
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "**Cumulative stop event counts by service_hour**\n\n| service_hour | running_total |\n|--------------|---------------|\n| 8            | 7             |\n| 9            | 10            |\n| 10           | 12            |\n| 25           | 14            |",
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 1891,
+        "output_tokens": 1421,
+        "total_tokens": 3312,
+        "token_usage_complete": true,
+        "stages_ms": {
+          "prepare_schema_node": 0.489,
+          "generate_sql_node": 1338.798,
+          "run_sql_node": 0.982,
+          "plot_sql_node": 1302.295,
+          "answer_node": 642.372
+        },
+        "latency_ms": 3377.632
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "8",
+          "7",
+          "9",
+          "10",
+          "10",
+          "12",
+          "25",
+          "14"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.000568125",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "plot_rows": [
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          25,
+          14
+        ]
+      ],
+      "renderer_rows": [
+        [
+          "8",
+          7.0
+        ],
+        [
+          "9",
+          10.0
+        ],
+        [
+          "10",
+          12.0
+        ],
+        [
+          "25",
+          14.0
+        ]
+      ],
+      "labels": {
+        "title": "Cumulative stop event count by service hour",
+        "xlabel": "Service hour",
+        "ylabel": "Cumulative stop event count"
+      },
+      "chart_query_correct": true,
+      "renderer_correct": true,
+      "labels_present": true,
+      "png_nonblank": true,
+      "cache_preserves_image": true,
+      "chart_correct": true,
+      "passed": true
+    }
+  ],
+  "expected_cases": 24,
+  "complete": true,
+  "narrative_accuracy_measured": false,
+  "numeric_support_measured": true,
+  "agent_quality_measured": true,
+  "configuration": {
+    "model": "openai/gpt-oss-20b",
+    "max_output_tokens": 1024,
+    "demo_mode": true,
+    "sql_max_rows": 50,
+    "sql_timeout_seconds": 5.0,
+    "temperature": 0
+  },
+  "summary": {
+    "reference_passed": 24,
+    "total": 24,
+    "sql_correct": 23,
+    "charts_correct": 4,
+    "charts_total": 4,
+    "errors": 0,
+    "cache_hits": 24,
+    "numeric_supported": 16,
+    "numeric_unsupported": 1,
+    "numeric_unscored": 7
+  },
+  "completed_at": "2026-11-05T02:02:42.523813+00:00"
+}

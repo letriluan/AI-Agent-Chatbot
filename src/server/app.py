@@ -9,6 +9,7 @@ from fastapi import FastAPI, HTTPException, Request, Response, Depends
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
+from groq import APIConnectionError
 
 from src.agent.graph import ask
 from src.agent import graph
@@ -90,6 +91,11 @@ def ask_agent(req: AskRequest, admission=Depends(demo_admission)):
         result = ask(req.question)
     except (FileNotFoundError, ValueError):
         raise HTTPException(503, detail={"message": "Check database and provider configuration.", "request_id": request_id}) from None
+    except APIConnectionError as exc:
+        raise HTTPException(503, detail={
+            "message": "The model service could not be reached. Please try again shortly.",
+            "request_id": getattr(exc, 'agent_request_id', request_id),
+        }, headers={'Retry-After': '5'}) from None
     except Exception:
         # Never include provider errors, credentials, prompts or SQL in the HTTP error.
         raise HTTPException(502, detail={"message": "The agent could not complete this request. Please retry.", "request_id": request_id}) from None

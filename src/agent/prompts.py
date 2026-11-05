@@ -16,6 +16,7 @@ STRICT RULES:
 - Output ONLY SQL (no explanations, no markdown).
 - Read-only ONLY: must be a single SELECT or WITH query.
 - Use ONLY tables/columns that appear in the schema.
+- When schema context confirms a supplied code in a key/code/ID column, use that column; do not substitute a display-name filter unless the user explicitly identifies the value as a name. Without a confirmed match, choose columns from the question and schema rather than assuming a code is a display name. Never drop or broaden an explicit code filter.
 - Select only the columns needed to answer the question. Never use SELECT * or table.* unless the user explicitly requests all fields.
 - A scalar question asking for the largest/highest/maximum or smallest/lowest/minimum value returns ONLY MAX(metric) or MIN(metric), with no record identifier. This is distinct from asking to list ranked records.
 - For a ranked list of records, return exactly the record identifier and the ranking metric, unless additional fields are explicitly requested. Ranking includes top, bottom, largest, smallest, highest and lowest, even when the question does not repeat the metric name: infer that metric from the schema and include it. For example, the two cheapest products selects product ID and price.
@@ -41,16 +42,14 @@ STRICT RULES:
 - Output ONLY SQL (no explanations, no markdown).
 - Read-only ONLY: must be a single SELECT or WITH query.
 - Use ONLY tables/columns that appear in the schema.
+- Preserve user-supplied identifiers and explicit filters. Check confirmed key/code/ID matches before choosing a display-name column.
 - Select only the columns needed to answer the question. Never use SELECT * or table.* unless the user explicitly requests all fields.
 - A scalar question asking for the largest/highest/maximum or smallest/lowest/minimum value returns ONLY MAX(metric) or MIN(metric), with no record identifier. This is distinct from asking to list ranked records.
 - For a ranked list of records, return exactly the record identifier and the ranking metric, unless additional fields are explicitly requested. Ranking includes top, bottom, largest, smallest, highest and lowest, even when the question does not repeat the metric name: infer that metric from the schema and include it. For example, the two cheapest products selects product ID and price.
 - For a filtered list of records without a ranking, return the record identifier ONLY unless the user explicitly asks to display other fields. Mentioning a field in a filter is not a request to display it. Never select a field solely because it appears in WHERE or ORDER BY. Ordering by an identifier is not a metric ranking. For example, listing products whose stock is below a threshold, ordered by ID, selects only the product ID, not stock.
 - Prefer JOINs listed under RELATIONSHIPS; if you join, use ON with correct keys.
 - ALWAYS qualify columns with table name when there is any ambiguity.
-- If the previous query returned EMPTY rows but no error, BROADEN the query:
-  - remove overly strict WHERE filters
-  - widen date range (if applicable)
-  - avoid exact matches if a LIKE is more appropriate
+- An empty result can be correct. Check joins and identifier-vs-name columns without changing the requested filters. Do not remove filters, widen dates or replace exact equality with LIKE unless the user explicitly permits that change.
 - Always include a LIMIT at the end if missing.
 - For ratios/fractions, cast an operand to REAL or multiply by 1.0 before division to avoid SQLite integer truncation.
 
@@ -64,6 +63,7 @@ STRICT RULES:
 - Output ONLY SQL (no markdown).
 - Read-only ONLY: must be a single SELECT or WITH query.
 - The output MUST have exactly 2 columns: (x, y).
+- Preserve explicit filters and use confirmed identifier matches for supplied codes rather than display-name columns.
 - Give both columns descriptive aliases (for example order_status/order_count or purchase_month/total_item_price), not generic x/y aliases. Do not invent currency units.
 - x should be a category or time bucket, y should be numeric.
 - Prefer sensible aggregation (SUM/COUNT/AVG) and ORDER BY x (for time) or y DESC (for ranking).

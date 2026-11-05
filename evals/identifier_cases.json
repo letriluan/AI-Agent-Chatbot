@@ -1,0 +1,10 @@
+[
+  {"id":"i01","kind":"sql","question":"For stop S2, return distinct route_key values in ascending order.","reference_sql":"SELECT DISTINCT route_key FROM fact_stop_events WHERE stop_key='S2' ORDER BY route_key","expected_rows":[["R1"]],"ordered":true},
+  {"id":"i02","kind":"sql","question":"Return stop_key and stop_name for stop S4, in that column order.","reference_sql":"SELECT stop_key,stop_name FROM dim_stop WHERE stop_key='S4'","expected_rows":[["S4","Beach"]],"ordered":true},
+  {"id":"i03","kind":"sql","question":"Return only stop_key values for the stop named S4, sorted by stop_key.","reference_sql":"SELECT stop_key FROM dim_stop WHERE stop_name='S4' ORDER BY stop_key","expected_rows":[["S2"]],"ordered":true},
+  {"id":"i04","kind":"sql","question":"For route R3, return only route_short_name.","reference_sql":"SELECT route_short_name FROM dim_route WHERE route_key='R3'","expected_rows":[["R30"]],"ordered":true},
+  {"id":"i05","kind":"sql","question":"Return only stop_key values for the stop named Platform 12, sorted by stop_key.","reference_sql":"SELECT stop_key FROM dim_stop WHERE stop_name='Platform 12' ORDER BY stop_key","expected_rows":[["S7"]],"ordered":true},
+  {"id":"i06","kind":"sql","question":"Return only distinct trip_id values for route R2, sorted ascending.","reference_sql":"SELECT DISTINCT trip_id FROM fact_stop_events WHERE route_key='R2' ORDER BY trip_id","expected_rows":[["T4"],["T5"]],"ordered":true},
+  {"id":"i07","kind":"sql","question":"Return only distinct route_key values serving stop S99, sorted ascending. An empty answer is valid; keep the exact requested code.","reference_sql":"SELECT DISTINCT route_key FROM fact_stop_events WHERE stop_key='S99' ORDER BY route_key","expected_rows":[],"ordered":true},
+  {"id":"i08","kind":"bar","question":"Draw a bar chart of stop event counts by route_key for stop S4. Return route_key and event count, sorted by route_key. Keep the exact stop code filter.","reference_sql":"SELECT route_key,COUNT(*) FROM fact_stop_events WHERE stop_key='S4' GROUP BY route_key ORDER BY route_key","expected_rows":[["R2",2]],"ordered":true}
+]

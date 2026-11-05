@@ -33,6 +33,7 @@ from langgraph.graph import StateGraph, START, END
 from langchain_groq import ChatGroq
 
 from .observability import observed, measured, invoke_llm
+from .identifiers import identifier_matches, identifier_context
 from .intent import requests_data_change, REFUSAL
 from .presentation import chart_labels, coded_result_answer, remove_unsupported_currency
 from .schema import get_schema, get_relationships, format_schema
@@ -79,7 +80,8 @@ class State(TypedDict, total=False):
 def _make_llm():
     model = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
     demo = os.getenv("DEMO_MODE", "false").lower() == "true"
-    return ChatGroq(model=model, temperature=0, timeout=20 if demo else 30, max_retries=0 if demo else 1, max_tokens=int(os.getenv("LLM_MAX_TOKENS", "1024")))
+    # Transport retries are counted and bounded centrally in invoke_llm.
+    return ChatGroq(model=model, temperature=0, timeout=20 if demo else 30, max_retries=0, max_tokens=int(os.getenv("LLM_MAX_TOKENS", "1024")))
 
 
 def _strip_markdown_fences(text: str) -> str:
@@ -92,7 +94,7 @@ def _strip_markdown_fences(text: str) -> str:
 
 def _expects_non_empty(question: str) -> bool:
     q = question.lower()
-    return any(k in q for k in ["top", "most", "highest", "lowest", "rank", "list", "show", "compare"])
+    return bool(re.search(r'\b(?:top|most|highest|lowest|rank(?:ed|ing)?|list|show|compare)\b', q))
 
 
 def _wants_plot(question: str) -> bool:
@@ -177,8 +179,8 @@ def _is_too_vague(question: str, schema: Dict[str, List[str]]) -> bool:
 @measured
 def prepare_schema_node(state: State) -> State:
     db_fp = db_fingerprint(DB_PATH)
-    schema_text, relationships, _schema = _cached_schema_text(DB_PATH, db_fp)
-    state["schema_text"] = schema_text
+    schema_text, relationships, schema = _cached_schema_text(DB_PATH, db_fp)
+    state["schema_text"] = schema_text + identifier_context(identifier_matches(DB_PATH, schema, state['question']))
     state["relationships"] = relationships
     state["attempts"] = 0
     return state

@@ -1,0 +1,61 @@
+{
+  "reviewed_at": "2026-11-05T03:26:41.640744+00:00",
+  "checks": {
+    "affected_regressions_passed": 4,
+    "fresh_identifier_cases_passed": 8,
+    "controlled_connection_recovery_passed": true,
+    "chart_checks_passed": 3
+  },
+  "original_benchmark_checksums": {
+    "docs\\evaluations\\transit-first-live-2026-11-05\\results.json": "6483308f6ab5456ff776122fb4751c91e4fdee495dc31e4c62cf9427a301ead7",
+    "docs\\evaluations\\reliability-live-2026-11-05\\summary.json": "bc901d437776df22d903bbb27f08710e563c5660093137b49292d9d8a52d47cb"
+  },
+  "original_results_preserved": true,
+  "visual_reviews": [
+    {
+      "path": "holdout-regressions\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visually_reviewed": true
+    },
+    {
+      "path": "holdout-regressions\\h16.png",
+      "sha256": "71946087c771f3fd01784fca5cb0e1f96f31aa1761573614e080558c9c3f7f5a",
+      "visually_reviewed": true
+    },
+    {
+      "path": "fresh-identifiers\\i08.png",
+      "sha256": "e1d2017d2b801e49fe2bff9e057d243ddb456f53aae506414a44f0c98e1916d7",
+      "visually_reviewed": true
+    }
+  ],
+  "controlled_test": {
+    "injected_pre_network_errors": 1,
+    "application_retries": 1,
+    "recovered": true,
+    "natural_outage_claimed": false,
+    "usage_flag_remains_incomplete": true
+  },
+  "known_list_price_estimate_usd": "0.002421900",
+  "cost_coverage": "11/13",
+  "actual_bill_measured": false,
+  "pytest": {
+    "tests": 314,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pytest_xml_sha256": "1a56f8902ca7a3e50f2e9e8abb7d08c4d78ff5a8a09bbd553d1ec9836e7d196b",
+  "deployed_to_render": false,
+  "naturally_observed_recoveries": [
+    {
+      "phase": "fresh-identifiers",
+      "id": "i07",
+      "recovered": true,
+      "retries": 1,
+      "failed_attempts": 1,
+      "category": "connection_or_timeout",
+      "underlying_network_cause_verified": false,
+      "usage_complete": false
+    }
+  ]
+}

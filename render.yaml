@@ -6,6 +6,7 @@ services:
     region: singapore
     dockerfilePath: ./Dockerfile
     healthCheckPath: /ready
+    autoDeployTrigger: checksPass
     envVars:
       - key: GROQ_API_KEY
         sync: false
@@ -19,6 +20,8 @@ services:
         value: "5.0"
       - key: LLM_MAX_TOKENS
         value: "1024"
+      - key: LLM_CONNECTION_RETRIES
+        value: "2"
       - key: LANGCHAIN_TRACING_V2
         value: "false"
       - key: LANGSMITH_TRACING

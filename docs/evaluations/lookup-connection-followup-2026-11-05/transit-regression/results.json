@@ -1,0 +1,123 @@
+{
+  "mode": "live",
+  "suite": "transit",
+  "fingerprints": {
+    "cache.py": "3639d21feb54a5ea08a0f58f3ebd6dd6dea4f5df68fddcde0c4e84d599ab94ae",
+    "database.py": "15149515e0ec716c5e4a3ad8154d1ce480e3156338ce5cb8d2919e03ef7aa9e1",
+    "graph.py": "ce1a45094bd863e4d139d2de91e7de2004afff8dc54add76a562dc43ea05a709",
+    "identifiers.py": "f93d5d0bf3d2315aec077c8c2233a44b53e0266b405bffa48e57419468f5c42b",
+    "intent.py": "0499802daeff01e9939d8f709e4cfee360bc0e541489c3d6be1a6592f8e96e5a",
+    "observability.py": "029f189dd25c14bb77f8c0f8ff9d5c3a079ad7fca3ee51a68181e36cac3fe654",
+    "plot_tools.py": "f78c3cf038b315f46f53ce3d44b4139d2f6f31bae1a6bdcdfd0bd026237fb37a",
+    "presentation.py": "01081ed992e5ee7976aedacc58b4ed13e17ecf3b8039c435585d50efa160d83f",
+    "privacy.py": "e553caec1eed6f63bed63a561453496dc9ef4e3d4c5e3d7100a58a76d601a7de",
+    "prompts.py": "a5dd3fc58a6dea4e4e22e3b43347861c447412d3ddde7f7066740134367758ab",
+    "schema.py": "7ea194a611576aa07e014252cd8c6a21472949643f0e36091501596e4edc3ec4",
+    "sql_tools.py": "269b4fc31ec869ee6d7b24b4527e8cde6605f5094f3a388acf67f35ca32b938a",
+    "holdout.py": "bb2447889b8ce94e262b272c73a2f8aab7132e85d366de9fbf5fc2ecc5d6365b",
+    "run.py": "b6c2cb215f71415c3161743dab20892edd1513afd2affc170228c4fcf4201a9c",
+    "grounding.py": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+    "cost.py": "b7afd36ab8dc48b38101cf9d1cffbd92e09ff9be6bca0f7b002e4e7cd1d7a33e",
+    "transit_cases.json": "5b16baa75e272828ce0018dc3d8af7eff5d575b50a6f60fa06ac3c9541edba8f",
+    "transit_fixture.py": "d00c55e9161b6cb1a17630cac7da2d1bf1aa5a4940251d5c569c6de045f5a298"
+  },
+  "model": "openai/gpt-oss-20b",
+  "started_at": "2026-11-05T03:16:06.860145+00:00",
+  "records": [
+    {
+      "id": "t15",
+      "kind": "sql",
+      "question": "Return only distinct route_key values serving stop S4, sorted ascending.",
+      "reference_sql": "SELECT DISTINCT route_key FROM fact_stop_events WHERE stop_key='S4' ORDER BY route_key",
+      "expected_rows": [
+        [
+          "R2"
+        ]
+      ],
+      "ordered": true,
+      "reference_valid": true,
+      "generated_sql": "SELECT DISTINCT fact_stop_events.route_key\nFROM fact_stop_events\nWHERE fact_stop_events.stop_key = 'S4'\nORDER BY fact_stop_events.route_key ASC\nLIMIT 50;",
+      "actual_rows": [
+        [
+          "R2"
+        ]
+      ],
+      "sql_correct": true,
+      "answer": "R2",
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1342,
+        "output_tokens": 278,
+        "total_tokens": 1620,
+        "token_usage_complete": true,
+        "llm_failed_calls": 0,
+        "connection_retries": 0,
+        "retry_backoff_ms": 0,
+        "stages_ms": {
+          "prepare_schema_node": 3.572,
+          "generate_sql_node": 1124.86,
+          "run_sql_node": 1.324,
+          "plot_sql_node": 0.003,
+          "answer_node": 753.661
+        },
+        "latency_ms": 1966.2
+      },
+      "attempts": 1,
+      "numeric_support": {
+        "status": "no_numeric_claims",
+        "claims": [],
+        "unsupported": [],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "estimated_cost": {
+        "available": true,
+        "estimated_usd": "0.00018405",
+        "pricing": {
+          "model": "openai/gpt-oss-20b",
+          "currency": "USD",
+          "input_per_million": "0.075",
+          "output_per_million": "0.30",
+          "checked_on": "2026-11-05",
+          "source": "https://console.groq.com/docs/model/openai/gpt-oss-20b"
+        },
+        "basis": "Standard list price; no provider cache/batch discounts or free-tier credits",
+        "actual_bill_measured": false
+      },
+      "cache_hit": true,
+      "cached_llm_calls": 0,
+      "passed": true
+    }
+  ],
+  "expected_cases": 1,
+  "selected_case_ids": [
+    "t15"
+  ],
+  "complete": true,
+  "narrative_accuracy_measured": false,
+  "numeric_support_measured": true,
+  "agent_quality_measured": true,
+  "configuration": {
+    "model": "openai/gpt-oss-20b",
+    "max_output_tokens": 1024,
+    "demo_mode": true,
+    "sql_max_rows": 50,
+    "sql_timeout_seconds": 5.0,
+    "temperature": 0,
+    "connection_retry_limit": 2,
+    "sdk_max_retries": 0
+  },
+  "summary": {
+    "reference_passed": 1,
+    "total": 1,
+    "sql_correct": 1,
+    "charts_correct": 0,
+    "charts_total": 0,
+    "errors": 0,
+    "cache_hits": 1,
+    "numeric_supported": 0,
+    "numeric_unsupported": 0,
+    "numeric_unscored": 1
+  },
+  "completed_at": "2026-11-05T03:16:08.899233+00:00"
+}

@@ -1,0 +1,220 @@
+{
+  "mode": "retrospective_numeric_support",
+  "source_report": "holdout-first-use-2026-10-18.json",
+  "source_sha256": "a182ab08f12a6cbd6718ede2764f09b239ec0af17b56b9aa2b367535aa57cd5e",
+  "checker_sha256": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+  "new_model_calls": 0,
+  "semantic_factuality_measured": false,
+  "records": [
+    {
+      "id": "h01",
+      "status": "supported",
+      "claims": [
+        "0",
+        "100.0",
+        "240.0",
+        "120.0"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h02",
+      "status": "supported",
+      "claims": [
+        "5",
+        "6"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h03",
+      "status": "supported",
+      "claims": [
+        "62.5"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h04",
+      "status": "supported",
+      "claims": [
+        "1",
+        "1",
+        "2",
+        "1",
+        "3",
+        "2",
+        "4",
+        "0",
+        "5",
+        "1"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h05",
+      "status": "supported",
+      "claims": [
+        "3"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h06",
+      "status": "supported",
+      "claims": [
+        "460.0"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h07",
+      "status": "supported",
+      "claims": [
+        "1",
+        "3",
+        "5",
+        "4"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h08",
+      "status": "supported",
+      "claims": [
+        "5"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h09",
+      "status": "unsupported",
+      "claims": [
+        "2026",
+        "30",
+        "1",
+        "5",
+        "6",
+        "7"
+      ],
+      "unsupported": [
+        "2026",
+        "30",
+        "1"
+      ],
+      "passed": false,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h10",
+      "status": "supported",
+      "claims": [
+        "30.0"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h11",
+      "status": "supported",
+      "claims": [
+        "1",
+        "5",
+        "6"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h12",
+      "status": "no_numeric_claims",
+      "claims": [],
+      "unsupported": [],
+      "passed": false,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h13",
+      "status": "supported",
+      "claims": [
+        "0",
+        "100.0",
+        "240.0",
+        "120.0"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h14",
+      "status": "supported",
+      "claims": [
+        "2026-01",
+        "60.0",
+        "2026-02",
+        "40.0",
+        "2026-04",
+        "100.0",
+        "2026-05",
+        "40.0"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h15",
+      "status": "supported",
+      "claims": [
+        "1",
+        "13",
+        "2"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    {
+      "id": "h16",
+      "status": "supported",
+      "claims": [
+        "2026-01",
+        "120.0",
+        "2026-02",
+        "200.0",
+        "2026-04",
+        "500.0",
+        "2026-05",
+        "540.0"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    }
+  ],
+  "summary": {
+    "total": 16,
+    "supported": 14,
+    "unsupported": 1,
+    "unscored": 1
+  }
+}

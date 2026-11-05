@@ -1,0 +1,58 @@
+{
+  "reviewed_at": "2026-11-05T05:18:41.014804+00:00",
+  "complete": false,
+  "free_only": true,
+  "completed_runs": 1,
+  "planned_runs": 5,
+  "observations_including_partial_run": 23,
+  "passed_observations": 22,
+  "rate_limited_observations": [
+    {
+      "run": 2,
+      "id": "h07",
+      "http_status": 429
+    }
+  ],
+  "transit_rerun_started": false,
+  "natural_recoveries": [
+    {
+      "run": 1,
+      "id": "h09",
+      "connection_retries": 1
+    }
+  ],
+  "numeric_context_reviews": [
+    {
+      "run": 1,
+      "id": "h09",
+      "classification": "question_context",
+      "note": "April 2026, April 30 and May 1 restate the requested date boundary. Returned IDs 5, 6 and 7 agree with SQL."
+    }
+  ],
+  "cost_coverage": "21/23",
+  "known_list_price_estimate_usd": "0.004852050",
+  "actual_bill_measured": false,
+  "groq_console_observation": {
+    "plan": "Free / Current Plan",
+    "visible_org": "Personal",
+    "gpt_oss_20b_limits": {
+      "rpm": 30,
+      "rpd": 1000,
+      "tpm": 8000,
+      "tpd": 200000
+    },
+    "exact_limit_window_causing_429_verified": false,
+    "quota_reset_time_verified": false
+  },
+  "fingerprints_verified": true,
+  "checksums": {
+    "REPORT.md": "25332db9d16f953860b6453cdb4892386a7dc135d172139ca87bfec3a0d05094",
+    "run-01\\h13.png": "5fa6de167b0d6d59b54e5e6362d4a48b9592109f580865177bf9383a725ce1e7",
+    "run-01\\h14.png": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
+    "run-01\\h15.png": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+    "run-01\\h16.png": "71946087c771f3fd01784fca5cb0e1f96f31aa1761573614e080558c9c3f7f5a",
+    "run-01\\results.json": "0a8bce43e1a74624c3d22fe522e83411956074ec2e21eb4385bb2eb8eb391bdc",
+    "run-02\\results.json": "0430ab2ff7f4ed6ee8985917ed82ffbe1c0ab7da02e3c0bd29030c685f325a9c",
+    "summary.json": "11f7dcce9020c21db400e9a77733e4de6545a31e38be57f863665c98861c7667"
+  }
+}

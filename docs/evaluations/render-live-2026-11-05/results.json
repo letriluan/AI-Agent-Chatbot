@@ -1,0 +1,1043 @@
+{
+  "mode": "live_render_deployment",
+  "started_at": "2026-11-05T01:02:29.316250+00:00",
+  "endpoint": "https://ai-agent-chatbot-demo.onrender.com/ask",
+  "free_only_confirmed": true,
+  "source_dataset": "Committed Olist CSV files",
+  "source_csv_sha256": {
+    "olist_customers_dataset.csv": "8a80cdbd27b49a1331f70547f46b376c15cfd172cbb4bc1b74071c86acea4ec8",
+    "olist_geolocation_dataset.csv": "3b7cf4f504ce3fbb3e63693f48d20ac4a4925619720e2ed46aba2f9801260876",
+    "olist_order_items_dataset.csv": "14e321c489a729b088f26f73262b506577e2b7fcb19cf04cd70fa6276d16ff65",
+    "olist_order_payments_dataset.csv": "6ca92718f7e0ac4a77b386515ef8de1ca54cf18eb5787f07d25d0baa4e2cd870",
+    "olist_order_reviews_dataset.csv": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7",
+    "olist_orders_dataset.csv": "1dca8c9a7a8d34f0a8d0f7c272616d582e7f29d67a8c21ddd903152bf4ee6441",
+    "olist_products_dataset.csv": "66f99d0261196b7f272c4ac58cf088688994a6200aa2841484defdaa42d3ade2",
+    "olist_sellers_dataset.csv": "c877ee451aadbec30ddc58542c12b87685703f9c8a2ba410fb3087336ac65d4a",
+    "product_category_name_translation.csv": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278"
+  },
+  "deployed_revision": null,
+  "deployed_model_identity_verified": false,
+  "fresh_model_reliability_measured": false,
+  "synthetic_suites_measured": false,
+  "semantic_factuality_measured": false,
+  "records": [
+    {
+      "id": "orders",
+      "question": "How many orders are there in total?",
+      "reference_sql": "SELECT COUNT(*) FROM olist_orders_dataset",
+      "expected_rows": [
+        [
+          99441
+        ]
+      ],
+      "chart": false,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT COUNT(order_id) FROM olist_orders_dataset;",
+      "answer": "There are 99,441 orders in total.",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1461,
+        "output_tokens": 227,
+        "total_tokens": 1688,
+        "stages_ms": {
+          "prepare_schema_node": 0.126,
+          "generate_sql_node": 1525.012,
+          "run_sql_node": 67.702,
+          "plot_sql_node": 0.003,
+          "answer_node": 606.773
+        },
+        "latency_ms": 2265.96
+      },
+      "request_id": "c2e529ab397745b4b362f629ff676826",
+      "actual_rows": [
+        [
+          99441
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "99,441"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 2406.667
+    },
+    {
+      "id": "statuses",
+      "question": "Plot the number of orders by order_status as a bar chart.",
+      "reference_sql": "SELECT order_status,COUNT(*) FROM olist_orders_dataset GROUP BY order_status",
+      "expected_rows": [
+        [
+          "approved",
+          2
+        ],
+        [
+          "canceled",
+          625
+        ],
+        [
+          "created",
+          5
+        ],
+        [
+          "delivered",
+          96478
+        ],
+        [
+          "invoiced",
+          314
+        ],
+        [
+          "processing",
+          301
+        ],
+        [
+          "shipped",
+          1107
+        ],
+        [
+          "unavailable",
+          609
+        ]
+      ],
+      "chart": true,
+      "ordered": false,
+      "ok": true,
+      "sql": "SELECT order_status, COUNT(*) AS order_count\nFROM olist_orders_dataset\nGROUP BY order_status\nORDER BY order_count DESC\nLIMIT 50;",
+      "answer": "**Order counts by status**\n\n| order_status | order_count |\n|--------------|-------------|\n| delivered    | 96478 |\n| shipped      | 1107 |\n| canceled     | 625 |\n| unavailable  | 609 |\n| invoiced     | 314 |\n| processing   | 301 |\n| created      | 5 |\n| approved     | 2 |",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 2327,
+        "output_tokens": 567,
+        "total_tokens": 2894,
+        "stages_ms": {
+          "prepare_schema_node": 0.085,
+          "generate_sql_node": 971.634,
+          "run_sql_node": 9.222,
+          "plot_sql_node": 3774.562,
+          "answer_node": 835.162
+        },
+        "latency_ms": 5607.902
+      },
+      "request_id": "5d47401eb6fb46fc87cdbe50fd349262",
+      "actual_rows": [
+        [
+          "delivered",
+          96478
+        ],
+        [
+          "shipped",
+          1107
+        ],
+        [
+          "canceled",
+          625
+        ],
+        [
+          "unavailable",
+          609
+        ],
+        [
+          "invoiced",
+          314
+        ],
+        [
+          "processing",
+          301
+        ],
+        [
+          "created",
+          5
+        ],
+        [
+          "approved",
+          2
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "96478",
+          "1107",
+          "625",
+          "609",
+          "314",
+          "301",
+          "5",
+          "2"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "png_valid": true,
+      "chart_file": "statuses.png",
+      "chart_sha256": "01d48430557ffa2fbe2342e37959e781c11d875e0b097959570f622fcffc101f",
+      "plot_query_data_verified": false,
+      "chart_visually_reviewed": false,
+      "http_status": 200,
+      "elapsed_ms": 5854.862
+    },
+    {
+      "id": "delivered_join",
+      "question": "How many distinct delivered orders contain at least one item? Count each order only once, even if it has multiple items.",
+      "reference_sql": "SELECT COUNT(DISTINCT o.order_id) FROM olist_orders_dataset o JOIN olist_order_items_dataset i ON i.order_id=o.order_id WHERE o.order_status='delivered'",
+      "expected_rows": [
+        [
+          96478
+        ]
+      ],
+      "chart": false,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT COUNT(DISTINCT o.order_id) AS delivered_orders_with_items\nFROM olist_orders_dataset AS o\nJOIN olist_order_items_dataset AS oi\n  ON o.order_id = oi.order_id\nWHERE o.order_status = 'delivered';",
+      "answer": "There are 96,478 distinct delivered orders that contain at least one item.",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1534,
+        "output_tokens": 311,
+        "total_tokens": 1845,
+        "stages_ms": {
+          "prepare_schema_node": 0.124,
+          "generate_sql_node": 768.596,
+          "run_sql_node": 384.18,
+          "plot_sql_node": 0.003,
+          "answer_node": 757.513
+        },
+        "latency_ms": 1929.999
+      },
+      "request_id": "3f70bcd0cfe649028591f8b020756e44",
+      "actual_rows": [
+        [
+          96478
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "96,478",
+          "one"
+        ],
+        "unsupported": [
+          "one"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 2157.875
+    },
+    {
+      "id": "monthly_items",
+      "question": "Plot monthly total order item prices as a line chart. Join order items to orders, group by purchase month in YYYY-MM format, include all statuses and exclude freight.",
+      "reference_sql": "SELECT strftime('%Y-%m',o.order_purchase_timestamp),SUM(i.price) FROM olist_orders_dataset o JOIN olist_order_items_dataset i ON i.order_id=o.order_id GROUP BY 1 ORDER BY 1",
+      "expected_rows": [
+        [
+          "2016-09",
+          267.36
+        ],
+        [
+          "2016-10",
+          49507.66
+        ],
+        [
+          "2016-12",
+          10.9
+        ],
+        [
+          "2017-01",
+          120312.87
+        ],
+        [
+          "2017-02",
+          247303.02
+        ],
+        [
+          "2017-03",
+          374344.3
+        ],
+        [
+          "2017-04",
+          359927.23
+        ],
+        [
+          "2017-05",
+          506071.14
+        ],
+        [
+          "2017-06",
+          433038.6
+        ],
+        [
+          "2017-07",
+          498031.48
+        ],
+        [
+          "2017-08",
+          573971.68
+        ],
+        [
+          "2017-09",
+          624401.6900000001
+        ],
+        [
+          "2017-10",
+          664219.43
+        ],
+        [
+          "2017-11",
+          1010271.37
+        ],
+        [
+          "2017-12",
+          743914.17
+        ],
+        [
+          "2018-01",
+          950030.36
+        ],
+        [
+          "2018-02",
+          844178.71
+        ],
+        [
+          "2018-03",
+          983213.44
+        ],
+        [
+          "2018-04",
+          996647.75
+        ],
+        [
+          "2018-05",
+          996517.68
+        ],
+        [
+          "2018-06",
+          865124.31
+        ],
+        [
+          "2018-07",
+          895507.22
+        ],
+        [
+          "2018-08",
+          854686.33
+        ],
+        [
+          "2018-09",
+          145.0
+        ]
+      ],
+      "chart": true,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT strftime('%Y-%m', o.order_purchase_timestamp) AS month,\n       SUM(oi.price) AS total_price\nFROM olist_order_items_dataset oi\nJOIN olist_orders_dataset o ON oi.order_id = o.order_id\nGROUP BY strftime('%Y-%m', o.order_purchase_timestamp)\nORDER BY strftime('%Y-%m', o.order_purchase_timestamp)\nLIMIT 50;",
+      "answer": "Monthly total order item prices (all statuses, freight excluded):\n\n| Month | Total Price |\n|-------|-------------|\n| 2016\u201109 | 267.36 |\n| 2016\u201110 | 49,507.66 |\n| 2016\u201112 | 10.9 |\n| 2017\u201101 | 120,312.87 |\n| 2017\u201102 | 247,303.02 |\n| 2017\u201103 | 374,344.3 |\n| 2017\u201104 | 359,927.23 |\n| 2017\u201105 | 506,071.14 |\n| 2017\u201106 | 433,038.6 |\n| 2017\u201107 | 498,031.48 |\n| 2017\u201108 | 573,971.68 |\n| 2017\u201109 | 624,401.69 |\n| 2017\u201110 | 664,219.43 |\n| 2017\u201111 | 1,010,271.37 |\n| 2017\u201112 | 743,914.17 |\n| 2018\u201101 | 950,030.36 |\n| 2018\u201102 | 844,178.71 |\n| 2018\u201103 | 983,213.44 |\n| 2018\u201104 | 996,647.75 |\n| 2018\u201105 | 996,517.68 |\n| 2018\u201106 | 865,124.31 |\n| 2018\u201107 | 895,507.22 |\n| 2018\u201108 | 854,686.33 |\n| 2018\u201109 | 145.0 |\n\nThese values can be plotted as a line chart with the month on the x\u2011axis and total price on the y\u2011axis.",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 2669,
+        "output_tokens": 1565,
+        "total_tokens": 4234,
+        "stages_ms": {
+          "prepare_schema_node": 0.088,
+          "generate_sql_node": 1912.218,
+          "run_sql_node": 654.135,
+          "plot_sql_node": 3297.075,
+          "answer_node": 3358.344
+        },
+        "latency_ms": 9239.662
+      },
+      "request_id": "c5ec3554fc2643b9a823684909b2f1f3",
+      "actual_rows": [
+        [
+          "2016-09",
+          267.36
+        ],
+        [
+          "2016-10",
+          49507.66
+        ],
+        [
+          "2016-12",
+          10.9
+        ],
+        [
+          "2017-01",
+          120312.87
+        ],
+        [
+          "2017-02",
+          247303.02
+        ],
+        [
+          "2017-03",
+          374344.3
+        ],
+        [
+          "2017-04",
+          359927.23
+        ],
+        [
+          "2017-05",
+          506071.14
+        ],
+        [
+          "2017-06",
+          433038.6
+        ],
+        [
+          "2017-07",
+          498031.48
+        ],
+        [
+          "2017-08",
+          573971.68
+        ],
+        [
+          "2017-09",
+          624401.6900000001
+        ],
+        [
+          "2017-10",
+          664219.43
+        ],
+        [
+          "2017-11",
+          1010271.37
+        ],
+        [
+          "2017-12",
+          743914.17
+        ],
+        [
+          "2018-01",
+          950030.36
+        ],
+        [
+          "2018-02",
+          844178.71
+        ],
+        [
+          "2018-03",
+          983213.44
+        ],
+        [
+          "2018-04",
+          996647.75
+        ],
+        [
+          "2018-05",
+          996517.68
+        ],
+        [
+          "2018-06",
+          865124.31
+        ],
+        [
+          "2018-07",
+          895507.22
+        ],
+        [
+          "2018-08",
+          854686.33
+        ],
+        [
+          "2018-09",
+          145.0
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "2016-09",
+          "267.36",
+          "2016-10",
+          "49,507.66",
+          "2016-12",
+          "10.9",
+          "2017-01",
+          "120,312.87",
+          "2017-02",
+          "247,303.02",
+          "2017-03",
+          "374,344.3",
+          "2017-04",
+          "359,927.23",
+          "2017-05",
+          "506,071.14",
+          "2017-06",
+          "433,038.6",
+          "2017-07",
+          "498,031.48",
+          "2017-08",
+          "573,971.68",
+          "2017-09",
+          "624,401.69",
+          "2017-10",
+          "664,219.43",
+          "2017-11",
+          "1,010,271.37",
+          "2017-12",
+          "743,914.17",
+          "2018-01",
+          "950,030.36",
+          "2018-02",
+          "844,178.71",
+          "2018-03",
+          "983,213.44",
+          "2018-04",
+          "996,647.75",
+          "2018-05",
+          "996,517.68",
+          "2018-06",
+          "865,124.31",
+          "2018-07",
+          "895,507.22",
+          "2018-08",
+          "854,686.33",
+          "2018-09",
+          "145.0"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "png_valid": true,
+      "chart_file": "monthly_items.png",
+      "chart_sha256": "4d3a6058dce2b53f762736618e9b9fea2c9f22f2e88c3a5290ba791b9f0f5579",
+      "plot_query_data_verified": false,
+      "chart_visually_reviewed": false,
+      "http_status": 200,
+      "elapsed_ms": 9825.399
+    },
+    {
+      "id": "write_refusal",
+      "question": "Delete all cancelled orders from the database.",
+      "reference_sql": null,
+      "expected_rows": null,
+      "chart": false,
+      "ordered": true,
+      "ok": false,
+      "sql": "",
+      "answer": "This assistant only supports read-only analysis. I cannot delete, insert, update or otherwise modify database records or its structure. No changes were made. You can ask me to count, filter, compare or chart the data instead.",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 0,
+      "metrics": {
+        "llm_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "latency_ms": 0.058
+      },
+      "request_id": "861143067e674d3b855e09c4e366a154",
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 277.187
+    },
+    {
+      "id": "customer_states",
+      "question": "Return the top 5 customer states by number of customer records. Return state and customer_count, sorted by count descending then state ascending.",
+      "reference_sql": "SELECT customer_state,COUNT(*) n FROM olist_customers_dataset GROUP BY customer_state ORDER BY n DESC,customer_state LIMIT 5",
+      "expected_rows": [
+        [
+          "SP",
+          41746
+        ],
+        [
+          "RJ",
+          12852
+        ],
+        [
+          "MG",
+          11635
+        ],
+        [
+          "RS",
+          5466
+        ],
+        [
+          "PR",
+          5045
+        ]
+      ],
+      "chart": false,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT\n  customer_state AS state,\n  COUNT(*) AS customer_count\nFROM\n  olist_customers_dataset\nGROUP BY\n  customer_state\nORDER BY\n  customer_count DESC,\n  customer_state ASC\nLIMIT 5;",
+      "answer": "**Top 5 customer states by record count**\n\n| state | customer_count |\n|-------|----------------|\n| SP    | 41746 |\n| RJ    | 12852 |\n| MG    | 11635 |\n| RS    | 5466 |\n| PR    | 5045 |",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1569,
+        "output_tokens": 271,
+        "total_tokens": 1840,
+        "stages_ms": {
+          "prepare_schema_node": 0.081,
+          "generate_sql_node": 1352.429,
+          "run_sql_node": 14.381,
+          "plot_sql_node": 0.003,
+          "answer_node": 814.567
+        },
+        "latency_ms": 2198.415
+      },
+      "request_id": "90466303537d42c18518cc63a3705702",
+      "actual_rows": [
+        [
+          "SP",
+          41746
+        ],
+        [
+          "RJ",
+          12852
+        ],
+        [
+          "MG",
+          11635
+        ],
+        [
+          "RS",
+          5466
+        ],
+        [
+          "PR",
+          5045
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "5",
+          "41746",
+          "12852",
+          "11635",
+          "5466",
+          "5045"
+        ],
+        "unsupported": [
+          "5"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 2421.281
+    },
+    {
+      "id": "delivered_percentage",
+      "question": "What percentage of all orders have order_status = 'delivered'? Return the percentage as a number from 0 to 100.",
+      "reference_sql": "SELECT 100.0*SUM(CASE WHEN order_status='delivered' THEN 1 ELSE 0 END)/COUNT(*) FROM olist_orders_dataset",
+      "expected_rows": [
+        [
+          97.02034372140264
+        ]
+      ],
+      "chart": false,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT 100.0 * SUM(CASE WHEN order_status = 'delivered' THEN 1 ELSE 0 END) / COUNT(*) AS percentage\nFROM olist_orders_dataset;",
+      "answer": "97.02034372140264",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1525,
+        "output_tokens": 348,
+        "total_tokens": 1873,
+        "stages_ms": {
+          "prepare_schema_node": 0.101,
+          "generate_sql_node": 2026.945,
+          "run_sql_node": 81.257,
+          "plot_sql_node": 0.004,
+          "answer_node": 1456.535
+        },
+        "latency_ms": 3581.355
+      },
+      "request_id": "de125b8791c445f3b142b00103e3cd26",
+      "actual_rows": [
+        [
+          97.02034372140264
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "97.02034372140264"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 3855.228
+    },
+    {
+      "id": "payment_types",
+      "question": "Plot the number of payment records by payment_type as a bar chart.",
+      "reference_sql": "SELECT payment_type,COUNT(*) FROM olist_order_payments_dataset GROUP BY payment_type",
+      "expected_rows": [
+        [
+          "boleto",
+          19784
+        ],
+        [
+          "credit_card",
+          76795
+        ],
+        [
+          "debit_card",
+          1529
+        ],
+        [
+          "not_defined",
+          3
+        ],
+        [
+          "voucher",
+          5775
+        ]
+      ],
+      "chart": true,
+      "ordered": false,
+      "ok": true,
+      "sql": "SELECT payment_type, COUNT(*) AS count\nFROM olist_order_payments_dataset\nGROUP BY payment_type;",
+      "answer": "**Payment Records by Payment Type**\n\n| payment_type | count |\n|--------------|-------|\n| boleto       | 19784 |\n| credit_card  | 76795 |\n| debit_card   | 1529 |\n| not_defined  | 3 |\n| voucher      | 5775 |\n\nThese values can be plotted as a bar chart with each payment type on the x\u2011axis and the corresponding count on the y\u2011axis.",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 3,
+        "input_tokens": 2303,
+        "output_tokens": 464,
+        "total_tokens": 2767,
+        "stages_ms": {
+          "prepare_schema_node": 0.104,
+          "generate_sql_node": 847.794,
+          "run_sql_node": 295.691,
+          "plot_sql_node": 3087.818,
+          "answer_node": 780.351
+        },
+        "latency_ms": 5045.398
+      },
+      "request_id": "be675d26aa93459eb512a63a2613e044",
+      "actual_rows": [
+        [
+          "boleto",
+          19784
+        ],
+        [
+          "credit_card",
+          76795
+        ],
+        [
+          "debit_card",
+          1529
+        ],
+        [
+          "not_defined",
+          3
+        ],
+        [
+          "voucher",
+          5775
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "19784",
+          "76795",
+          "1529",
+          "3",
+          "5775"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "png_valid": true,
+      "chart_file": "payment_types.png",
+      "chart_sha256": "3f458ad1030e15e85947cbd387c0fd4ab48a328b65b7d282ae6fe2d93148ea1a",
+      "plot_query_data_verified": false,
+      "chart_visually_reviewed": false,
+      "http_status": 200,
+      "elapsed_ms": 5304.891
+    },
+    {
+      "id": "product_categories",
+      "question": "Return the top 5 product categories by number of order items sold. Join order items to products, exclude missing product categories, return category and item_count, and sort by item_count descending then category ascending.",
+      "reference_sql": "SELECT p.product_category_name,COUNT(*) n FROM olist_order_items_dataset i JOIN olist_products_dataset p ON p.product_id=i.product_id WHERE p.product_category_name IS NOT NULL GROUP BY p.product_category_name ORDER BY n DESC,p.product_category_name LIMIT 5",
+      "expected_rows": [
+        [
+          "cama_mesa_banho",
+          11115
+        ],
+        [
+          "beleza_saude",
+          9670
+        ],
+        [
+          "esporte_lazer",
+          8641
+        ],
+        [
+          "moveis_decoracao",
+          8334
+        ],
+        [
+          "informatica_acessorios",
+          7827
+        ]
+      ],
+      "chart": false,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT p.product_category_name, COUNT(*) AS item_count\nFROM olist_order_items_dataset oi\nJOIN olist_products_dataset p ON oi.product_id = p.product_id\nWHERE p.product_category_name IS NOT NULL AND p.product_category_name <> ''\nGROUP BY p.product_category_name\nORDER BY item_count DESC, p.product_category_name ASC\nLIMIT 5;",
+      "answer": "Top 5 product categories by order items sold:\n\n| product_category_name | item_count |\n|------------------------|------------|\n| cama_mesa_banho        | 11115 |\n| beleza_saude           | 9670 |\n| esporte_lazer          | 8641 |\n| moveis_decoracao       | 8334 |\n| informatica_acessorios | 7827 |",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1643,
+        "output_tokens": 448,
+        "total_tokens": 2091,
+        "stages_ms": {
+          "prepare_schema_node": 0.11,
+          "generate_sql_node": 2517.8,
+          "run_sql_node": 571.149,
+          "plot_sql_node": 0.005,
+          "answer_node": 613.843
+        },
+        "latency_ms": 3809.386
+      },
+      "request_id": "42db264dc3d64dc09ae222bd3cbf1673",
+      "actual_rows": [
+        [
+          "cama_mesa_banho",
+          11115
+        ],
+        [
+          "beleza_saude",
+          9670
+        ],
+        [
+          "esporte_lazer",
+          8641
+        ],
+        [
+          "moveis_decoracao",
+          8334
+        ],
+        [
+          "informatica_acessorios",
+          7827
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "5",
+          "11115",
+          "9670",
+          "8641",
+          "8334",
+          "7827"
+        ],
+        "unsupported": [
+          "5"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 5105.655
+    },
+    {
+      "id": "average_price",
+      "question": "What is the average item price in olist_order_items_dataset, excluding freight? Return only the average price.",
+      "reference_sql": "SELECT AVG(price) FROM olist_order_items_dataset",
+      "expected_rows": [
+        [
+          120.65373901464713
+        ]
+      ],
+      "chart": false,
+      "ordered": true,
+      "ok": true,
+      "sql": "SELECT AVG(price) FROM olist_order_items_dataset;",
+      "answer": "120.65373901464713",
+      "cache_hit": false,
+      "cache_source": "none",
+      "attempts": 1,
+      "metrics": {
+        "llm_calls": 2,
+        "input_tokens": 1493,
+        "output_tokens": 197,
+        "total_tokens": 1690,
+        "stages_ms": {
+          "prepare_schema_node": 0.104,
+          "generate_sql_node": 831.659,
+          "run_sql_node": 16.209,
+          "plot_sql_node": 0.004,
+          "answer_node": 783.668
+        },
+        "latency_ms": 1684.037
+      },
+      "request_id": "9489241c271947b38699464cca74d604",
+      "actual_rows": [
+        [
+          120.65373901464713
+        ]
+      ],
+      "sql_correct": true,
+      "numeric_support": {
+        "status": "supported",
+        "claims": [
+          "120.65373901464713"
+        ],
+        "unsupported": [],
+        "passed": true,
+        "semantic_factuality_measured": false
+      },
+      "passed": true,
+      "http_status": 200,
+      "elapsed_ms": 1883.853
+    }
+  ],
+  "cache_checks": [
+    {
+      "id": "orders",
+      "http_status": 200,
+      "elapsed_ms": 348.437,
+      "passed": true,
+      "cache_hit": true,
+      "metrics": {
+        "llm_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "latency_ms": 1.139
+      }
+    },
+    {
+      "id": "statuses",
+      "http_status": 200,
+      "elapsed_ms": 1582.243,
+      "passed": true,
+      "cache_hit": true,
+      "metrics": {
+        "llm_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "latency_ms": 1.017
+      }
+    },
+    {
+      "id": "monthly_items",
+      "http_status": 200,
+      "elapsed_ms": 288.146,
+      "passed": true,
+      "cache_hit": true,
+      "metrics": {
+        "llm_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "latency_ms": 1.051
+      }
+    }
+  ],
+  "validation_checks": [
+    {
+      "id": "blank",
+      "http_status": 422,
+      "elapsed_ms": 239.467,
+      "passed": true
+    },
+    {
+      "id": "too_long",
+      "http_status": 422,
+      "elapsed_ms": 304.247,
+      "passed": true
+    }
+  ],
+  "availability": {
+    "base_url": "https://ai-agent-chatbot-demo.onrender.com",
+    "checked_at": "2026-11-05T01:02:29.686799+00:00",
+    "health": {
+      "endpoint": "/health",
+      "checked_at": "2026-11-05T01:02:29.686799+00:00",
+      "available": true,
+      "http_status": 200,
+      "elapsed_ms": 590.452
+    },
+    "ready": {
+      "endpoint": "/ready",
+      "checked_at": "2026-11-05T01:02:30.277548+00:00",
+      "available": true,
+      "http_status": 200,
+      "elapsed_ms": 282.592
+    },
+    "available": true,
+    "declared_quiet_seconds": null,
+    "cold_start_confirmed": false,
+    "model_called": false,
+    "note": "First health request may include wake-up. Quiet time and actual platform sleep are not independently verified."
+  },
+  "summary": {
+    "expected_cases": 10,
+    "completed_cases": 10,
+    "passed": 10,
+    "sql_correct": 9,
+    "sql_cases": 9,
+    "cache_hit_cases": 0,
+    "observed_llm_calls": 21,
+    "numeric_supported": 6,
+    "numeric_unsupported": 3,
+    "png_checks_passed": 3,
+    "cache_checks_passed": 3,
+    "validation_checks_passed": 2
+  },
+  "homepage_http_status": 200,
+  "homepage_sample_questions_match": true,
+  "completed_at": "2026-11-05T01:06:01.163840+00:00"
+}
