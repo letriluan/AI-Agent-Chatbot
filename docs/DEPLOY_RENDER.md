@@ -23,6 +23,12 @@ If a Blueprint flow is unavailable, create **New → Web Service**, connect the 
 
 The startup script binds to `0.0.0.0:$PORT` and uses exactly one Uvicorn worker. Do not replace it with a multi-worker command or trust all forwarded headers.
 
+### Deploy only after CI
+
+The maintainer confirmed **After CI Checks Pass** in Render Settings on 5 November 2026. The Blueprint now declares `autoDeployTrigger: checksPass` to preserve that choice for future setups. Render observes GitHub checks; the GitHub CI workflow does not call a deploy hook. [Official CI integration behaviour](https://render.com/docs/deploys#integrating-with-ci). A deliberately failing deployment-branch commit was not used to independently test this setting.
+
+The separate `Demo availability` GitHub workflow samples `/health` and `/ready` twice an hour once the workflow is on the default branch. It needs no Groq credentials and does not call `/ask`. Its artifacts are observations, not continuous uptime. Sampling traffic can wake a sleeping instance; see the [measurement protocol](PROJECT1_EVALUATION.md).
+
 ## 4. Verify the live demo
 
 - `/health` returns `{"status":"ok"}`.
@@ -43,10 +49,12 @@ The startup script binds to `0.0.0.0:$PORT` and uses exactly one Uvicorn worker.
 | JSON payload | At most 8,192 bytes, including streamed/chunked bodies |
 | Question | At most 2,000 characters |
 | LLM completion cap | 1,024 tokens per model call, including whatever the provider counts toward that limit |
-| Demo provider timeout/retries | 20 seconds per call; SDK automatic retries disabled |
+| Demo provider timeout/retries | 20 seconds per call; SDK retries disabled; at most two extra connection/timeout attempts across one question |
 | SQL execution | Read-only, existing row/time limits |
 
 A question can require several model calls: generation, up to two SQL repairs, an optional chart query and a summary. A request quota is therefore **not a token, API-call or dollar quota**. Admitted requests are counted even on provider failure; blocked/busy requests never enter the agent. Validation failures may also reserve a slot because admission is an API dependency. A user can exhaust the public quota; these limits reduce resource abuse but are not full denial-of-service protection.
+
+The bounded connection-recovery code and `LLM_CONNECTION_RETRIES=2` are source changes awaiting deployment. HTTP errors and free-tier quota/access failures are not automatically retried. Each connection attempt is counted; recovered requests with missing usage are not reported as zero cost. [Implementation details](ENGINEERING.md#connection-recovery). Historical Render checks describe the previously deployed code.
 
 Each visitor receives a random browser-session cookie signed by the server. It is HttpOnly and SameSite=Lax; the Render Blueprint sets Secure and generates a stable signing secret (`DEMO_SESSION_SECRET`). The cookie is issued even on API errors. Visitors behind the same proxy get separate session allowances. Forwarding headers are not used as identity.
 

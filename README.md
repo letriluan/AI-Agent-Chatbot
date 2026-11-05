@@ -68,14 +68,14 @@ The 5-second SQL bound is not the total response timeout: generating SQL, repair
 
 ## CI/CD and Deployment
 
-GitHub Actions provides automated validation; Render provides automatic delivery from the connected `main` branch.
+GitHub Actions provides automated validation; Render is configured to deploy the connected `main` branch after CI checks pass. The maintainer confirmed the dashboard setting on **5 November 2026**; `render.yaml` also declares `autoDeployTrigger: checksPass`.
 
 ```mermaid
 flowchart LR
     A[Push to main] --> B[GitHub Actions CI]
     B --> C[Lint, tests and offline evaluations]
     C --> D[Compose validation and Docker build]
-    A --> E[Render automatic deployment]
+    D --> E[Render deploys after CI checks pass]
     E --> F[Build image, database and analytics indexes]
     F --> G[Readiness check and live demo]
 ```
@@ -84,13 +84,15 @@ flowchart LR
 - **CD:** Render builds the repository's Docker image and deploys the web service, using `/ready` as its health check. SQLite is packaged into the image; no separate PostgreSQL service is required.
 - **Secrets:** the Groq key and session-signing secret are supplied at runtime. Local `.env` files are excluded from Git and the Docker build context.
 
-These are separate integrations: **Render deployment is not currently gated on a successful GitHub Actions run**. The CI workflow itself does not publish an image or deploy the service.
+Render reads the GitHub check results before deploying; the CI workflow itself does not publish an image or call the Render deployment API. See [Render's CI integration rules](https://render.com/docs/deploys#integrating-with-ci). This setting has not been tested here by deliberately failing a deployment-branch commit.
 
 See the [Render deployment guide](docs/DEPLOY_RENDER.md) for configuration and hosting limits.
 
 ## Evaluation and Results
 
 ### Latest public-demo check
+
+On **5 November 2026**, all **ten current demo checks passed** through the public Render API: nine SQL results matched independent Olist references and the write request was refused with zero model calls. The nine data questions were uncached and made 21 observed model calls; all three chart PNGs were visually inspected. Three cache repeats preserved SQL/images with zero model calls, and two invalid inputs returned HTTP 422. This is one known-question deployment check, not the five-run synthetic reliability study or transit evaluation. [Latest report, raw results and chart review](docs/evaluations/render-live-2026-11-05/REPORT.md).
 
 On **18 October 2026**, the original five sample questions were tested against the Render `/ask` endpoint after deploying the 5-second SQL configuration. The first four requests used no cached answers and succeeded on their first SQL attempt. Results were compared with reference queries over the source dataset, and both chart images were visually inspected.
 
@@ -110,7 +112,7 @@ The five added prompts (06–10) were also verified against the live API and sou
 
 | Check | Evidence | Scope |
 | --- | --- | --- |
-| Current automated regressions | **161 passed** locally on Windows; Linux GitHub CI passed | Database controls, API, privacy, caching, retries, charts and reference cases |
+| Earlier automated regressions | **161 passed** locally on Windows; Linux GitHub CI passed | Historical baseline before the November evaluation additions |
 | Earlier development SQL suite | **30/30** strict matches | Questions used during prompt development |
 | Earlier new-question first-use suite | **16/16** main SQL matches | Separate synthetic fixture; 12 SQL-only and four chart requests |
 | First-use chart checks | **4/4 passed** | Plot-query rows, renderer inputs, chart type, labels, PNG output and cached-image reuse |
@@ -118,6 +120,18 @@ The five added prompts (06–10) were also verified against the live API and sou
 Strict SQL matching compares returned values, column count, duplicates and required ordering, rather than SQL wording. The first-use questions were evaluated with frozen prompts before using them as regression cases; they are no longer unseen. These small suites do not establish correctness on arbitrary schemas or factuality of every generated sentence.
 
 [First-use protocol and report](docs/HOLDOUT_EVALUATION.md) · [Development results and validation history](docs/VALIDATION.md)
+
+### November evaluation additions
+
+- **314 automated tests passed** locally on Windows/Python 3.12, including identifier grounding, bounded connection recovery and free-tier stop/resume controls. Lint, dependency compatibility and Compose configuration checks also passed. The new branch has not run on GitHub and its Docker image has not been rebuilt. [Latest fix validation](docs/evaluations/lookup-connection-followup-2026-11-05/REPORT.md) · [Initial offline verification](docs/evaluations/project1-offline-verification-2026-11-05.json).
+- Five fresh-cache regression runs collected **80 observations**: **77 returned SQL results matched**, while three requests failed with `APIConnectionError`. **13/16 questions passed in every run (81.25%)**; chart cases succeeded in **18/20** observations, with two connection failures. Every returned SQL result matched; failed requests remain in the denominator. These are 16 exposed questions repeated five times, not 80 unseen questions. [Repeated-run report and raw evidence](docs/evaluations/reliability-live-2026-11-05/REPORT.md).
+- A first live run on **24 synthetic transit questions** achieved **23/24 strict SQL matches and 4/4 chart checks**, with all four PNGs visually inspected. One stop-code lookup incorrectly filtered the stop-name column; the failure is preserved. This uses an invented five-table star schema, not Adelaide Metro data or a general cross-domain benchmark. [First-live report and failure analysis](docs/evaluations/transit-first-live-2026-11-05/REPORT.md).
+- A conservative numeric-support check compares answer numbers with executed SQL cells. Applied retrospectively to the archived October holdout, **14 answers have supported numbers, one is flagged and one has no numeric claims**. The flagged answer repeats dates supplied in the question but not returned by SQL. This is a review flag, not proof of a false statement; numeric support does not establish semantic factuality. [Retrospective report](docs/evaluations/numeric-support-archived-holdout-2026-11-05.json).
+- A no-model availability probe observed `/health` returning in **32.58 s**, followed by `/ready` in **0.22 s**, on 5 November. Platform sleep was not independently confirmed. A scheduled GitHub workflow is prepared; ongoing availability history has not yet been collected. [Observation](docs/evaluations/render-availability-2026-11-05.json).
+- Dated token-based cost estimates cover **24/24 transit questions and 77/80 holdout observations**. Missing usage on the three failed requests is not treated as zero, so no complete holdout mean is claimed. Estimates use standard list prices and do not represent measured charges. [Estimate record and coverage](docs/evaluations/cost-estimates-2026-11-05.json).
+- A separate local follow-up corrected the stop-code lookup: **4/4 affected regressions and 8/8 new identifier/name cases passed**, with three chart PNGs visually reviewed. A controlled pre-network failure and one naturally observed transport failure both recovered after one application retry. Original benchmark failures remain preserved; this is a targeted follow-up, not a new five-run reliability study. These fixes await Render deployment. [Follow-up evidence](docs/evaluations/lookup-connection-followup-2026-11-05/REPORT.md).
+
+[Protocol, commands and remaining work](docs/PROJECT1_EVALUATION.md)
 
 ### What Changed After Failures
 
@@ -177,6 +191,7 @@ ruff check .
 pytest -q
 python -m evals.run --mode offline --output reports/offline.json
 python -m evals.holdout --mode offline --output reports/holdout-offline
+python -m evals.holdout --suite transit --mode offline --output reports/transit-offline
 ```
 
 Offline evaluations validate references without calling an LLM. Live evaluations make real Groq API calls and use isolated synthetic databases:
@@ -184,9 +199,11 @@ Offline evaluations validate references without calling an LLM. Live evaluations
 ```bash
 python -m evals.run --mode live --delay-seconds 12 --output reports/live.json
 python -m evals.holdout --mode live --delay-seconds 15 --output reports/holdout-rerun
+python -m evals.reliability --mode live --runs 5 --delay-seconds 15 --output reports/reliability-live
+python -m evals.holdout --suite transit --mode live --delay-seconds 15 --output reports/transit-first-live
 ```
 
-Live evaluations measure execution-result correctness and chart behaviour; they do not automatically establish narrative factuality. Generated reports under `reports/` are ignored by Git; selected evidence is archived under `docs/evaluations/`.
+Live evaluations measure execution-result correctness, chart behaviour and literal numeric support separately. They do not establish complete narrative factuality. The repeated-run command requires a new output directory and refuses to pool different source/configuration fingerprints. Evaluation cost estimates use dated Groq standard rates only when complete token usage is recorded; they do not measure your bill. Generated reports under `reports/` are ignored by Git; selected evidence is archived under `docs/evaluations/`.
 
 ## Repository Guide
 
@@ -206,4 +223,4 @@ This is a deployed project demo with a fixed example dataset. It does not provid
 
 Write-intent recognition and column-name privacy checks are conservative, incomplete controls; the SQLite executor independently enforces read-only access. Public limits use signed browser sessions rather than verified identities. Cache and quota state use ephemeral storage on Render, so they can reset after replacement or redeployment.
 
-Next steps include broader fresh-question evaluation, narrative factuality checks, repeated-run reliability measurement, authentication and monitoring. Hosted LangSmith delivery and monetary cost reporting remain unverified. Deployment should remain described as a demo, rather than a production-ready service.
+Next steps are to deploy the validated local identifier/recovery fixes, collect a new repeated-run study with the changed behaviour, collect availability history and test on real Project 2 data when available. The eight identifier cases are now exposed regression cases; future prompt changes need another fresh evaluation set. End-user authentication, full narrative factuality and hosted LangSmith delivery remain outside the verified scope. Monetary estimates are distinct from measured billing. Deployment should remain described as a demo, rather than a production-ready service.

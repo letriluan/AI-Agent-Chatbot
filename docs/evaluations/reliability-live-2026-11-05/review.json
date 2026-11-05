@@ -1,0 +1,292 @@
+{
+  "reviewed_at": "2026-11-05T02:44:12.915407+00:00",
+  "summary_sha256": "bc901d437776df22d903bbb27f08710e563c5660093137b49292d9d8a52d47cb",
+  "image_reviews": [
+    {
+      "path": "run-01\\h13.png",
+      "sha256": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-01\\h14.png",
+      "sha256": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-01\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-01\\h16.png",
+      "sha256": "6c813de39366cf2d4fe24824d826cd8cdccf2eeccd6c836a52adf5bb8723898e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-02\\h13.png",
+      "sha256": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-02\\h14.png",
+      "sha256": "2b9fef06bdb3e0ac4cd95ba45b376b977290aafe8ca8f781e3ac9e9c1b9b1031",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-02\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-02\\h16.png",
+      "sha256": "6c813de39366cf2d4fe24824d826cd8cdccf2eeccd6c836a52adf5bb8723898e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-03\\h13.png",
+      "sha256": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-03\\h14.png",
+      "sha256": "2b9fef06bdb3e0ac4cd95ba45b376b977290aafe8ca8f781e3ac9e9c1b9b1031",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-03\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-03\\h16.png",
+      "sha256": "6c813de39366cf2d4fe24824d826cd8cdccf2eeccd6c836a52adf5bb8723898e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-04\\h13.png",
+      "sha256": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-04\\h14.png",
+      "sha256": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-04\\h16.png",
+      "sha256": "6c813de39366cf2d4fe24824d826cd8cdccf2eeccd6c836a52adf5bb8723898e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-05\\h13.png",
+      "sha256": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-05\\h14.png",
+      "sha256": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
+      "visual_review_covered_by_identical_hash": true
+    },
+    {
+      "path": "run-05\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visual_review_covered_by_identical_hash": true
+    }
+  ],
+  "unique_visually_reviewed_hashes": 5,
+  "automatic_numeric_flags": [
+    {
+      "run": 1,
+      "id": "h09",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5  \n- 6  \n- 7",
+      "unsupported": [
+        "2026",
+        "30",
+        "1"
+      ],
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ]
+    },
+    {
+      "run": 2,
+      "id": "h09",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "unsupported": [
+        "2026",
+        "30",
+        "1"
+      ],
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ]
+    },
+    {
+      "run": 2,
+      "id": "h15",
+      "answer": "**Bar chart data (status \u2192 total units)**  \n\n| status     | total_units |\n|------------|-------------|\n| cancelled  | 1           |\n| delivered  | 13          |\n| pending    | 2           |\n\nThe chart should display three bars sorted alphabetically by status: *cancelled*, *delivered*, *pending*.",
+      "unsupported": [
+        "three"
+      ],
+      "actual_rows": [
+        [
+          "cancelled",
+          1
+        ],
+        [
+          "delivered",
+          13
+        ],
+        [
+          "pending",
+          2
+        ]
+      ]
+    },
+    {
+      "run": 3,
+      "id": "h09",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "unsupported": [
+        "2026",
+        "30",
+        "1"
+      ],
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ]
+    },
+    {
+      "run": 4,
+      "id": "h09",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "unsupported": [
+        "2026",
+        "30",
+        "1"
+      ],
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ]
+    },
+    {
+      "run": 5,
+      "id": "h09",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "unsupported": [
+        "2026",
+        "30",
+        "1"
+      ],
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ]
+    }
+  ],
+  "full_semantic_factuality_measured": false,
+  "observed_model_calls": 172,
+  "observed_tokens": 136728,
+  "cached_repeats": 77,
+  "cached_repeats_with_zero_model_calls": 77,
+  "provider_errors": 3,
+  "numeric_flag_review": [
+    {
+      "run": 1,
+      "id": "h09",
+      "classification": "context_or_result_shape",
+      "review": "The dates 2026, April 30 and May 1 restate the question filter; returned IDs 5,6,7 match the independent reference."
+    },
+    {
+      "run": 2,
+      "id": "h09",
+      "classification": "context_or_result_shape",
+      "review": "The dates 2026, April 30 and May 1 restate the question filter; returned IDs 5,6,7 match the independent reference."
+    },
+    {
+      "run": 2,
+      "id": "h15",
+      "classification": "context_or_result_shape",
+      "review": "The word three describes the three displayed bars/rows, not an extra numeric result. The displayed status/unit pairs match the actual rows."
+    },
+    {
+      "run": 3,
+      "id": "h09",
+      "classification": "context_or_result_shape",
+      "review": "The dates 2026, April 30 and May 1 restate the question filter; returned IDs 5,6,7 match the independent reference."
+    },
+    {
+      "run": 4,
+      "id": "h09",
+      "classification": "context_or_result_shape",
+      "review": "The dates 2026, April 30 and May 1 restate the question filter; returned IDs 5,6,7 match the independent reference."
+    },
+    {
+      "run": 5,
+      "id": "h09",
+      "classification": "context_or_result_shape",
+      "review": "The dates 2026, April 30 and May 1 restate the question filter; returned IDs 5,6,7 match the independent reference."
+    }
+  ],
+  "provider_error_cases": [
+    {
+      "run": 4,
+      "id": "h12",
+      "error_type": "APIConnectionError",
+      "usage_available": false
+    },
+    {
+      "run": 4,
+      "id": "h15",
+      "error_type": "APIConnectionError",
+      "usage_available": false
+    },
+    {
+      "run": 5,
+      "id": "h16",
+      "error_type": "APIConnectionError",
+      "usage_available": false
+    }
+  ],
+  "model_result_scope": "77 returned SQL results matched; three observations failed with APIConnectionError. The connection failures stay in the 80-observation denominator. No failed request was silently retried or replaced.",
+  "numeric_scope": "67 supported, six contextual/result-shape flags reviewed, seven unscored. No automated full semantic factuality score is claimed."
+}

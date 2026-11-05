@@ -1,0 +1,25 @@
+{
+  "checked_on": "2026-11-05",
+  "model": "openai/gpt-oss-20b",
+  "currency": "USD",
+  "pricing_source": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+  "input_per_million": "0.075",
+  "output_per_million": "0.30",
+  "basis": "Undiscounted standard list price; free-tier credits and provider-cache discounts not applied; not measured charges",
+  "actual_bill_measured": false,
+  "free_only_execution_constraint": true,
+  "transit": {
+    "planned_observations": 24,
+    "usage_covered": 24,
+    "known_subtotal_usd": "0.005974800",
+    "complete_mean_estimate_usd": "0.000248950"
+  },
+  "holdout": {
+    "planned_observations": 80,
+    "usage_covered": 77,
+    "known_subtotal_usd": "0.019320525",
+    "complete_mean_estimate_usd": null,
+    "mean_for_covered_observations_only_usd": "0.0002509159090909090909090909091",
+    "missing_usage_reason": "Three APIConnectionError observations; missing usage was not treated as zero"
+  }
+}

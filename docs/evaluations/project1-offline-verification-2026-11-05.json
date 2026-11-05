@@ -1,0 +1,107 @@
+{
+  "mode": "offline_verification",
+  "checked_at": "2026-11-05T00:26:29.810069+00:00",
+  "python": "3.12.13",
+  "platform": "Windows",
+  "pytest": {
+    "tests": 255,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pytest_xml_sha256": "c030ed2717b10f320976478b835f1d5f14e802bf0b3459a60f80438971594ea2",
+  "checks": [
+    {
+      "command": [
+        ".venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "uv",
+        "pip",
+        "check",
+        "--python",
+        ".venv/Scripts/python.exe"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "config",
+        "--quiet"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "compose.yaml",
+        "-f",
+        "compose.demo.yaml",
+        "config",
+        "--quiet"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "repeated_reference_checks": 80,
+  "repeated_runs": 5,
+  "transit_reference_checks": {
+    "reference_passed": 24,
+    "total": 24
+  },
+  "development_reference_checks": 30,
+  "holdout_source_fingerprints": {
+    "cache.py": "3639d21feb54a5ea08a0f58f3ebd6dd6dea4f5df68fddcde0c4e84d599ab94ae",
+    "database.py": "15149515e0ec716c5e4a3ad8154d1ce480e3156338ce5cb8d2919e03ef7aa9e1",
+    "graph.py": "039adc40b1b6fded714f1c2c308d610579fc6a85c6f3f4e1c6c4c6088e9d1135",
+    "intent.py": "0499802daeff01e9939d8f709e4cfee360bc0e541489c3d6be1a6592f8e96e5a",
+    "observability.py": "c2a39c93a99ddc8af08cf3545b9daf37c2cf8e469d922eee13a922179e32c9a2",
+    "plot_tools.py": "f78c3cf038b315f46f53ce3d44b4139d2f6f31bae1a6bdcdfd0bd026237fb37a",
+    "presentation.py": "01081ed992e5ee7976aedacc58b4ed13e17ecf3b8039c435585d50efa160d83f",
+    "privacy.py": "e553caec1eed6f63bed63a561453496dc9ef4e3d4c5e3d7100a58a76d601a7de",
+    "prompts.py": "a264ae47da52f728caa78d5e0c741b07875db973b793141b9a960a7348c1b7b9",
+    "schema.py": "7ea194a611576aa07e014252cd8c6a21472949643f0e36091501596e4edc3ec4",
+    "sql_tools.py": "269b4fc31ec869ee6d7b24b4527e8cde6605f5094f3a388acf67f35ca32b938a",
+    "holdout.py": "4f0986453c9b4f4202ed4ee0dac381c7f7612ebacb868bd3c9749edec45983dd",
+    "run.py": "b6c2cb215f71415c3161743dab20892edd1513afd2affc170228c4fcf4201a9c",
+    "grounding.py": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+    "cost.py": "b7afd36ab8dc48b38101cf9d1cffbd92e09ff9be6bca0f7b002e4e7cd1d7a33e",
+    "holdout_cases.json": "a24c6d64d74d3ab96d9e665b94f69136cee4d9f869ea165c28444132b0f2c7c5",
+    "holdout_fixture.py": "ab134b675becdfb7fed2932032e78470e4fd8fb1e7ab5e7fa62e82de9a45bc31"
+  },
+  "transit_source_fingerprints": {
+    "cache.py": "3639d21feb54a5ea08a0f58f3ebd6dd6dea4f5df68fddcde0c4e84d599ab94ae",
+    "database.py": "15149515e0ec716c5e4a3ad8154d1ce480e3156338ce5cb8d2919e03ef7aa9e1",
+    "graph.py": "039adc40b1b6fded714f1c2c308d610579fc6a85c6f3f4e1c6c4c6088e9d1135",
+    "intent.py": "0499802daeff01e9939d8f709e4cfee360bc0e541489c3d6be1a6592f8e96e5a",
+    "observability.py": "c2a39c93a99ddc8af08cf3545b9daf37c2cf8e469d922eee13a922179e32c9a2",
+    "plot_tools.py": "f78c3cf038b315f46f53ce3d44b4139d2f6f31bae1a6bdcdfd0bd026237fb37a",
+    "presentation.py": "01081ed992e5ee7976aedacc58b4ed13e17ecf3b8039c435585d50efa160d83f",
+    "privacy.py": "e553caec1eed6f63bed63a561453496dc9ef4e3d4c5e3d7100a58a76d601a7de",
+    "prompts.py": "a264ae47da52f728caa78d5e0c741b07875db973b793141b9a960a7348c1b7b9",
+    "schema.py": "7ea194a611576aa07e014252cd8c6a21472949643f0e36091501596e4edc3ec4",
+    "sql_tools.py": "269b4fc31ec869ee6d7b24b4527e8cde6605f5094f3a388acf67f35ca32b938a",
+    "holdout.py": "4f0986453c9b4f4202ed4ee0dac381c7f7612ebacb868bd3c9749edec45983dd",
+    "run.py": "b6c2cb215f71415c3161743dab20892edd1513afd2affc170228c4fcf4201a9c",
+    "grounding.py": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+    "cost.py": "b7afd36ab8dc48b38101cf9d1cffbd92e09ff9be6bca0f7b002e4e7cd1d7a33e",
+    "transit_cases.json": "5b16baa75e272828ce0018dc3d8af7eff5d575b50a6f60fa06ac3c9541edba8f",
+    "transit_fixture.py": "d00c55e9161b6cb1a17630cac7da2d1bf1aa5a4940251d5c569c6de045f5a298"
+  },
+  "agent_quality_measured": false,
+  "live_reliability_measured": false,
+  "docker_image_built": false,
+  "docker_unavailable_reason": "Docker Desktop Linux engine was not running",
+  "github_checks_run": false
+}

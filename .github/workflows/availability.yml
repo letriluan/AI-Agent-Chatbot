@@ -1,0 +1,28 @@
+name: Demo availability
+on:
+  workflow_dispatch:
+  schedule:
+    # Sampling leaves room for Free-plan sleep. It is not a keep-awake service.
+    - cron: '17,47 * * * *'
+permissions:
+  contents: read
+concurrency:
+  group: demo-availability
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check process and database (no model calls)
+        run: python -m evals.availability --output reports/availability-${{ github.run_id }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: availability-${{ github.run_id }}
+          path: reports/availability-*.json
+          retention-days: 30

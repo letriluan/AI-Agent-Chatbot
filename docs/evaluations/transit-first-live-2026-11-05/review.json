@@ -1,0 +1,63 @@
+{
+  "reviewed_at": "2026-11-05T02:04:15.040896+00:00",
+  "source_results_sha256": "6483308f6ab5456ff776122fb4751c91e4fdee495dc31e4c62cf9427a301ead7",
+  "strict_sql_matches": 23,
+  "total_cases": 24,
+  "failure_analysis": [
+    {
+      "id": "t15",
+      "cause": "Stop identifier was treated as a stop name",
+      "actual_filter": "ds.stop_name = 'S4'",
+      "expected_filter": "stop_key = 'S4'",
+      "actual_rows": [],
+      "expected_rows": [
+        [
+          "R2"
+        ]
+      ],
+      "attempts": 3,
+      "prompts_changed_after_first_use": false
+    }
+  ],
+  "numeric_review": [
+    {
+      "id": "t09",
+      "classification": "question_context",
+      "detail": "24:00 repeats the question filter; SQL returns only T6. This is not an invented result value."
+    }
+  ],
+  "numeric_scope": "16 supported, one contextual flag, seven unscored. The incorrect empty answer in t15 has no numeric claims and remains a SQL failure; no full semantic factuality rate is claimed.",
+  "charts": [
+    {
+      "id": "t21",
+      "visually_reviewed": true,
+      "png_sha256": "c7a94c43aa55cbc5c8e221abd125cb910eac828d327e073c9690d1c4ea909a58",
+      "notes": "Four route categories, including zero trips for R4; readable count labels."
+    },
+    {
+      "id": "t22",
+      "visually_reviewed": true,
+      "png_sha256": "7c39dac9c14d0a318daa86fc78c811cca83ff8084bdc12fc240ee0178658948a",
+      "notes": "Three service dates with correct visible counts and readable labels. Date categories have equal spacing; the axis does not represent elapsed-day distance."
+    },
+    {
+      "id": "t23",
+      "visually_reviewed": true,
+      "png_sha256": "51b08d4ac9bd16f70c1dd723e56d3c1dc5919407f67241dbe1592f41a46de904",
+      "notes": "Four zones with counts 6, 2, 1 and 5, matching reference and renderer data."
+    },
+    {
+      "id": "t24",
+      "visually_reviewed": true,
+      "png_sha256": "041870ac480974d1e29a7f80acc0ada5b2ed35a2bbe1a4683592396741421cd7",
+      "notes": "Ordered observed service-hour categories 8, 9, 10 and 25 with cumulative counts 7, 10, 12 and 14. Equal categorical spacing is not an elapsed-hour scale."
+    }
+  ],
+  "cost": {
+    "complete_usage_cases": 24,
+    "estimated_standard_list_price_usd": "0.005974800",
+    "mean_estimated_usd_per_question": "0.000248950",
+    "actual_bill_measured": false
+  },
+  "fresh_question_scope": "First live use on a developer-written synthetic transit fixture, not Adelaide Metro data or a blinded benchmark."
+}

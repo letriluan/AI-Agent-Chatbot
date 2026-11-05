@@ -1,0 +1,914 @@
+{
+  "mode": "live",
+  "suite": "holdout",
+  "model": "openai/gpt-oss-20b",
+  "fingerprints": {
+    "cache.py": "3639d21feb54a5ea08a0f58f3ebd6dd6dea4f5df68fddcde0c4e84d599ab94ae",
+    "database.py": "15149515e0ec716c5e4a3ad8154d1ce480e3156338ce5cb8d2919e03ef7aa9e1",
+    "graph.py": "039adc40b1b6fded714f1c2c308d610579fc6a85c6f3f4e1c6c4c6088e9d1135",
+    "intent.py": "0499802daeff01e9939d8f709e4cfee360bc0e541489c3d6be1a6592f8e96e5a",
+    "observability.py": "c2a39c93a99ddc8af08cf3545b9daf37c2cf8e469d922eee13a922179e32c9a2",
+    "plot_tools.py": "f78c3cf038b315f46f53ce3d44b4139d2f6f31bae1a6bdcdfd0bd026237fb37a",
+    "presentation.py": "01081ed992e5ee7976aedacc58b4ed13e17ecf3b8039c435585d50efa160d83f",
+    "privacy.py": "e553caec1eed6f63bed63a561453496dc9ef4e3d4c5e3d7100a58a76d601a7de",
+    "prompts.py": "a264ae47da52f728caa78d5e0c741b07875db973b793141b9a960a7348c1b7b9",
+    "schema.py": "7ea194a611576aa07e014252cd8c6a21472949643f0e36091501596e4edc3ec4",
+    "sql_tools.py": "269b4fc31ec869ee6d7b24b4527e8cde6605f5094f3a388acf67f35ca32b938a",
+    "holdout.py": "560ce85dd4b7513b11551da2c1b0a6fc94cb26b8d27c9d4891ec9ce989656d18",
+    "run.py": "b6c2cb215f71415c3161743dab20892edd1513afd2affc170228c4fcf4201a9c",
+    "grounding.py": "590cf7d87b5709f515b11ac8e45b78e1ae47d1bb859d4eaedb5aa67c4dd9bbe4",
+    "cost.py": "b7afd36ab8dc48b38101cf9d1cffbd92e09ff9be6bca0f7b002e4e7cd1d7a33e",
+    "holdout_cases.json": "a24c6d64d74d3ab96d9e665b94f69136cee4d9f869ea165c28444132b0f2c7c5",
+    "holdout_fixture.py": "ab134b675becdfb7fed2932032e78470e4fd8fb1e7ab5e7fa62e82de9a45bc31"
+  },
+  "configuration": {
+    "model": "openai/gpt-oss-20b",
+    "max_output_tokens": 1024,
+    "demo_mode": true,
+    "sql_max_rows": 50,
+    "sql_timeout_seconds": 5.0,
+    "temperature": 0
+  },
+  "planned_runs": 5,
+  "completed_runs": 5,
+  "complete": true,
+  "agent_quality_measured": true,
+  "reliability_measured": true,
+  "semantic_factuality_measured": false,
+  "cases": [
+    {
+      "id": "h01",
+      "question": "For each state, return state and total delivered order amount, including states with no delivered orders as zero. Sort by state.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h02",
+      "question": "Which orders tie for the largest amount? Return only order IDs, ascending.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h03",
+      "question": "What percentage of orders are delivered? Return one number from 0 to 100 without rounding.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h04",
+      "question": "For each customer, return customer ID and the number of delivered orders, including zero counts. Sort by customer ID.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h05",
+      "question": "Return only IDs of customers who have at least two delivered orders, ascending.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h06",
+      "question": "Calculate total item value as quantity times unit price for delivered orders only. Return one total.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h07",
+      "question": "Return order ID and total quantity for delivered orders with at least three units. Sort by order ID.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h08",
+      "question": "How many distinct delivered orders have item rows? Count each order once even if it has several item rows.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h09",
+      "question": "Return only order IDs purchased during April 2026, including April 30 but excluding May 1, sorted ascending.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 0,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "unsupported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "unsupported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "unsupported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "unsupported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "unsupported"
+        }
+      ]
+    },
+    {
+      "id": "h10",
+      "question": "What is the average amount of pending orders, including zero amounts?",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h11",
+      "question": "Return only IDs of delivered orders whose amount exceeds the average delivered order amount, sorted ascending.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h12",
+      "question": "Return only IDs of customers with orders but no delivered orders, sorted ascending.",
+      "passed_runs": 4,
+      "observed_runs": 5,
+      "pass_rate": 0.8,
+      "passed_every_run": false,
+      "mixed_results": true,
+      "sql_correct_runs": 4,
+      "numeric_supported_runs": 0,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "no_numeric_claims"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "no_numeric_claims"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "no_numeric_claims"
+        },
+        {
+          "run": 4,
+          "passed": false,
+          "sql_correct": false,
+          "chart_correct": null,
+          "error_type": "APIConnectionError",
+          "numeric_support": "unavailable"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": null,
+          "error_type": null,
+          "numeric_support": "no_numeric_claims"
+        }
+      ]
+    },
+    {
+      "id": "h13",
+      "question": "Draw a bar chart of delivered order amount by state, including zero states. Return state and total delivered amount; sort states alphabetically.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h14",
+      "question": "Draw a line chart of monthly average order amount for all statuses. Use YYYY-MM and average amount, in chronological order. Include only months with orders; do not fill missing months.",
+      "passed_runs": 5,
+      "observed_runs": 5,
+      "pass_rate": 1.0,
+      "passed_every_run": true,
+      "mixed_results": false,
+      "sql_correct_runs": 5,
+      "numeric_supported_runs": 5,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h15",
+      "question": "Draw a bar chart of total units purchased by order status. Join orders and order_items; sum quantity rather than counting item rows. Return status and total units, sorted by status.",
+      "passed_runs": 4,
+      "observed_runs": 5,
+      "pass_rate": 0.8,
+      "passed_every_run": false,
+      "mixed_results": true,
+      "sql_correct_runs": 4,
+      "numeric_supported_runs": 3,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "unsupported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": false,
+          "sql_correct": false,
+          "chart_correct": null,
+          "error_type": "APIConnectionError",
+          "numeric_support": "unavailable"
+        },
+        {
+          "run": 5,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        }
+      ]
+    },
+    {
+      "id": "h16",
+      "question": "Draw a line chart of cumulative monthly order amount over all statuses. Use YYYY-MM and a running total of monthly sums, chronological order, only months with orders.",
+      "passed_runs": 4,
+      "observed_runs": 5,
+      "pass_rate": 0.8,
+      "passed_every_run": false,
+      "mixed_results": true,
+      "sql_correct_runs": 4,
+      "numeric_supported_runs": 4,
+      "outcomes": [
+        {
+          "run": 1,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 2,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 3,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 4,
+          "passed": true,
+          "sql_correct": true,
+          "chart_correct": true,
+          "error_type": null,
+          "numeric_support": "supported"
+        },
+        {
+          "run": 5,
+          "passed": false,
+          "sql_correct": false,
+          "chart_correct": null,
+          "error_type": "APIConnectionError",
+          "numeric_support": "unavailable"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "case_count": 16,
+    "observations": 80,
+    "passed_observations": 77,
+    "sql_correct_observations": 77,
+    "always_passed_cases": 13,
+    "always_passed_rate": 0.8125,
+    "mixed_cases": [
+      "h12",
+      "h15",
+      "h16"
+    ],
+    "never_passed_cases": [],
+    "error_observations": 3,
+    "numeric_supported": 67,
+    "numeric_unsupported": 6,
+    "numeric_unscored": 7,
+    "estimated_cost_observations": 77,
+    "cost_coverage_complete": false,
+    "known_estimated_usd": "0.019320525",
+    "mean_estimated_usd_per_question": null,
+    "actual_bill_measured": false
+  },
+  "started_at": "2026-11-05T02:02:43.049388+00:00",
+  "runner_fingerprint": "520551f41f220a2051da9c19458aebf860fe8aed9761ea4e0eaf99ce3ac671cf",
+  "updated_at": "2026-11-05T02:43:50.493232+00:00"
+}

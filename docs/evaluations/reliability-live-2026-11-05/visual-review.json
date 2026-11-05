@@ -1,0 +1,34 @@
+{
+  "reviewed_images": [
+    {
+      "path": "run-01\\h13.png",
+      "sha256": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
+      "visually_reviewed": true,
+      "notes": "Four state categories including the zero amount; descriptive labels and no invented currency."
+    },
+    {
+      "path": "run-01\\h14.png",
+      "sha256": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
+      "visually_reviewed": true,
+      "notes": "Four monthly average points; March has a tick/interpolated connecting line but no artificial zero point."
+    },
+    {
+      "path": "run-01\\h15.png",
+      "sha256": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
+      "visually_reviewed": true,
+      "notes": "Status categories and unit counts 1,13,2 are readable and match renderer data."
+    },
+    {
+      "path": "run-01\\h16.png",
+      "sha256": "6c813de39366cf2d4fe24824d826cd8cdccf2eeccd6c836a52adf5bb8723898e",
+      "visually_reviewed": true,
+      "notes": "Chronological cumulative totals 120,200,500,540; no zero point for the missing month."
+    },
+    {
+      "path": "run-02\\h14.png",
+      "sha256": "2b9fef06bdb3e0ac4cd95ba45b376b977290aafe8ca8f781e3ac9e9c1b9b1031",
+      "visually_reviewed": true,
+      "notes": "Readable month labels and correct monthly average points; title differs from run 1 but has the same meaning."
+    }
+  ]
+}

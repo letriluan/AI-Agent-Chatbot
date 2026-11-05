@@ -21,6 +21,8 @@ jobs:
       - run: pytest -q
       - run: python -m evals.run --mode offline --output reports/offline.json
       - run: python -m evals.holdout --mode offline --output reports/holdout-offline
+      - run: python -m evals.holdout --suite transit --mode offline --output reports/transit-offline
+      - run: python -m evals.holdout --suite identifier --mode offline --output reports/identifier-offline
       - run: docker compose config --quiet
       - run: docker build -t sql-agent-ci .
       - uses: actions/upload-artifact@v4
