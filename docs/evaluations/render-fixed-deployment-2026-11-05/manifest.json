@@ -47,5 +47,28 @@
     "Dockerfile": "2d145f671f8621d96648e116a12b5b003178f82abc9d545002849cdabae50df3",
     "requirements.txt": "9f8d7892337fce9aca040af50bc4cd7e52fee209816107c71d31092c8caf1433",
     "render.yaml": "0dc83aea8687509e2e7ddad9bf501413db3305a081b4cd7bdd2e80c12dfe6e75"
-  }
+  },
+  "runtime_source_sha256_basis": "Measured Windows working-copy bytes; Git blob hashes are supplied separately for cross-platform review.",
+  "runtime_source_git_blob_sha256": {
+    "src\\agent\\cache.py": "6e061b2c61145347e466a6fefc6be0e6f3b7edc9d9856feaddc278ccadce8ee1",
+    "src\\agent\\database.py": "f19348e84b9b5a016b2fd85ae929c46e167abe1e6709dbcc8bdcac8088885c6f",
+    "src\\agent\\graph.py": "60e31d890c1e377baccedd08eba1b85de3a29a79e042e6a91d8ff087c842a903",
+    "src\\agent\\identifiers.py": "f93d5d0bf3d2315aec077c8c2233a44b53e0266b405bffa48e57419468f5c42b",
+    "src\\agent\\intent.py": "20ed5695a8be63783f25620066c4ad69b44aa26f26be77c1c8fee0c698aedbef",
+    "src\\agent\\observability.py": "ec320c38fd767a3fcdec57fdeb4482bc3f514b0cf48e6dd0f4a58b3acefd2688",
+    "src\\agent\\plot_tools.py": "0aba667a4c5aefcf64ca55aaf35128312d28b68b5570872af09568e7cb2a7e6e",
+    "src\\agent\\presentation.py": "68acc053da88243c3161f720b1f2777e70c795256b28bb19091cba169c1c780b",
+    "src\\agent\\privacy.py": "dec1c20b51b9d60c537efb0c750a4e084bef4a924e183bc502f680debd8cb318",
+    "src\\agent\\prompts.py": "349f48d3d8cb9951c65f6e2bba253d1c1d6c291ed11e08b1fb3d075cfe32e607",
+    "src\\agent\\schema.py": "3444c3af8a04c1079fb4dac2654944dd4aed4ece979c8b0ec6daa08b9a469a0d",
+    "src\\agent\\sql_tools.py": "c90f931cd8a9c39720f5e03b3b8c0d96bb35901c47fd94da67e304da607a038b",
+    "src\\server\\app.py": "aed6c1d2449538afb80fdb557ef37abbc76294e095521146731d9f93bbe6a365",
+    "src\\server\\demo.py": "03cbf3fac097d04d9b08307ea059f574457664d7b9160c1aec6ffa65f2e9334c",
+    "deploy\\prepare_analytics.py": "6a49d86b42865b61bbfe33183ea971c1a2eb49c81891ece5c3b07fa08f433e0c",
+    "deploy\\start.py": "68dc198c7251fb759d5e9fc92859b8485a5ac71155ea54fe2f5bdbd9d0dacccd",
+    "Dockerfile": "dc1ab2a9043024436e8ad77f0bdae4abbf6cdf001bf15ba8e0f2b6503cb12ca3",
+    "requirements.txt": "1e0a10a45f1a8fa145a1d58ee2d31fd577f8afa7ded4f8a051482917c9cd155a",
+    "render.yaml": "baeab462dfb7d718d4a4becbd18d27bc4f51de70590798a285b89fe61a2496ac"
+  },
+  "archived_bytes_preserved_by_gitattributes": true
 }

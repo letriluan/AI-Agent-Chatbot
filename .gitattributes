@@ -1,0 +1,6 @@
+# Preserve measured evidence bytes so archived SHA-256 manifests survive checkout.
+/docs/evaluations/reliability-fixed-live-2026-11-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/evaluations/transit-fixed-live-2026-11-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/evaluations/render-fixed-deployment-2026-11-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/evaluations/cost-estimates-fixed-2026-11-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/evaluations/fixed-study-account-protocol-2026-11-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

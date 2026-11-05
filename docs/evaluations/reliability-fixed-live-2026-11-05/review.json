@@ -211,5 +211,11 @@
     "docs\\evaluations\\reliability-live-2026-11-05\\summary.json": "bc901d437776df22d903bbb27f08710e563c5660093137b49292d9d8a52d47cb",
     "docs\\evaluations\\transit-first-live-2026-11-05\\results.json": "6483308f6ab5456ff776122fb4751c91e4fdee495dc31e4c62cf9427a301ead7",
     "docs\\evaluations\\fixed-rerun-partial-2026-11-05\\summary.json": "11f7dcce9020c21db400e9a77733e4de6545a31e38be57f863665c98861c7667"
+  },
+  "earlier_report_hash_basis": "Original Windows working-copy bytes; earlier Git commits may normalise text line endings.",
+  "earlier_report_git_blob_sha256": {
+    "docs\\evaluations\\reliability-live-2026-11-05\\summary.json": "fe2221d57fe2c6e94f039e286fb9381ed6997fb6a0c760194d22dd6b550adc7c",
+    "docs\\evaluations\\transit-first-live-2026-11-05\\results.json": "71fe83ca712c43f6c0bf97d3b57f6b81c308bd4720b319f51d633ad11aabf418",
+    "docs\\evaluations\\fixed-rerun-partial-2026-11-05\\summary.json": "d18106a0c0bcf7dea3832dc0839715e6f732983a94f0cda3964bf14d8878900f"
   }
 }

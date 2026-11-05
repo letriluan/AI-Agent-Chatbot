@@ -3,11 +3,12 @@
   "checksums": {
     "REPORT.md": "0b2268149eadb40c08455de59a6987ed48bd88a60b109e9881478302852c70ac",
     "results.json": "276c0e90d2145c44071431cf9b9ea6f1be1fe74c5795ab3a26b8557839decd67",
-    "review.json": "5e9aa62fd325e4dac456f2ce2e19becafe552b83bd42e606fe6386d7803f4c19",
+    "review.json": "8db6fe5e38989920f1492c0c49a9ab3f4c4a3bbd95562a6b09b2573f4daf5505",
     "t21.png": "c7a94c43aa55cbc5c8e221abd125cb910eac828d327e073c9690d1c4ea909a58",
     "t22.png": "7c39dac9c14d0a318daa86fc78c811cca83ff8084bdc12fc240ee0178658948a",
     "t23.png": "51b08d4ac9bd16f70c1dd723e56d3c1dc5919407f67241dbe1592f41a46de904",
     "t24.png": "492d3a477b3a0e35c64124436e07a5d4e291bc67ba15530470c5069a90cb9c52",
     "visual-review.json": "1e2cef893935273285c84ece7b8fc393dcffdd7a335673ee8171c123c8495240"
-  }
+  },
+  "archived_bytes_preserved_by_gitattributes": true
 }

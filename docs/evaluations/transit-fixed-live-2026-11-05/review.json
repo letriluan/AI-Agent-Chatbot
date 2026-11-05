@@ -67,5 +67,7 @@
     ],
     "answer": "R2",
     "attempts": 1
-  }
+  },
+  "prior_baseline_hash_basis": "Original Windows working-copy bytes; compare the separate Git blob hash for a normalised checkout.",
+  "prior_baseline_git_blob_sha256": "71fe83ca712c43f6c0bf97d3b57f6b81c308bd4720b319f51d633ad11aabf418"
 }

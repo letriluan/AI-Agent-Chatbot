@@ -2,7 +2,7 @@
   "created_at": "2026-11-05T06:11:52.232318+00:00",
   "checksums": {
     "REPORT.md": "1eb62308ef49aaf9c2fa1f9b029631619049e5c4136c0aae15157daee148b6f4",
-    "review.json": "23f7dd7d5d59b68921edeee18244b2d384d586d294a129db86226192e75eeb97",
+    "review.json": "8cdb62111d54e90425e95ccbfe63e8d999ff959fdaeb6c5f03e907d0f70ba87f",
     "run-01\\h13.png": "b4983a8948e4c0ea322f885889eaa84963a635e6e2d4a9691c39f82d6466901e",
     "run-01\\h14.png": "16c6f6816c579af94736d46a92f70dfbce7c056b0858e46622c46d9e3cbfe064",
     "run-01\\h15.png": "6fb6c90f84e352dfc627142f2e4a45e73b6a1978b2e4d9c043fb34e7c0bad0ed",
@@ -31,5 +31,6 @@
     "RUNNER_REPORT.md": "5b78138089c59f29e4c210053274212400201e446c21eabd12fc7f13677ceea7",
     "summary.json": "3c103447c33c01b27e8e630c9c5e0d04d528854a744174a6201e813a44a794f3",
     "visual-review.json": "9e67dcb870061fe534329c0e189621a1427c4613a2275da8887a8f813fc9f434"
-  }
+  },
+  "archived_bytes_preserved_by_gitattributes": true
 }
