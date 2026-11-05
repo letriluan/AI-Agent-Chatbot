@@ -1,9 +1,8 @@
-name: Demo availability
+name: Availability diagnostic
 on:
   workflow_dispatch:
-  schedule:
-    # UTC minutes 12 and 42; keep 30-minute sampling so Free-plan sleep remains possible.
-    - cron: '12,42 * * * *'
+# UptimeRobot Free owns the 30-minute external monitoring schedule.
+# This on-demand health/readiness diagnostic does not call the model.
 permissions:
   contents: read
 concurrency:

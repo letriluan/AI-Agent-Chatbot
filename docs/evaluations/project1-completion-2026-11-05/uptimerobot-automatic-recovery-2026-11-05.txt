@@ -1,0 +1,135 @@
+Browser tab: 1271253136, Title: "Incident on SQL Agent demo - health | UptimeRobot", URL: "https://dashboard.uptimerobot.com/incidents/376635194058224841".
+1 AXWebArea Incident on SQL Agent demo - health | UptimeRobot, URL: dashboard.uptimerobot.com/incidents/376635194058224841
+	2 container
+		3 link Description: UptimeRobot logo, Value: dashboard.uptimerobot.com/
+		4 link Description: Monitoring, Value: dashboard.uptimerobot.com/monitors
+		5 link Description: 3rd party monitors Beta, Value: dashboard.uptimerobot.com/3rd-party-services
+		6 link Description: Incidents, Value: dashboard.uptimerobot.com/incidents
+		7 link Description: Status pages, Value: dashboard.uptimerobot.com/status
+		8 link Description: Maintenance, Value: dashboard.uptimerobot.com/maintenance
+		9 link Description: Team members, Value: dashboard.uptimerobot.com/team
+		10 link Description: Integrations & API, Value: dashboard.uptimerobot.com/integrations
+		11 container menu-button-_R_6t9l6bv9iv5tbbH1_
+			12 container Le Tri Luan
+			13 text Le Tri Luan
+			14 button Team actions
+		15 button
+			16 image
+		17 link Description: Upgrade now, Value: app.uptimerobot.com/billing/pricing
+		26 container
+			27 link Description: Incidents, Value: dashboard.uptimerobot.com/incidents
+			28 text Resolved incident on SQL Agent demo - health Keyword  monitor  for https://ai-agent-chatbot-demo.onrender.com/health Included
+			29 link Description: Go to monitor, Value: dashboard.uptimerobot.com/monitors/804558877
+			30 text Download response
+			31 pop up button (collapsed) Description: Actions, ID: menu-button-_r_2_, Secondary Actions: Expand
+		32 definition list
+			33 container Root cause
+				34 text Root cause
+			35 container
+				36 text 503 Service Unavailable in  Europe
+		37 definition list
+			38 container Status
+				39 text Status
+			40 text Resolved
+			41 container
+				42 text Started at  Nov 5, 2026, 18:03:47 GMT+10:30
+		43 definition list
+			44 container Duration
+				45 text Duration
+			46 text 0h 5m 5s
+			47 container
+				48 text Resolved at  Nov 5, 2026, 18:08:52 GMT+10:30
+		49 text Regions
+		50 image
+		51 text Europe
+		52 heading Activity log., Value: 2
+			53 text Activity log .
+		54 container
+			55 text Email sent  to  Le Tri Luan
+		56 text SUCCESS
+		57 text Nov 5, 2026, 18:08:54 GMT+10:30
+		58 container
+			59 text Incident resolved  by Europe
+		60 text Nov 5, 2026, 18:08:52 GMT+10:30
+		61 container
+			62 text Email sent  to  Le Tri Luan
+		63 text SUCCESS
+		64 text Nov 5, 2026, 18:03:49 GMT+10:30
+		65 container
+			66 text 503 Service Unavailable confirmed by Frankfurt, Germany: 
+			67 text 18.193.252.127
+		68 text Nov 5, 2026, 18:03:47 GMT+10:30
+		69 container
+			70 text 503 Service Unavailable confirmed by Falkenstein, Germany: 
+			71 text 142.132.180.39
+		72 text Nov 5, 2026, 18:03:32 GMT+10:30
+		73 container
+			74 text 503 Service Unavailable confirmed by Frankfurt, Germany: 
+			75 text 18.192.166.72
+		76 text Nov 5, 2026, 18:03:17 GMT+10:30
+		77 container
+			78 text 503 Service Unavailable detected by Nuremberg, Germany: 
+			79 text 49.13.167.123
+		80 text Nov 5, 2026, 18:03:02 GMT+10:30
+		81 heading Comments., Value: 2
+			82 text Comments .
+		83 container
+			84 text Collaborate with ease,  comment  incidents .
+		85 text Add any important details. Unlock seamless team collaboration with incident comments
+		86 link Description: Upgrade to Team, Value: app.uptimerobot.com/billing/pricing
+		87 container
+			88 text Team plan starts at  $29  / month . 10-day money-back guarantee.
+		89 container
+			90 heading Request., Value: 2
+				91 text Request .
+			92 tab group
+				93 tab (selected, settable, boolean) URL, Value: 1, ID: tabs-_r_3_--tab-0
+				94 tab (selectable, settable, boolean) Headers, Value: 0, ID: tabs-_r_3_--tab-1
+			95 container Description: URL, ID: tabs-_r_3_--tabpanel-0
+				96 container
+					97 button
+						98 image
+					99 text GET https://ai-agent-chatbot-demo.onrender.com/health
+			100 heading Response., Value: 2
+				101 text Response .
+			102 tab group
+				103 tab (selectable, disabled, settable, boolean) Body, Value: 0, ID: tabs-_r_4_--tab-0
+				104 tab (selected, settable, boolean) Headers, Value: 1, ID: tabs-_r_4_--tab-1
+			105 container Description: Headers, ID: tabs-_r_4_--tabpanel-1
+				106 container
+					107 button
+						108 image
+					109 text {
+  "Alt-Svc": [
+    "h3=\":443\"; ma=86400"
+  ],
+  "Cf-Cache-Status": [
+    "DYNAMIC"
+  ],
+  "Cf-Ray": [
+    "a55a2c1c6bd423d4-FRA"
+  ],
+  "Content-Length": [
+    "0"
+  ],
+  "Date": [
+    "Thu, 05 Nov 2026 07:33:47 GMT"
+  ],
+  "Rndr-Id": [
+    "2d1c4f80-3e70-4043"
+  ],
+  "Server": [
+    "cloudflare"
+  ],
+  "X-Render-Routing": [
+    "hibernate-wake-error"
+  ]
+}
+		20 container Description: Notifications-top, ID: chakra-toast-manager-top
+		21 container Description: Notifications-top-left, ID: chakra-toast-manager-top-left
+		22 container Description: Notifications-top-right, ID: chakra-toast-manager-top-right
+		23 container Description: Notifications-bottom-left, ID: chakra-toast-manager-bottom-left
+		24 container Description: Notifications-bottom, ID: chakra-toast-manager-bottom
+		25 container Description: Notifications-bottom-right, ID: chakra-toast-manager-bottom-right
+
+The focused UI element is 1 AXWebArea Incident on SQL Agent demo - health | UptimeRobot, URL: dashboard.uptimerobot.com/incidents/376635194058224841

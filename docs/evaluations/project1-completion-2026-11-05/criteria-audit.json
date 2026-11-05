@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-05",
+  "agreed_deliverables_met": 6,
+  "total_deliverables": 6,
+  "second_schema": "user-approved synthetic transit",
+  "groq_calls_in_monitoring_followup": 0,
+  "monitor": {
+    "id": "804558877",
+    "plan": "Free (user-confirmed)",
+    "interval_seconds": 1800,
+    "timeout_seconds": 60,
+    "keyword": "\"status\":\"ok\"",
+    "case_sensitive": true,
+    "incident_when": "keyword missing",
+    "automatic_detection_and_recovery_verified": true
+  },
+  "confirmed_cold_start_seconds": 32.851516,
+  "limitations": [
+    "No continuous uptime SLA",
+    "Render Free wake 503s retained",
+    "Synthetic schemas",
+    "Five recovered observations have incomplete usage",
+    "Full narrative factuality unmeasured"
+  ]
+}
