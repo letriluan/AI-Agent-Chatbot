@@ -1,0 +1,15 @@
+					107 03:54:33 PM [rxg2z] INFO: Started server process [1]
+						112 text INFO:     Started server process [1]
+					167 03:55:32 PM [rxg2z] INFO:agent.metrics:{"event": "agent_request", "request_id": "a07a641482ff4bbab1929129d92a24ed", "cache_source": "none", "ok": false, "llm_calls": 0, "input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "token_usage_complete": true, "llm_failed_calls": 0, "connection_retries": 0, "retry_backoff_ms": 0, "latency_ms": 1.577}
+						169 text 03:55:32 PM
+					184 04:10:32 PM [rxg2z] INFO: Shutting down
+						186 text 04:10:32 PM
+						189 text INFO:     Shutting down
+					190 04:10:32 PM [rxg2z] INFO: Waiting for application shutdown.
+						192 text 04:10:32 PM
+					197 04:10:32 PM [rxg2z] INFO: Application shutdown complete.
+						199 text 04:10:32 PM
+						202 text INFO:     Application shutdown complete.
+					203 04:10:32 PM [rxg2z] INFO: Finished server process [1]
+						205 text 04:10:32 PM
+						208 text INFO:     Finished server process [1]

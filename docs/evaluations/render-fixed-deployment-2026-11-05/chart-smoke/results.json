@@ -1,0 +1,138 @@
+{
+  "started_at": "2026-11-05T05:50:58.010864+00:00",
+  "free_only_confirmed_by_user": true,
+  "hosted_credential_changed": false,
+  "commit_verified": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "http_status": 200,
+  "assessment": {
+    "id": "statuses",
+    "question": "Plot the number of orders by order_status as a bar chart.",
+    "reference_sql": "SELECT order_status,COUNT(*) FROM olist_orders_dataset GROUP BY order_status",
+    "expected_rows": [
+      [
+        "approved",
+        2
+      ],
+      [
+        "canceled",
+        625
+      ],
+      [
+        "created",
+        5
+      ],
+      [
+        "delivered",
+        96478
+      ],
+      [
+        "invoiced",
+        314
+      ],
+      [
+        "processing",
+        301
+      ],
+      [
+        "shipped",
+        1107
+      ],
+      [
+        "unavailable",
+        609
+      ]
+    ],
+    "ordered": false,
+    "chart": true,
+    "ok": true,
+    "sql": "SELECT order_status, COUNT(*) AS order_count\nFROM olist_orders_dataset\nGROUP BY order_status\nORDER BY order_count DESC\nLIMIT 50;",
+    "answer": "**Order counts by status**\n\n| order_status | order_count |\n|--------------|-------------|\n| delivered    | 96478 |\n| shipped      | 1107 |\n| canceled     | 625 |\n| unavailable  | 609 |\n| invoiced     | 314 |\n| processing   | 301 |\n| created      | 5 |\n| approved     | 2 |",
+    "cache_hit": false,
+    "cache_source": "none",
+    "attempts": 1,
+    "metrics": {
+      "llm_calls": 3,
+      "input_tokens": 2414,
+      "output_tokens": 608,
+      "total_tokens": 3022,
+      "token_usage_complete": true,
+      "llm_failed_calls": 0,
+      "connection_retries": 0,
+      "retry_backoff_ms": 0,
+      "stages_ms": {
+        "prepare_schema_node": 0.106,
+        "generate_sql_node": 932.815,
+        "run_sql_node": 62.573,
+        "plot_sql_node": 2499.867,
+        "answer_node": 765.769
+      },
+      "latency_ms": 4369.535
+    },
+    "request_id": "b9fdc7f971f5461c80e71bd46dc380a1",
+    "actual_rows": [
+      [
+        "delivered",
+        96478
+      ],
+      [
+        "shipped",
+        1107
+      ],
+      [
+        "canceled",
+        625
+      ],
+      [
+        "unavailable",
+        609
+      ],
+      [
+        "invoiced",
+        314
+      ],
+      [
+        "processing",
+        301
+      ],
+      [
+        "created",
+        5
+      ],
+      [
+        "approved",
+        2
+      ]
+    ],
+    "sql_correct": true,
+    "numeric_support": {
+      "status": "supported",
+      "claims": [
+        "96478",
+        "1107",
+        "625",
+        "609",
+        "314",
+        "301",
+        "5",
+        "2"
+      ],
+      "unsupported": [],
+      "passed": true,
+      "semantic_factuality_measured": false
+    },
+    "passed": true,
+    "png_valid": true,
+    "chart_file": "statuses.png",
+    "chart_sha256": "01d48430557ffa2fbe2342e37959e781c11d875e0b097959570f622fcffc101f",
+    "plot_query_data_verified": false,
+    "chart_visually_reviewed": false
+  },
+  "cache_check": {
+    "http_status": 200,
+    "cache_hit": true,
+    "llm_calls": 0,
+    "passed": true
+  },
+  "completed_at": "2026-11-05T05:51:02.995633+00:00",
+  "passed": true
+}

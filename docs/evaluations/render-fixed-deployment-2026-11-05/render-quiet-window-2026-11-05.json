@@ -1,0 +1,8 @@
+{
+  "started_at": "2026-11-05T05:25:32.673461+00:00",
+  "duration_seconds": 1200,
+  "monitor_workflow_disabled": true,
+  "no_agent_http_during_quiet": true,
+  "public_traffic_excluded": false,
+  "deployment_commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1"
+}

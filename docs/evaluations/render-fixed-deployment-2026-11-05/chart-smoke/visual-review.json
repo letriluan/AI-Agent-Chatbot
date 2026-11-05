@@ -1,0 +1,12 @@
+{
+  "reviewed_at": "2026-11-05T05:52:07.909060+00:00",
+  "images": [
+    {
+      "path": "statuses.png",
+      "sha256": "01d48430557ffa2fbe2342e37959e781c11d875e0b097959570f622fcffc101f",
+      "visually_reviewed": true,
+      "notes": "Eight order-status labels, readable axes/title and dominant delivered bar agree with the independent reference distribution. Tiny minority-category counts are not individually legible at this scale. The public API does not expose plot-query rows."
+    }
+  ],
+  "hosted_plot_query_rows_independently_verified": false
+}

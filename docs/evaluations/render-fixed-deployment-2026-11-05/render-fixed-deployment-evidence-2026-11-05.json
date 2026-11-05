@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-11-05T05:28:56.445226+00:00",
+  "service_id": "srv-dba7t74s728c73e2nqk0",
+  "url": "https://ai-agent-chatbot-demo.onrender.com",
+  "runtime": "Docker",
+  "plan_observed": "Free",
+  "commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "main_ci": {
+    "run_id": 41973491756,
+    "url": "https://github.com/letriluan/AI-Agent-Chatbot/actions/runs/41973491756",
+    "conclusion": "success",
+    "finished_at": "2026-11-05T05:23:08Z"
+  },
+  "canceled_early_blueprint_deploy": {
+    "id": "dep-dbm14ku1egvs73b0j2v0",
+    "reason": "Blueprint auto-sync started before merged-commit CI completed",
+    "status_observed": "Canceled by you"
+  },
+  "blueprint": {
+    "id": "exs-dba7sovbtjjs73e53l4g",
+    "auto_sync": false,
+    "status_observed": "Sync paused",
+    "future_config_sync_requires_manual_after_ci": true
+  },
+  "successful_deploy": {
+    "id": "dep-dbm15fvb9u1s738a6dag",
+    "trigger_observed": "Auto-Deploy",
+    "status_observed": "Deploy succeeded | Live",
+    "started_at": "2026-11-05T05:23:11Z",
+    "live_at": "2026-11-05T05:24:39Z",
+    "ui_duration": "1m 27s",
+    "started_after_main_ci": true,
+    "instance_label": "rxg2z",
+    "startup_log_at": "2026-11-05T05:24:33Z"
+  },
+  "screenshot": "render-deployed-2026-11-05.png",
+  "health_check_path": "/ready",
+  "auto_deploy_selection_observed": "After CI Checks Pass",
+  "intentionally_failed_main_commit_tested": false,
+  "hosted_model_evaluation_rerun": false,
+  "hosted_model_smoke": {
+    "fresh_questions": 2,
+    "observed_llm_calls": 5,
+    "sql_checks_passed": 2,
+    "chart_png_checks_passed": 1,
+    "cache_repeats_passed": 2,
+    "cache_repeat_llm_calls": 0,
+    "hosted_credential_changed": false,
+    "free_only_confirmed_by_user": true,
+    "is_full_hosted_regression_suite": false
+  }
+}

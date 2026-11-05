@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-11-05T05:25:31.923419+00:00",
+  "commit_verified_in_render": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "model_calls_authorized": false,
+  "checks": [
+    {
+      "name": "homepage",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "name": "write_refusal",
+      "status": 200,
+      "llm_calls": 0,
+      "answer": "This assistant only supports read-only analysis. I cannot delete, insert, update or otherwise modify database records or its structure. No changes were made. You can ask me to count, filter, compare or chart the data instead.",
+      "passed": true
+    },
+    {
+      "name": "blank_validation",
+      "status": 422,
+      "passed": true
+    },
+    {
+      "name": "length_validation",
+      "status": 422,
+      "passed": true
+    }
+  ],
+  "completed_at": "2026-11-05T05:25:32.673461+00:00",
+  "passed": true
+}

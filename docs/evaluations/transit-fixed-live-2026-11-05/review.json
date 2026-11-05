@@ -1,0 +1,73 @@
+{
+  "reviewed_at": "2026-11-05T06:24:51.141694+00:00",
+  "runtime_commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "free_only": true,
+  "same_separate_user_supplied_free_account_as_final_holdout": true,
+  "complete": true,
+  "observations": 24,
+  "sql_correct": 24,
+  "charts_correct": 4,
+  "cache_hits": 24,
+  "cached_llm_calls": 0,
+  "numeric_supported": 16,
+  "numeric_flagged": 1,
+  "numeric_unscored": 7,
+  "numeric_supported_rate_among_scored": 0.9411764705882353,
+  "manual_numeric_reviews": [
+    {
+      "report": "reports\\new-free-account-transit-live-2026-11-05\\results.json",
+      "id": "t09",
+      "question": "Which trips have arrivals at or after 24:00 in their service day? arrival_seconds is seconds from service-day midnight and may exceed 86400. Return only distinct trip_id values, ascending.",
+      "answer": "The only trip that has an arrival at or after 24:00 in its service day is:\n\n- T6",
+      "actual_rows": [
+        [
+          "T6"
+        ]
+      ],
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "24:00"
+        ],
+        "unsupported": [
+          "24:00"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "classification": "question_context",
+      "review": "24:00 is the threshold supplied by the question; the only returned trip T6 matches the reference. The raw numeric-support flag is retained."
+    }
+  ],
+  "natural_recoveries": [
+    {
+      "report": "reports\\new-free-account-transit-live-2026-11-05\\results.json",
+      "id": "t23",
+      "retries": 1,
+      "failed_attempts": 1,
+      "passed": true,
+      "token_usage_complete": false
+    }
+  ],
+  "known_list_price_estimate_usd": "0.005380875",
+  "cost_coverage": "23/24",
+  "full_mean_available": false,
+  "actual_bill_measured": false,
+  "source_fingerprints_match": true,
+  "observed_provider_tokens": 45567,
+  "observed_tokens_are_complete_billable_total": false,
+  "prior_baseline_sha256": "6483308f6ab5456ff776122fb4751c91e4fdee495dc31e4c62cf9427a301ead7",
+  "stop_code_case": {
+    "id": "t15",
+    "generated_sql": "SELECT DISTINCT fact_stop_events.route_key\nFROM fact_stop_events\nWHERE fact_stop_events.stop_key = 'S4'\nORDER BY fact_stop_events.route_key ASC\nLIMIT 50;",
+    "actual_rows": [
+      [
+        "R2"
+      ]
+    ],
+    "answer": "R2",
+    "attempts": 1
+  },
+  "prior_baseline_hash_basis": "Original Windows working-copy bytes; compare the separate Git blob hash for a normalised checkout.",
+  "prior_baseline_git_blob_sha256": "71fe83ca712c43f6c0bf97d3b57f6b81c308bd4720b319f51d633ad11aabf418"
+}

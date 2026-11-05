@@ -1,0 +1,23 @@
+{
+  "base_url": "https://ai-agent-chatbot-demo.onrender.com",
+  "checked_at": "2026-11-05T06:18:37.446752+00:00",
+  "health": {
+    "endpoint": "/health",
+    "checked_at": "2026-11-05T06:18:37.446752+00:00",
+    "available": true,
+    "http_status": 200,
+    "elapsed_ms": 356.239
+  },
+  "ready": {
+    "endpoint": "/ready",
+    "checked_at": "2026-11-05T06:18:37.803008+00:00",
+    "available": true,
+    "http_status": 200,
+    "elapsed_ms": 268.463
+  },
+  "available": true,
+  "declared_quiet_seconds": null,
+  "cold_start_confirmed": false,
+  "model_called": false,
+  "note": "First health request may include wake-up. Quiet time and actual platform sleep are not independently verified."
+}

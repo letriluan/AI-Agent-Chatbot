@@ -1,0 +1,22 @@
+{
+  "started_at": "2026-11-05T05:28:14.829240+00:00",
+  "user_initiated_new_account": true,
+  "local_env_updated_utc": "2026-11-05T05:25:43Z",
+  "free_only_required": true,
+  "free_plan_observed_in_browser": true,
+  "api_key_org_independently_verified": false,
+  "model": "openai/gpt-oss-20b",
+  "source_commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "separate_from_prior_account_results": true,
+  "agent_created_accounts_or_keys": false,
+  "paid_fallback": false,
+  "stop_on_429": true,
+  "reliability_output": "reports/new-free-account-reliability-live-2026-11-05",
+  "transit_output": "reports/new-free-account-transit-live-2026-11-05",
+  "completed_at": "2026-11-05T06:27:10.080114+00:00",
+  "holdout_complete": true,
+  "transit_complete": true,
+  "holdout_observations": 80,
+  "transit_observations": 24,
+  "quota_errors_in_new_batch": 0
+}
