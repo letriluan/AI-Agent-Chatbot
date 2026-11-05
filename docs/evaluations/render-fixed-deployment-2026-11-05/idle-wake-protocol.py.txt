@@ -1,0 +1,63 @@
+"""One bounded idle/wake experiment; no model requests or credentials."""
+import json
+import re
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
+
+root = Path('reports')
+window = json.loads((root / 'render-quiet-window-2026-11-05.json').read_text())
+deadline = datetime.fromisoformat(window['started_at']).timestamp() + window['duration_seconds']
+output = root / 'render-fixed-idle-wake-2026-11-05.json'
+if output.exists():
+    raise SystemExit('Preserve existing observation')
+print(json.dumps({'scheduled_probe_utc': datetime.fromtimestamp(deadline, timezone.utc).isoformat()}), flush=True)
+while time.time() < deadline:
+    time.sleep(min(30, deadline - time.time()))
+
+origin = 'https://ai-agent-chatbot-demo.onrender.com'
+start = time.perf_counter()
+experiment = dict(started_at=datetime.now(timezone.utc).isoformat(), quiet_window=window,
+                  model_called=False, cold_start_confirmed=False, observations=[])
+for attempt in range(25):
+    row = dict(checked_at=datetime.now(timezone.utc).isoformat(), endpoint='/health', ready=False)
+    tick = time.perf_counter()
+    try:
+        # A browser-style first request can expose Render's public wake-up page.
+        accept = 'text/html,application/json' if attempt == 0 else 'application/json'
+        request = Request(origin + '/health', headers={'Accept': accept, 'Cache-Control': 'no-cache',
+            'User-Agent': 'Mozilla/5.0 sql-agent-cold-start-observation/1'})
+        with urlopen(request, timeout=120 if attempt == 0 else 30) as response:
+            raw = response.read(65536).decode('utf-8', 'replace')
+            row.update(http_status=response.status, content_type=response.headers.get('Content-Type'))
+        try:
+            payload = json.loads(raw)
+            row['ready'] = row['http_status'] == 200 and payload.get('status') == 'ok'
+            row['json_status'] = payload.get('status')
+        except (ValueError, AttributeError):
+            title = re.search(r'<title[^>]*>(.*?)</title>', raw, re.I | re.S)
+            row['html_title'] = title.group(1).strip() if title else None
+            row['render_wake_page_candidate'] = bool(re.search(r'spinning up|waking up|spun down', raw, re.I))
+            if attempt == 0:
+                (root / 'render-cold-first-response.html').write_text(raw, encoding='utf-8')
+    except HTTPError as exc:
+        row.update(http_status=exc.code, error_type='HTTPError')
+    except (URLError, TimeoutError, OSError) as exc:
+        row['error_type'] = type(exc).__name__
+    row['elapsed_ms'] = round((time.perf_counter() - tick) * 1000, 3)
+    experiment['observations'].append(row)
+    experiment['elapsed_until_health_ms'] = round((time.perf_counter() - start) * 1000, 3)
+    output.write_text(json.dumps(experiment, indent=2), encoding='utf-8')
+    print(json.dumps(row), flush=True)
+    if row['ready'] or time.perf_counter() - start >= 180:
+        break
+    time.sleep(5)
+from evals.availability import sample
+experiment['followup_sample'] = sample(origin)
+experiment['completed_at'] = datetime.now(timezone.utc).isoformat()
+experiment['available'] = experiment['followup_sample']['available'] and any(r['ready'] for r in experiment['observations'])
+experiment['note'] = 'Idle/wake duration requires separate platform evidence before attributing it to actual sleep. No model calls.'
+output.write_text(json.dumps(experiment, indent=2), encoding='utf-8')
+print(json.dumps({'complete':True,'available':experiment['available'],'elapsed_until_health_ms':experiment['elapsed_until_health_ms']}), flush=True)

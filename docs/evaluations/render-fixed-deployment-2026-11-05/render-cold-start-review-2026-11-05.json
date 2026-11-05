@@ -1,0 +1,33 @@
+{
+  "reviewed_at": "2026-11-05T05:48:24.796345+00:00",
+  "commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "cold_start_confirmed": true,
+  "confirmation_basis": [
+    "Render logs show instance rxg2z shutting down and finishing at 2026-11-05T05:40:32Z, approximately 15 minutes after the last controlled request.",
+    "First wake request began at 2026-11-05T05:45:32.673683Z after a controlled 1200-second no-probe window.",
+    "Render logs show a new instance jp69m starting and completing application startup at 2026-11-05T05:45:56Z.",
+    "No new deploy occurred during the experiment; deployment dep-dbm15fvb9u1s738a6dag remained Live on the same commit after the wake."
+  ],
+  "shutdown_at": "2026-11-05T05:40:32Z",
+  "new_startup_at": "2026-11-05T05:45:56Z",
+  "old_instance": "rxg2z",
+  "new_instance": "jp69m",
+  "wake_to_healthy_ms": 32851.516,
+  "initial_response": {
+    "checked_at": "2026-11-05T05:45:32.673683+00:00",
+    "endpoint": "/health",
+    "ready": false,
+    "http_status": 503,
+    "error_type": "HTTPError",
+    "elapsed_ms": 520.886
+  },
+  "warm_health_ms": 234.478,
+  "warm_ready_ms": 198.684,
+  "measure_includes": "Client-observed network delay, one 5-second poll interval and platform wake-up; not pure application CPU startup time.",
+  "number_of_cold_trials": 1,
+  "model_called": false,
+  "public_traffic_excluded": false,
+  "continuous_uptime_measured": false,
+  "raw_probe_flags_note": "Generic HTTP samples intentionally retain cold_start_confirmed=false; this separate review adds independently observed platform lifecycle evidence.",
+  "log_text_sha256": "6fb69900954858a6bd2291d311dfe023a6ca1fe98a28a375665407dc6ba09244"
+}

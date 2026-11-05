@@ -1,0 +1,215 @@
+{
+  "reviewed_at": "2026-11-05T06:11:52.229316+00:00",
+  "runtime_commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "free_only": true,
+  "separate_user_supplied_free_account": true,
+  "completed_runs": 5,
+  "observations": 80,
+  "passed": 80,
+  "cache_hits": 80,
+  "cached_llm_calls": 0,
+  "charts_passed": 20,
+  "numeric_supported": 71,
+  "numeric_flagged": 4,
+  "numeric_unscored": 5,
+  "automatic_numeric_support_rate_among_scored": 0.9466666666666667,
+  "manual_numeric_reviews": [
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-01\\results.json",
+      "id": "h09",
+      "question": "Return only order IDs purchased during April 2026, including April 30 but excluding May 1, sorted ascending.",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "2026",
+          "30",
+          "1",
+          "5",
+          "6",
+          "7"
+        ],
+        "unsupported": [
+          "2026",
+          "30",
+          "1"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "classification": "question_context",
+      "review": "April 2026, April 30 and May 1 repeat the requested date filter. IDs 5, 6 and 7 match SQL. No fabricated result number identified in this flag."
+    },
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-03\\results.json",
+      "id": "h09",
+      "question": "Return only order IDs purchased during April 2026, including April 30 but excluding May 1, sorted ascending.",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30 but excluding May\u202f1), sorted ascending:\n\n- 5  \n- 6  \n- 7",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "2026",
+          "30",
+          "1",
+          "5",
+          "6",
+          "7"
+        ],
+        "unsupported": [
+          "2026",
+          "30",
+          "1"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "classification": "question_context",
+      "review": "April 2026, April 30 and May 1 repeat the requested date filter. IDs 5, 6 and 7 match SQL. No fabricated result number identified in this flag."
+    },
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-04\\results.json",
+      "id": "h09",
+      "question": "Return only order IDs purchased during April 2026, including April 30 but excluding May 1, sorted ascending.",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30 but excluding May\u202f1), sorted ascending:\n\n- 5\n- 6\n- 7",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "2026",
+          "30",
+          "1",
+          "5",
+          "6",
+          "7"
+        ],
+        "unsupported": [
+          "2026",
+          "30",
+          "1"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "classification": "question_context",
+      "review": "April 2026, April 30 and May 1 repeat the requested date filter. IDs 5, 6 and 7 match SQL. No fabricated result number identified in this flag."
+    },
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-05\\results.json",
+      "id": "h09",
+      "question": "Return only order IDs purchased during April 2026, including April 30 but excluding May 1, sorted ascending.",
+      "answer": "Order IDs purchased in April\u202f2026 (including April\u202f30, excluding May\u202f1):\n\n- 5\n- 6\n- 7",
+      "actual_rows": [
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "numeric_support": {
+        "status": "unsupported",
+        "claims": [
+          "2026",
+          "30",
+          "1",
+          "5",
+          "6",
+          "7"
+        ],
+        "unsupported": [
+          "2026",
+          "30",
+          "1"
+        ],
+        "passed": false,
+        "semantic_factuality_measured": false
+      },
+      "classification": "question_context",
+      "review": "April 2026, April 30 and May 1 repeat the requested date filter. IDs 5, 6 and 7 match SQL. No fabricated result number identified in this flag."
+    }
+  ],
+  "semantic_factuality_measured": false,
+  "natural_recoveries": [
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-01\\results.json",
+      "id": "h06",
+      "retries": 1,
+      "failed_attempts": 1,
+      "passed": true,
+      "token_usage_complete": false
+    },
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-02\\results.json",
+      "id": "h06",
+      "retries": 1,
+      "failed_attempts": 1,
+      "passed": true,
+      "token_usage_complete": false
+    },
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-04\\results.json",
+      "id": "h01",
+      "retries": 2,
+      "failed_attempts": 2,
+      "passed": true,
+      "token_usage_complete": false
+    },
+    {
+      "report": "reports\\new-free-account-reliability-live-2026-11-05\\run-04\\results.json",
+      "id": "h08",
+      "retries": 1,
+      "failed_attempts": 1,
+      "passed": true,
+      "token_usage_complete": false
+    }
+  ],
+  "failed_connection_attempts": 5,
+  "maximum_retries_in_one_request": 2,
+  "all_reported_sources_match": true,
+  "known_list_price_estimate_usd": "0.019544175",
+  "cost_coverage": "76/80",
+  "full_mean_available": false,
+  "actual_bill_measured": false,
+  "observed_provider_tokens": 150423,
+  "observed_tokens_are_complete_billable_total": false,
+  "earlier_reports_preserved": {
+    "docs\\evaluations\\reliability-live-2026-11-05\\summary.json": "bc901d437776df22d903bbb27f08710e563c5660093137b49292d9d8a52d47cb",
+    "docs\\evaluations\\transit-first-live-2026-11-05\\results.json": "6483308f6ab5456ff776122fb4751c91e4fdee495dc31e4c62cf9427a301ead7",
+    "docs\\evaluations\\fixed-rerun-partial-2026-11-05\\summary.json": "11f7dcce9020c21db400e9a77733e4de6545a31e38be57f863665c98861c7667"
+  }
+}

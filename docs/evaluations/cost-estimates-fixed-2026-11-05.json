@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-11-05T06:27:10.078113+00:00",
+  "model": "openai/gpt-oss-20b",
+  "currency": "USD",
+  "input_per_million": "0.075",
+  "output_per_million": "0.30",
+  "price_source": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+  "price_basis": "Standard list prices, no free credits or cached-token discounts applied; estimated equivalents, not charges.",
+  "studies": [
+    {
+      "suite": "holdout",
+      "observations": 80,
+      "cost_coverage": "76/80",
+      "known_estimated_usd": "0.019544175",
+      "full_mean_available": false,
+      "source_review": "docs/evaluations/reliability-fixed-live-2026-11-05/review.json"
+    },
+    {
+      "suite": "transit",
+      "observations": 24,
+      "cost_coverage": "23/24",
+      "known_estimated_usd": "0.005380875",
+      "full_mean_available": false,
+      "source_review": "docs/evaluations/transit-fixed-live-2026-11-05/review.json"
+    }
+  ],
+  "known_subtotal_usd": "0.024925050",
+  "complete_usage_coverage": "99/104",
+  "missing_usage_is_zero": false,
+  "actual_bill_measured": false
+}

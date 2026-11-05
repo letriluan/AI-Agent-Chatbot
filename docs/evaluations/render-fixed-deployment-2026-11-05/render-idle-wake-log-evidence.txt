@@ -1,0 +1,23 @@
+					115 03:54:33 PM [rxg2z] INFO: Started server process [1]
+						120 text INFO:     Started server process [1]
+					127 03:54:33 PM [rxg2z] INFO: Application startup complete.
+						132 text INFO:     Application startup complete.
+					192 04:10:32 PM [rxg2z] INFO: Shutting down
+						194 text 04:10:32 PM
+					198 04:10:32 PM [rxg2z] INFO: Waiting for application shutdown.
+						200 text 04:10:32 PM
+					204 04:10:32 PM [rxg2z] INFO: Application shutdown complete.
+						206 text 04:10:32 PM
+					210 04:10:32 PM [rxg2z] INFO: Finished server process [1]
+						212 text 04:10:32 PM
+						215 text INFO:     Finished server process [1]
+					216 04:15:56 PM [jp69m] INFO: Started server process [1]
+						218 text 04:15:56 PM
+						221 text INFO:     Started server process [1]
+					222 04:15:56 PM [jp69m] INFO: Waiting for application startup.
+						224 text 04:15:56 PM
+					228 04:15:56 PM [jp69m] INFO: Application startup complete.
+						230 text 04:15:56 PM
+						233 text INFO:     Application startup complete.
+					234 04:15:56 PM [jp69m] INFO: Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)
+						236 text 04:15:56 PM

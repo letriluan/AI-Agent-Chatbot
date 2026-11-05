@@ -1,0 +1,65 @@
+{
+  "started_at": "2026-11-05T05:49:58.461133+00:00",
+  "base_url": "https://ai-agent-chatbot-demo.onrender.com",
+  "commit_verified": "5df7de9f8f36c4674d136a58087d22c2c77f83a1",
+  "free_only_confirmed_by_user": true,
+  "hosted_credential_changed": false,
+  "checks": [
+    {
+      "name": "orders",
+      "http_status": 200,
+      "passed": true,
+      "payload": {
+        "question": "How many orders are there in total?",
+        "sql": "SELECT COUNT(order_id) AS total_orders FROM olist_orders_dataset;",
+        "answer": "There are 99,441 orders in total.",
+        "image_b64": null,
+        "cache_hit": false,
+        "cache_source": "none",
+        "attempts": 1,
+        "metrics": {
+          "llm_calls": 2,
+          "input_tokens": 1531,
+          "output_tokens": 303,
+          "total_tokens": 1834,
+          "token_usage_complete": true,
+          "llm_failed_calls": 0,
+          "connection_retries": 0,
+          "retry_backoff_ms": 0,
+          "stages_ms": {
+            "prepare_schema_node": 0.333,
+            "generate_sql_node": 2009.093,
+            "run_sql_node": 114.82,
+            "plot_sql_node": 0.002,
+            "answer_node": 926.444
+          },
+          "latency_ms": 4528.332
+        },
+        "request_id": "b0f972527e9445caabe91c9e8e3b508a",
+        "ok": true
+      },
+      "independent_sql_validation": {
+        "actual_rows": [
+          [
+            99441
+          ]
+        ],
+        "expected_rows": [
+          [
+            99441
+          ]
+        ],
+        "passed": true
+      }
+    },
+    {
+      "name": "cached_orders",
+      "http_status": 200,
+      "cache_hit": true,
+      "llm_calls": 0,
+      "passed": true
+    }
+  ],
+  "completed_at": "2026-11-05T05:50:04.080477+00:00",
+  "passed": true
+}

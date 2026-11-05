@@ -1,0 +1,29 @@
+{
+  "reviewed_at": "2026-11-05T06:24:51.141694+00:00",
+  "images": [
+    {
+      "path": "t21.png",
+      "sha256": "c7a94c43aa55cbc5c8e221abd125cb910eac828d327e073c9690d1c4ea909a58",
+      "visually_reviewed": true,
+      "notes": "Legible title, labels and values agree with the independently checked renderer data. Service dates and hours are equally spaced categories; the gap from hour 10 to 25 is not elapsed-time spacing."
+    },
+    {
+      "path": "t22.png",
+      "sha256": "7c39dac9c14d0a318daa86fc78c811cca83ff8084bdc12fc240ee0178658948a",
+      "visually_reviewed": true,
+      "notes": "Legible title, labels and values agree with the independently checked renderer data. Service dates and hours are equally spaced categories; the gap from hour 10 to 25 is not elapsed-time spacing."
+    },
+    {
+      "path": "t23.png",
+      "sha256": "51b08d4ac9bd16f70c1dd723e56d3c1dc5919407f67241dbe1592f41a46de904",
+      "visually_reviewed": true,
+      "notes": "Legible title, labels and values agree with the independently checked renderer data. Service dates and hours are equally spaced categories; the gap from hour 10 to 25 is not elapsed-time spacing."
+    },
+    {
+      "path": "t24.png",
+      "sha256": "492d3a477b3a0e35c64124436e07a5d4e291bc67ba15530470c5069a90cb9c52",
+      "visually_reviewed": true,
+      "notes": "Legible title, labels and values agree with the independently checked renderer data. Service dates and hours are equally spaced categories; the gap from hour 10 to 25 is not elapsed-time spacing."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-11-05T06:21:29.542166+00:00",
+  "configured_cron_utc": "17,47 * * * *",
+  "workflow_state": "active",
+  "remote_default_branch_source_verified": true,
+  "remote_workflow_blob": "3e9a9238304b3cac2b2425860c0af17705ceaaf7",
+  "runs": [
+    {
+      "id": 41979530248,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-05T06:18:29Z",
+      "html_url": "https://github.com/letriluan/AI-Agent-Chatbot/actions/runs/41979530248"
+    },
+    {
+      "id": 41976127859,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-05T05:46:35Z",
+      "html_url": "https://github.com/letriluan/AI-Agent-Chatbot/actions/runs/41976127859"
+    }
+  ],
+  "scheduled_runs_observed": 0,
+  "manually_dispatched_runs_observed": 2,
+  "summary": {
+    "sample_count": 2,
+    "available_samples": 2,
+    "sampled_availability": 1.0,
+    "continuous_uptime_measured": false,
+    "model_called": false
+  },
+  "window_start": "2026-11-05T05:46:43.409322+00:00",
+  "window_end": "2026-11-05T06:18:37.446752+00:00",
+  "note": "Manual dispatches verify the published workflow and its artifacts, but do not verify delivery of the schedule event. No scheduled event had appeared at this check. GitHub schedules are best effort; no continuous uptime claim."
+}

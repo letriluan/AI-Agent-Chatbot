@@ -1,0 +1,59 @@
+{
+  "started_at": "2026-11-05T05:45:32.673683+00:00",
+  "quiet_window": {
+    "started_at": "2026-11-05T05:25:32.673461+00:00",
+    "duration_seconds": 1200,
+    "monitor_workflow_disabled": true,
+    "no_agent_http_during_quiet": true,
+    "public_traffic_excluded": false,
+    "deployment_commit": "5df7de9f8f36c4674d136a58087d22c2c77f83a1"
+  },
+  "model_called": false,
+  "cold_start_confirmed": false,
+  "observations": [
+    {
+      "checked_at": "2026-11-05T05:45:32.673683+00:00",
+      "endpoint": "/health",
+      "ready": false,
+      "http_status": 503,
+      "error_type": "HTTPError",
+      "elapsed_ms": 520.886
+    },
+    {
+      "checked_at": "2026-11-05T05:45:38.206493+00:00",
+      "endpoint": "/health",
+      "ready": true,
+      "http_status": 200,
+      "content_type": "application/json",
+      "json_status": "ok",
+      "elapsed_ms": 27318.667
+    }
+  ],
+  "elapsed_until_health_ms": 32851.516,
+  "followup_sample": {
+    "base_url": "https://ai-agent-chatbot-demo.onrender.com",
+    "checked_at": "2026-11-05T05:46:05.532253+00:00",
+    "health": {
+      "endpoint": "/health",
+      "checked_at": "2026-11-05T05:46:05.532253+00:00",
+      "available": true,
+      "http_status": 200,
+      "elapsed_ms": 234.478
+    },
+    "ready": {
+      "endpoint": "/ready",
+      "checked_at": "2026-11-05T05:46:05.766784+00:00",
+      "available": true,
+      "http_status": 200,
+      "elapsed_ms": 198.684
+    },
+    "available": true,
+    "declared_quiet_seconds": null,
+    "cold_start_confirmed": false,
+    "model_called": false,
+    "note": "First health request may include wake-up. Quiet time and actual platform sleep are not independently verified."
+  },
+  "completed_at": "2026-11-05T05:46:05.965787+00:00",
+  "available": true,
+  "note": "Idle/wake duration requires separate platform evidence before attributing it to actual sleep. No model calls."
+}
